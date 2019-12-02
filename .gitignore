@@ -24,3 +24,5 @@ hs_err_pid*
 
 #All the build files
 build
+#Hide the gradle folder
+.gradle
