@@ -102,5 +102,50 @@ public class Wire {
 
     }
 
+    public int getDistanceToWpNew(WirePoint wp) {
+        Map<String, List<WireJoin>> pointListMap = new HashMap<>();
+        for(WireJoin wjToAdd: this.wireJoinSet) {
+            WirePoint[] bothPoints = wjToAdd.getBothPoints();
+            for(WirePoint wirePointToAddToMap : bothPoints) {
+                String key = wirePointToAddToMap.getMapString();
+                if(!pointListMap.containsKey(key)) {
+                    pointListMap.put(key, new ArrayList<>());
+                }
+                pointListMap.get(key).add(wjToAdd);
+            }
+        }
+
+        int currentDistance = 0;
+        List<WirePoint> wirePointsToCheck = new ArrayList<>();
+        List<WirePoint> wirePointsToCheckNext = new ArrayList<>();
+        wirePointsToCheck.add(new WirePoint(0, 0));
+
+        while(wirePointsToCheck.size() > 0) {
+            currentDistance++;
+            for(WirePoint wpToCheck : wirePointsToCheck) {
+                String keyToLookFor = wpToCheck.getMapString();
+                if(pointListMap.containsKey(keyToLookFor)) {
+                    for(WireJoin newWjToCheck : pointListMap.get(keyToLookFor)) {
+                        if(newWjToCheck.containsPoint(wp)) {
+                            return currentDistance;
+                        }else{
+                            wirePointsToCheckNext.add(newWjToCheck.getOtherPoint(wpToCheck));
+                        }
+                    }
+                }
+            }
+
+            wirePointsToCheck = wirePointsToCheckNext;
+            wirePointsToCheckNext = new ArrayList<>();
+
+        }
+
+
+
+        return 999999999;
+
+    }
+
+
 
 }

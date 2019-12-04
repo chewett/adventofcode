@@ -16,6 +16,10 @@ public class WirePoint {
         return Math.abs(this.x) + Math.abs(this.y);
     }
 
+    public String getMapString() {
+        return this.x + "," + this.y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
