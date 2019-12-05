@@ -5,12 +5,14 @@ import java.util.*;
 public class Wire {
 
     private Set<WireJoin> wireJoinSet;
+    private String command;
 
     public Wire() {
         this.wireJoinSet = new HashSet<>();
     }
 
     public void createWireFromCommands(String commandString) {
+        this.command = commandString;
         String[] commands = commandString.split(",");
         int x = 0;
         int y = 0;
@@ -63,37 +65,40 @@ public class Wire {
     };
 
     public int getDistanceToWp(WirePoint wp) {
-        Set<WireJoin> allWireJoinsLeftToUse = new HashSet<>();
-        Map<WirePoint, List<WireJoin>> pointListMap = new HashMap<>();
-        for(WireJoin wjToAdd: this.wireJoinSet) {
-            allWireJoinsLeftToUse.add(wjToAdd);
-        }
+        String[] commands = this.command.split(",");
+        int x = 0;
+        int y = 0;
+        int distance = 1;
+        for(String instruction : commands) {
+            String direction = instruction.substring(0, 1);
+            int movement = Integer.parseInt(instruction.substring(1));
 
-        int currentDistance = 0;
-        List<WirePoint> wirePointsToCheck = new ArrayList<>();
-        List<WirePoint> wirePointsToCheckNext = new ArrayList<>();
-        wirePointsToCheck.add(new WirePoint(0, 0));
-
-        while(wirePointsToCheck.size() > 0) {
-            currentDistance++;
-            for(WirePoint wpToCheck : wirePointsToCheck) {
-                Iterator<WireJoin> wjIt = allWireJoinsLeftToUse.iterator();
-                while(wjIt.hasNext()) {
-                    WireJoin wj = wjIt.next();
-                    if(wj.containsPoint(wpToCheck)) {
-                        if(wj.containsPoint(wp)) {
-                            return currentDistance;
-                        }
-
-                        wirePointsToCheckNext.add(wj.getOtherPoint(wpToCheck));
-                        wjIt.remove();
-                    }
-                }
+            int xMovement = 0;
+            int yMovement = 0;
+            if (direction.equals("R")) {
+                xMovement = 1;
+            } else if (direction.equals("L")) {
+                xMovement = -1;
+            } else if (direction.equals("U")) {
+                yMovement = 1;
+            } else if (direction.equals("D")) {
+                yMovement = -1;
+            } else {
+                throw new RuntimeException("BAD INSTRUCTION");
             }
 
-            wirePointsToCheck = wirePointsToCheckNext;
-            wirePointsToCheckNext = new ArrayList<>();
+            for (int i = 0; i < movement; i++) {
+                int oldX = x;
+                int oldY = y;
+                x += xMovement;
+                y += yMovement;
 
+                if(wp.x == x && wp.y == y) {
+                    return distance;
+                }else{
+                    distance++;
+                }
+            }
         }
 
 
