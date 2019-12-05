@@ -45,6 +45,7 @@ public class IntcodeComputer {
 
     private IntcodeInstruction fetchInstructionAtCurrentAddress() {
         int intcodeInstructionId = this.memory.getIntAtAddress(this.currentAddress);
+        //TODO: Add parameter modes in here, MOD 100 for instruction ID
 
         if(!this.instructionSet.containsKey(intcodeInstructionId)) {
             throw new UnsupportedIntcodeInstruction();
