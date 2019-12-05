@@ -5,17 +5,27 @@ import java.util.*;
 public class Wire {
 
     private Set<WireJoin> wireJoinSet;
-    private String command;
+    private Map<Integer, Map<Integer, Integer>> pointLengthMap = new HashMap<>();
 
     public Wire() {
         this.wireJoinSet = new HashSet<>();
     }
 
+    private void addToPointMap(int x, int y, int distanceFromStart) {
+        if(!this.pointLengthMap.containsKey(x)) {
+            this.pointLengthMap.put(x, new HashMap<>());
+        }
+
+        if(!this.pointLengthMap.get(x).containsKey(y)) {
+            this.pointLengthMap.get(x).put(y, distanceFromStart);
+        }
+    }
+
     public void createWireFromCommands(String commandString) {
-        this.command = commandString;
         String[] commands = commandString.split(",");
         int x = 0;
         int y = 0;
+        int distance = 0;
         for(String instruction : commands) {
             String direction = instruction.substring(0, 1);
             int movement = Integer.parseInt(instruction.substring(1));
@@ -35,11 +45,13 @@ public class Wire {
             }
 
             for (int i = 0; i < movement; i++) {
+                distance++;
                 int oldX = x;
                 int oldY = y;
                 x += xMovement;
                 y += yMovement;
 
+                this.addToPointMap(x, y, distance);
                 this.addWireJoinList(new WireJoin(oldX, oldY, x, y));
             }
         }
@@ -47,7 +59,7 @@ public class Wire {
 
     }
 
-    public void addWireJoinList(WireJoin wj) {
+    private void addWireJoinList(WireJoin wj) {
         this.wireJoinSet.add(wj);
     }
 
@@ -65,92 +77,7 @@ public class Wire {
     };
 
     public int getDistanceToWp(WirePoint wp) {
-        String[] commands = this.command.split(",");
-        int x = 0;
-        int y = 0;
-        int distance = 1;
-        for(String instruction : commands) {
-            String direction = instruction.substring(0, 1);
-            int movement = Integer.parseInt(instruction.substring(1));
-
-            int xMovement = 0;
-            int yMovement = 0;
-            if (direction.equals("R")) {
-                xMovement = 1;
-            } else if (direction.equals("L")) {
-                xMovement = -1;
-            } else if (direction.equals("U")) {
-                yMovement = 1;
-            } else if (direction.equals("D")) {
-                yMovement = -1;
-            } else {
-                throw new RuntimeException("BAD INSTRUCTION");
-            }
-
-            for (int i = 0; i < movement; i++) {
-                int oldX = x;
-                int oldY = y;
-                x += xMovement;
-                y += yMovement;
-
-                if(wp.x == x && wp.y == y) {
-                    return distance;
-                }else{
-                    distance++;
-                }
-            }
-        }
-
-
-
-        return 999999999;
-
+        return this.pointLengthMap.get(wp.x).get(wp.y);
     }
-
-    public int getDistanceToWpNew(WirePoint wp) {
-        Map<String, List<WireJoin>> pointListMap = new HashMap<>();
-        for(WireJoin wjToAdd: this.wireJoinSet) {
-            WirePoint[] bothPoints = wjToAdd.getBothPoints();
-            for(WirePoint wirePointToAddToMap : bothPoints) {
-                String key = wirePointToAddToMap.getMapString();
-                if(!pointListMap.containsKey(key)) {
-                    pointListMap.put(key, new ArrayList<>());
-                }
-                pointListMap.get(key).add(wjToAdd);
-            }
-        }
-
-        int currentDistance = 0;
-        List<WirePoint> wirePointsToCheck = new ArrayList<>();
-        List<WirePoint> wirePointsToCheckNext = new ArrayList<>();
-        wirePointsToCheck.add(new WirePoint(0, 0));
-
-        while(wirePointsToCheck.size() > 0) {
-            currentDistance++;
-            for(WirePoint wpToCheck : wirePointsToCheck) {
-                String keyToLookFor = wpToCheck.getMapString();
-                if(pointListMap.containsKey(keyToLookFor)) {
-                    for(WireJoin newWjToCheck : pointListMap.get(keyToLookFor)) {
-                        if(newWjToCheck.containsPoint(wp)) {
-                            return currentDistance;
-                        }else{
-                            wirePointsToCheckNext.add(newWjToCheck.getOtherPoint(wpToCheck));
-                        }
-                    }
-                }
-            }
-
-            wirePointsToCheck = wirePointsToCheckNext;
-            wirePointsToCheckNext = new ArrayList<>();
-
-        }
-
-
-
-        return 999999999;
-
-    }
-
-
 
 }
