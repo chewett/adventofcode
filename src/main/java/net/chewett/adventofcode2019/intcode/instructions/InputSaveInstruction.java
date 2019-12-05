@@ -1,5 +1,6 @@
 package net.chewett.adventofcode2019.intcode.instructions;
 
+import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
 
 public class InputSaveInstruction extends IntcodeInstruction {
@@ -17,7 +18,7 @@ public class InputSaveInstruction extends IntcodeInstruction {
     @Override
     public boolean performInstructionOnMemory(int currentAddress, IntcodeComputerMemory memory) {
         //FIXME: This hardcodes it to save 1 for now as the "air conditioner". Change this later.
-        memory.storeIntAtAddress(memory.getIntAtAddress(currentAddress + 1), 1);
+        memory.storeIntAtAddress(memory.getIntAtAddress(currentAddress + 1), IntcodeComputer.input);
 
         return false;
     }

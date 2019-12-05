@@ -23,12 +23,37 @@ public class Day5 {
 
         //Init the computer so its ready
         IntcodeComputer icc = new IntcodeComputer(instructions);
+        IntcodeComputer.input = 1;
 
         //Load the intcode and then modify it for the starting problem
         Intcode ic = new Intcode(diagProgram);
-        int finalResult = icc.runIntcode(ic);
+        //int finalResult = icc.runIntcode(ic);
+//        System.out.println("Finished processing the input, the result is: " + finalResult);
 
-        System.out.println("Finished processing the input, the result is: " + finalResult);
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructionsTwo = new ArrayList<>();
+        instructionsTwo.add(new FinishInstruction());
+        instructionsTwo.add(new AddInstruction());
+        instructionsTwo.add(new MultiplyInstruction());
+        instructionsTwo.add(new InputSaveInstruction());
+        instructionsTwo.add(new WriteOutputInstruction());
+        instructionsTwo.add(new JumpIfTrueInstruction());
+        instructionsTwo.add(new JumpIfFalseInstruction());
+        instructionsTwo.add(new LessThanInstruction());
+        instructionsTwo.add(new EqualsInstruction());
+
+
+        //Init the computer so its ready
+        IntcodeComputer icc2 = new IntcodeComputer(instructionsTwo);
+        IntcodeComputer.input = 5;
+
+        //Test program, OUT 999 if less than 8, OUT 1000 if equal 8, OUT 1001 if higher than 8
+        //ic = new Intcode("3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99");
+
+        //Load the intcode and then modify it for the starting problem
+        int finalResult2 = icc2.runIntcode(ic);
+
+        System.out.println("Finished processing the input, the result is: " + finalResult2);
 
 
     }

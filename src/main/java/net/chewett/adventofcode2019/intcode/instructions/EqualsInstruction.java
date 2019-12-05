@@ -2,7 +2,7 @@ package net.chewett.adventofcode2019.intcode.instructions;
 
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
 
-public class AddInstruction extends TwoParameterInstruction {
+public class EqualsInstruction extends TwoParameterInstruction {
 
     @Override
     public int getIntsConsumed() {
@@ -11,7 +11,7 @@ public class AddInstruction extends TwoParameterInstruction {
 
     @Override
     public int getIntcodeInstructionNumber() {
-        return 1;
+        return 8;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class AddInstruction extends TwoParameterInstruction {
             operandAValue = memory.getIntAtAddress(currentAddress + 1);
         }else{
             throw new RuntimeException("Unsupported parameter mode");
-        }
+    }
 
         if(this.operandBMode == 0) {
             int locOfOperandB = memory.getIntAtAddress(currentAddress + 2);
@@ -38,7 +38,7 @@ public class AddInstruction extends TwoParameterInstruction {
         }
 
         int locToStoreResult = memory.getIntAtAddress(currentAddress + 3);
-        memory.storeIntAtAddress(locToStoreResult, operandAValue + operandBValue);
+        memory.storeIntAtAddress(locToStoreResult, (operandAValue == operandBValue ? 1 : 0));
 
         return false;
     }

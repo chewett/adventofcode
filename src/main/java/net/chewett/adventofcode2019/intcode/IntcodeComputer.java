@@ -13,6 +13,9 @@ public class IntcodeComputer {
     private IntcodeComputerMemory memory = new IntcodeComputerMemory();
     private int currentAddress = 0;
 
+    //FIXME: This is terrible
+    public static int input = 0;
+
     public IntcodeComputer(List<IntcodeInstruction> instructions) {
         for(IntcodeInstruction i : instructions) {
             if(this.instructionSet.containsKey(i.getIntcodeInstructionNumber())) {
