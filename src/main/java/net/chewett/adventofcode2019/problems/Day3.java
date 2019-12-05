@@ -1,3 +1,5 @@
+package net.chewett.adventofcode2019.problems;
+
 import java.util.*;
 
 public class Day3 {
