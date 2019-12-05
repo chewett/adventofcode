@@ -3,18 +3,15 @@ package net.chewett.adventofcode2019.intcode;
 import net.chewett.adventofcode2019.intcode.exceptions.UnsupportedIntcodeInstruction;
 import net.chewett.adventofcode2019.intcode.instructions.IntcodeInstruction;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class IntcodeComputer {
 
     private Map<Integer, IntcodeInstruction> instructionSet = new HashMap<>();
     private IntcodeComputerMemory memory = new IntcodeComputerMemory();
     private int currentAddress = 0;
-
-    //FIXME: This is terrible
-    public static int input = 0;
+    private List<Integer> output = new ArrayList<>();
+    private Queue<Integer> input = new LinkedList<>();
 
     public IntcodeComputer(List<IntcodeInstruction> instructions) {
         for(IntcodeInstruction i : instructions) {
@@ -39,7 +36,7 @@ public class IntcodeComputer {
         while(!finishedIntcode) {
             IntcodeInstruction i = this.fetchInstructionAtCurrentAddress();
             //DEBUG: System.out.println("Running " + i);
-            finishedIntcode = i.performInstructionOnMemory(this.currentAddress, this.memory);
+            finishedIntcode = i.performInstructionOnMemory(this, this.currentAddress, this.memory);
             this.currentAddress += i.getIntsConsumed();
         }
 
@@ -61,6 +58,22 @@ public class IntcodeComputer {
         i.configureMode(modeSettings);
 
         return i;
+    }
+
+    public void addOutputString(int i) {
+        this.output.add(i);
+    }
+
+    public List<Integer> getOutput() {
+        return this.output;
+    }
+
+    public void addToInput(int input) {
+        this.input.add(input);
+    }
+
+    public int getInput() {
+        return this.input.remove();
     }
 
 }

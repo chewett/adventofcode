@@ -1,5 +1,6 @@
 package net.chewett.adventofcode2019.intcode.instructions;
 
+import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
 
 public class FinishInstruction extends IntcodeInstruction {
@@ -16,7 +17,7 @@ public class FinishInstruction extends IntcodeInstruction {
     }
 
     @Override
-    public boolean performInstructionOnMemory(int currentAddress, IntcodeComputerMemory memory) {
+    public boolean performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
         return true;
     }
 

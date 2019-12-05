@@ -1,5 +1,6 @@
 package net.chewett.adventofcode2019.intcode.instructions;
 
+import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
 
 public class WriteOutputInstruction extends OneParameterInstruction {
@@ -15,16 +16,17 @@ public class WriteOutputInstruction extends OneParameterInstruction {
     }
 
     @Override
-    public boolean performInstructionOnMemory(int currentAddress, IntcodeComputerMemory memory) {
+    public boolean performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
         //FIXME: This just writes out the results, change this to have some way of outputting stuff.
 
+        int newOutput;
         if(this.operandMode == 0) {
-            System.out.println(memory.getIntAtAddress(memory.getIntAtAddress(currentAddress + 1)));
+            newOutput = memory.getIntAtAddress(memory.getIntAtAddress(currentAddress + 1));
         }else{
-            System.out.println(memory.getIntAtAddress(currentAddress + 1));
+            newOutput = memory.getIntAtAddress(currentAddress + 1);
         }
 
-
+        icc.addOutputString(newOutput);
         return false;
     }
 
