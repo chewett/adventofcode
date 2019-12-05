@@ -20,4 +20,8 @@ public class FinishInstruction extends IntcodeInstruction {
         return true;
     }
 
+    @Override
+    public void configureMode(int modeSetting) {
+        //Do nothing
+    }
 }

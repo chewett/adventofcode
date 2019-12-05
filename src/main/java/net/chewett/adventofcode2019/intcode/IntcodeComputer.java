@@ -35,6 +35,7 @@ public class IntcodeComputer {
         boolean finishedIntcode = false;
         while(!finishedIntcode) {
             IntcodeInstruction i = this.fetchInstructionAtCurrentAddress();
+            //DEBUG: System.out.println("Running " + i);
             finishedIntcode = i.performInstructionOnMemory(this.currentAddress, this.memory);
             this.currentAddress += i.getIntsConsumed();
         }
@@ -44,14 +45,19 @@ public class IntcodeComputer {
     }
 
     private IntcodeInstruction fetchInstructionAtCurrentAddress() {
-        int intcodeInstructionId = this.memory.getIntAtAddress(this.currentAddress);
+        int instructionModeValue = this.memory.getIntAtAddress(this.currentAddress);
+        int modeSettings = (int)Math.floor(instructionModeValue / 100.0);
+        int intcodeInstructionId = instructionModeValue % 100;
         //TODO: Add parameter modes in here, MOD 100 for instruction ID
 
         if(!this.instructionSet.containsKey(intcodeInstructionId)) {
-            throw new UnsupportedIntcodeInstruction();
+            throw new UnsupportedIntcodeInstruction(intcodeInstructionId);
         }
 
-        return this.instructionSet.get(intcodeInstructionId);
+        IntcodeInstruction i = this.instructionSet.get(intcodeInstructionId);
+        i.configureMode(modeSettings);
+
+        return i;
     }
 
 }

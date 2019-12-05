@@ -3,6 +3,7 @@ package net.chewett.adventofcode2019.intcode;
 import net.chewett.adventofcode2019.intcode.instructions.AddInstruction;
 import net.chewett.adventofcode2019.intcode.instructions.FinishInstruction;
 import net.chewett.adventofcode2019.intcode.instructions.IntcodeInstruction;
+import net.chewett.adventofcode2019.intcode.instructions.MultiplyInstruction;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,7 +23,7 @@ public class IntcodeComputerTest {
     private IntcodeComputer getBasicMultiplyComputer() {
         List<IntcodeInstruction> instructions = new ArrayList<>();
         instructions.add(new FinishInstruction());
-        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
 
         return new IntcodeComputer(instructions);
     }
@@ -44,5 +45,25 @@ public class IntcodeComputerTest {
 
         Assert.assertEquals(4, finalResult);
     }
+
+    @Test
+    public void basicIntcodeAddParameterImmediateModeTest() {
+        IntcodeComputer icc = this.getBasicAddComputer();
+
+        int finalResult = icc.runIntcode(new Intcode("1101,5,10,0,99"));
+
+        Assert.assertEquals(15, finalResult);
+    }
+
+    @Test
+    public void basicIntcodeMultiplyParameterImmediateModeTest() {
+        IntcodeComputer icc = this.getBasicMultiplyComputer();
+
+        int finalResult = icc.runIntcode(new Intcode("1102,3,9,0,99"));
+
+        Assert.assertEquals(27, finalResult);
+    }
+
+
 
 }

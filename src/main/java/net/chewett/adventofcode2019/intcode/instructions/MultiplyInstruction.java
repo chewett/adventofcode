@@ -2,8 +2,7 @@ package net.chewett.adventofcode2019.intcode.instructions;
 
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
 
-public class MultiplyInstruction extends IntcodeInstruction {
-
+public class MultiplyInstruction extends TwoParameterInstruction {
 
     @Override
     public int getIntsConsumed() {
@@ -17,13 +16,28 @@ public class MultiplyInstruction extends IntcodeInstruction {
 
     @Override
     public boolean performInstructionOnMemory(int currentAddress, IntcodeComputerMemory memory) {
-        int locOfOperandA = memory.getIntAtAddress(currentAddress + 1);
-        int locOfOperandB = memory.getIntAtAddress(currentAddress + 2);
+        int operandAValue;
+        int operandBValue;
+
+        if(this.operandAMode == 0) {
+            int locOfOperandA = memory.getIntAtAddress(currentAddress + 1);
+            operandAValue = memory.getIntAtAddress(locOfOperandA);
+        }else if (this.operandAMode == 1) {
+            operandAValue = memory.getIntAtAddress(currentAddress + 1);
+        }else{
+            throw new RuntimeException("Unsupported parameter mode");
+        }
+
+        if(this.operandBMode == 0) {
+            int locOfOperandB = memory.getIntAtAddress(currentAddress + 2);
+            operandBValue = memory.getIntAtAddress(locOfOperandB);
+        }else if (this.operandBMode == 1) {
+            operandBValue = memory.getIntAtAddress(currentAddress + 2);
+        }else{
+            throw new RuntimeException("Unsupported parameter mode");
+        }
+
         int locToStoreResult = memory.getIntAtAddress(currentAddress + 3);
-
-        int operandAValue = memory.getIntAtAddress(locOfOperandA);
-        int operandBValue = memory.getIntAtAddress(locOfOperandB);
-
         memory.storeIntAtAddress(locToStoreResult, operandAValue * operandBValue);
 
         return false;
