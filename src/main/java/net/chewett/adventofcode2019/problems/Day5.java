@@ -113,8 +113,17 @@ public class Day5 {
 
         //Load the intcode and then modify it for the starting problem
         Intcode ic = new Intcode(diagProgram);
-        int finalResult = icc.runIntcode(ic);
-        System.out.println("Finished processing the input, the result is: " + finalResult);
+        icc.initIntcode(ic);
+        icc.runIntcode();
+
+        int finalOutput = 0;
+        while(icc.hasOutputToRead()) {
+            finalOutput = icc.getOutput();
+        }
+
+        System.out.println("Finished processing the input, the result is: " + finalOutput);
+
+        //Part two
 
         //Set up my Instruction set
         List<IntcodeInstruction> instructionsTwo = new ArrayList<>();
@@ -135,9 +144,15 @@ public class Day5 {
 
         //Load the intcode and then modify it for the starting problem
         Intcode ic2 = new Intcode(diagProgram);
-        int finalResult2 = icc2.runIntcode(ic2);
+        icc2.initIntcode(ic2);
+        icc2.runIntcode();
+        int finalOutput2 = 0;
+        while(icc2.hasOutputToRead()) {
+            finalOutput2 = icc2.getOutput();
+        }
 
-        System.out.println("Finished processing the input, the result is: " + finalResult2);
+        System.out.println("Finished processing the input, the result is: " + finalOutput2);
+
 
 
     }

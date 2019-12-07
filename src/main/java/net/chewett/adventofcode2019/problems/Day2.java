@@ -108,7 +108,9 @@ public class Day2 {
             Intcode ic = new Intcode(st);
             ic.setIntToAddress(1, 12);
             ic.setIntToAddress(2, 2);
-            int finalResult = icc.runIntcode(ic);
+            icc.initIntcode(ic);
+            icc.runIntcode();
+            int finalResult = icc.getResultOfComputation();
 
             System.out.println("Finished processing the input, the result is: " + finalResult);
 

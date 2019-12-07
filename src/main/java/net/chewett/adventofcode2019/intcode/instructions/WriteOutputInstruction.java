@@ -2,6 +2,8 @@ package net.chewett.adventofcode2019.intcode.instructions;
 
 import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
+import net.chewett.adventofcode2019.intcode.instructionreturns.IntcodeInstructionReturn;
+import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddressPointerInstructionReturn;
 
 public class WriteOutputInstruction extends OneParameterInstruction {
 
@@ -16,7 +18,7 @@ public class WriteOutputInstruction extends OneParameterInstruction {
     }
 
     @Override
-    public boolean performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
+    public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
         //FIXME: This just writes out the results, change this to have some way of outputting stuff.
 
         int newOutput;
@@ -27,7 +29,12 @@ public class WriteOutputInstruction extends OneParameterInstruction {
         }
 
         icc.addOutputString(newOutput);
-        return false;
+        return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());
+    }
+
+    @Override
+    public String getInstructionDetails(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
+        return "WriteOutputInstruction(addressToOutput="+memory.getIntAtAddress(currentAddress + 1)+")";
     }
 
 }

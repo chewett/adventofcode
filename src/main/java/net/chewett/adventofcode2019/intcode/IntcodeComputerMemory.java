@@ -16,4 +16,15 @@ public class IntcodeComputerMemory {
         this.memory[address] = value;
     }
 
+    public void printMemory() {
+        String mem = "";
+        int memLoc = 0;
+        for(int i : memory) {
+            mem += memLoc + ":" + i + ",";
+            memLoc++;
+        }
+
+        System.out.println(mem);
+    }
+
 }

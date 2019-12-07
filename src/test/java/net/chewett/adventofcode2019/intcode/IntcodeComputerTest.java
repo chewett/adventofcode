@@ -44,7 +44,10 @@ public class IntcodeComputerTest {
     public void basicIntcodeAddTest() {
         IntcodeComputer icc = this.getBasicAddComputer();
 
-        int finalResult = icc.runIntcode(new Intcode("1,0,0,0,99"));
+        icc.initIntcode(new Intcode("1,0,0,0,99"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        int finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(2, finalResult);
     }
@@ -53,7 +56,10 @@ public class IntcodeComputerTest {
     public void basicIntcodeMultiplyTest() {
         IntcodeComputer icc = this.getBasicMultiplyComputer();
 
-        int finalResult = icc.runIntcode(new Intcode("2,2,2,0,99"));
+        icc.initIntcode(new Intcode("2,2,2,0,99"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        int finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(4, finalResult);
     }
@@ -62,7 +68,10 @@ public class IntcodeComputerTest {
     public void basicIntcodeAddParameterImmediateModeTest() {
         IntcodeComputer icc = this.getBasicAddComputer();
 
-        int finalResult = icc.runIntcode(new Intcode("1101,5,10,0,99"));
+        icc.initIntcode(new Intcode("1101,5,10,0,99"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        int finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(15, finalResult);
     }
@@ -71,7 +80,10 @@ public class IntcodeComputerTest {
     public void basicIntcodeMultiplyParameterImmediateModeTest() {
         IntcodeComputer icc = this.getBasicMultiplyComputer();
 
-        int finalResult = icc.runIntcode(new Intcode("1102,3,9,0,99"));
+        icc.initIntcode(new Intcode("1102,3,9,0,99"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        int finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(27, finalResult);
     }
@@ -81,10 +93,12 @@ public class IntcodeComputerTest {
         IntcodeComputer icc = this.getFullyFeaturedComputer();
         Intcode ic = new Intcode("3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99");
         icc.addToInput(1);
-        icc.runIntcode(ic);
+        icc.initIntcode(ic);
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
 
-        List<Integer> output = icc.getOutput();
-        Assert.assertEquals(999, (int)output.get(0));
+        int output = icc.getOutput();
+        Assert.assertEquals(999, output);
     }
 
     @Test
@@ -92,10 +106,12 @@ public class IntcodeComputerTest {
         IntcodeComputer icc = this.getFullyFeaturedComputer();
         Intcode ic = new Intcode("3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99");
         icc.addToInput(8);
-        icc.runIntcode(ic);
+        icc.initIntcode(ic);
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
 
-        List<Integer> output = icc.getOutput();
-        Assert.assertEquals(1000, (int)output.get(0));
+        int output = icc.getOutput();
+        Assert.assertEquals(1000, output);
     }
 
     @Test
@@ -103,10 +119,12 @@ public class IntcodeComputerTest {
         IntcodeComputer icc = this.getFullyFeaturedComputer();
         Intcode ic = new Intcode("3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99");
         icc.addToInput(10);
-        icc.runIntcode(ic);
+        icc.initIntcode(ic);
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
 
-        List<Integer> output = icc.getOutput();
-        Assert.assertEquals(1001, (int)output.get(0));
+        int output = icc.getOutput();
+        Assert.assertEquals(1001, output);
     }
 
 

@@ -18,7 +18,7 @@ public class Intcode {
     }
 
     public int[] readIntoMemory() {
-        return this.intsFromIntcode;
+        return this.intsFromIntcode.clone();
     }
 
     public void setIntToAddress(int address, int value) {

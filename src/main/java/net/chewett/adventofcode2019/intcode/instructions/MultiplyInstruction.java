@@ -2,6 +2,9 @@ package net.chewett.adventofcode2019.intcode.instructions;
 
 import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
+import net.chewett.adventofcode2019.intcode.ParameterMode;
+import net.chewett.adventofcode2019.intcode.instructionreturns.IntcodeInstructionReturn;
+import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddressPointerInstructionReturn;
 
 public class MultiplyInstruction extends TwoParameterInstruction {
 
@@ -16,7 +19,7 @@ public class MultiplyInstruction extends TwoParameterInstruction {
     }
 
     @Override
-    public boolean performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
+    public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
         int operandAValue;
         int operandBValue;
 
@@ -41,7 +44,15 @@ public class MultiplyInstruction extends TwoParameterInstruction {
         int locToStoreResult = memory.getIntAtAddress(currentAddress + 3);
         memory.storeIntAtAddress(locToStoreResult, operandAValue * operandBValue);
 
-        return false;
+        return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());
+    }
+
+    @Override
+    public String getInstructionDetails(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
+        return "MultiplyInstruction(" +
+                "OpA=" + ParameterMode.getModename(this.operandAMode) + ":" + memory.getIntAtAddress(currentAddress + 1) +
+                ",OpB=" + ParameterMode.getModename(this.operandBMode) + ":" + memory.getIntAtAddress(currentAddress + 2) +
+                ",SaveTo="+memory.getIntAtAddress(currentAddress + 3)+")";
     }
 
 }

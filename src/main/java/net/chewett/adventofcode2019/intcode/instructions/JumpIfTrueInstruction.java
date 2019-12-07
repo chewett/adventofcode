@@ -2,17 +2,15 @@ package net.chewett.adventofcode2019.intcode.instructions;
 
 import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
+import net.chewett.adventofcode2019.intcode.ParameterMode;
+import net.chewett.adventofcode2019.intcode.instructionreturns.IntcodeInstructionReturn;
+import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddressPointerInstructionReturn;
 
 public class JumpIfTrueInstruction extends TwoParameterInstruction {
 
-    private int tmpOverrideIntsConsumed = 0;
-
     @Override
     public int getIntsConsumed() {
-        int overrideValue = this.tmpOverrideIntsConsumed;
-        this.tmpOverrideIntsConsumed = 0;
-
-        return 3 + overrideValue;
+        return 3;
     }
 
     @Override
@@ -21,9 +19,7 @@ public class JumpIfTrueInstruction extends TwoParameterInstruction {
     }
 
     @Override
-    public boolean performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        //FIXME: This just writes out the results, change this to have some way of outputting stuff.
-
+    public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
         int valueToCheck;
         if(this.operandAMode == 0) {
             valueToCheck = memory.getIntAtAddress(memory.getIntAtAddress(currentAddress + 1));
@@ -39,10 +35,18 @@ public class JumpIfTrueInstruction extends TwoParameterInstruction {
                 newPointerAddress = memory.getIntAtAddress(currentAddress + 2);
             }
 
-            this.tmpOverrideIntsConsumed = newPointerAddress - 3 - currentAddress;
+            return new MoveCurrentAddressPointerInstructionReturn(newPointerAddress);
         }
 
-        return false;
+        return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());
+    }
+
+    @Override
+    public String getInstructionDetails(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
+        return "JumpIfTrueInstruction(" +
+                "ToCheck=" + ParameterMode.getModename(this.operandAMode) + ":" + memory.getIntAtAddress(currentAddress + 1) +
+                ",ToJumpTo=" + ParameterMode.getModename(this.operandBMode) + ":" + memory.getIntAtAddress(currentAddress + 2) +
+                ")";
     }
 
 }
