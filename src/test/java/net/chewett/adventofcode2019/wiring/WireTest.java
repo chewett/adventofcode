@@ -19,7 +19,7 @@ public class WireTest {
         Wire w = new Wire();
         w.createWireFromCommands("R1,U1,R1,D2,L3,U2,R3");
         int distance = w.getDistanceToWp(new WirePoint(0, 1));
-        Assert.assertEquals(3, distance);
+        Assert.assertEquals(11, distance);
 
     }
 

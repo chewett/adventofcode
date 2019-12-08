@@ -5,15 +5,15 @@ import java.util.*;
 public class WiringDistanceCalculator {
 
     public static int calculateManhattan(String wireOne, String wireTwo) {
-        return WiringDistanceCalculator.calculateStuff(wireOne, wireTwo, true);
+        return WiringDistanceCalculator.calculateWireDistance(wireOne, wireTwo, true);
     }
 
-    public static int calculateOther(String wireOne, String wireTwo) {
-        return WiringDistanceCalculator.calculateStuff(wireOne, wireTwo, false);
+    public static int calculateWireDistance(String wireOne, String wireTwo) {
+        return WiringDistanceCalculator.calculateWireDistance(wireOne, wireTwo, false);
     }
 
 
-    private static int calculateStuff(String wireOneString, String wireTwoString, boolean returnManhattan) {
+    private static int calculateWireDistance(String wireOneString, String wireTwoString, boolean returnManhattan) {
         Wire wireOne = new Wire();
         wireOne.createWireFromCommands(wireOneString);
         Wire wireTwo = new Wire();

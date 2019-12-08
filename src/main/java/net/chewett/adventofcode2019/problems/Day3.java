@@ -85,7 +85,7 @@ public class Day3 {
         int distanceManhattan = WiringDistanceCalculator.calculateManhattan(wireOneString, wireTwoString);
         System.out.println(distanceManhattan);
 
-        int distanceOther = WiringDistanceCalculator.calculateOther(wireOneString, wireTwoString);
+        int distanceOther = WiringDistanceCalculator.calculateWireDistance(wireOneString, wireTwoString);
         System.out.println(distanceOther);
 
 
