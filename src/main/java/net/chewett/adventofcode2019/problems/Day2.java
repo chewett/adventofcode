@@ -110,7 +110,7 @@ public class Day2 {
             ic.setIntToAddress(2, 2);
             icc.initIntcode(ic);
             icc.runIntcode();
-            int finalResult = icc.getResultOfComputation();
+            long finalResult = icc.getResultOfComputation();
 
             System.out.println("Finished processing the input, the result is: " + finalResult);
 

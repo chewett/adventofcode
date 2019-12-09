@@ -15,7 +15,7 @@ public class FinishInstruction extends IntcodeInstruction {
     }
 
     @Override
-    public int getIntcodeInstructionNumber() {
+    public long getIntcodeInstructionNumber() {
         return 99;
     }
 

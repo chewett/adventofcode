@@ -2,31 +2,26 @@ package net.chewett.adventofcode2019.intcode.instructions;
 
 import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.IntcodeComputerMemory;
+import net.chewett.adventofcode2019.intcode.ParameterMode;
 import net.chewett.adventofcode2019.intcode.instructionreturns.IntcodeInstructionReturn;
 import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddressPointerInstructionReturn;
-import net.chewett.adventofcode2019.intcode.instructionreturns.NeedsInputInstructionReturn;
+import net.chewett.adventofcode2019.intcode.instructionreturns.MoveRelativeBaseAddress;
 
-public class InputSaveInstruction extends OneParameterInstruction {
+public class AdjustRelativeBaseInstruction extends OneParameterInstruction {
 
     @Override
     public long getIntcodeInstructionNumber() {
-        return 3;
+        return 9;
     }
 
     @Override
     public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        if(!icc.hasInputToRead()) {
-            return new NeedsInputInstructionReturn();
-        }
-
-        memory.storeIntAtAddress(this.getMemoryAddressToOperateOn(icc, memory, currentAddress + 1, this.operandMode), icc.getInput());
-
-        return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());
+        return new MoveRelativeBaseAddress((int)this.getValueOfOperand(icc, memory, currentAddress + 1, this.operandMode), currentAddress + this.getIntsConsumed());
     }
 
     @Override
     public String getInstructionDetails(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        return "InputSaveInstruction(saveToAddress="+memory.getIntAtAddress(currentAddress + 1)+")";
+        return "AdjustRelativeBaseInstruction("+memory.getIntAtAddress(currentAddress)+"addressToOutput=" + ParameterMode.getModename(this.operandMode) +":"+this.getValueOfOperand(icc, memory, currentAddress + 1, this.operandMode)+")";
     }
 
 }

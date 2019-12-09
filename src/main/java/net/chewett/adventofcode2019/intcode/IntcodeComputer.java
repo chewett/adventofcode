@@ -8,13 +8,14 @@ import java.util.*;
 
 public class IntcodeComputer {
 
-    private Map<Integer, IntcodeInstruction> instructionSet = new HashMap<>();
+    private Map<Long, IntcodeInstruction> instructionSet = new HashMap<>();
     private IntcodeComputerMemory memory = new IntcodeComputerMemory();
     private int currentAddress = 0;
+    private int relativeBaseAddress = 0;
     private boolean computationEntirelyFinished = false;
     private boolean computationAwaitingInput = false;
-    private Queue<Integer> output = new LinkedList<>();
-    private Queue<Integer> input = new LinkedList<>();
+    private Queue<Long> output = new LinkedList<>();
+    private Queue<Long> input = new LinkedList<>();
 
     public IntcodeComputer(List<IntcodeInstruction> instructions) {
         for(IntcodeInstruction i : instructions) {
@@ -49,22 +50,28 @@ public class IntcodeComputer {
             IntcodeInstruction i = this.fetchInstructionAtCurrentAddress();
 
             //DEBUG
-            //System.out.println("Running address:" + this.currentAddress + " " + i.getInstructionDetails(this, this.currentAddress, this.memory));
+            //System.out.println("CurAddress:" + this.currentAddress + " RelAddress:" + this.relativeBaseAddress + " "  + i.getInstructionDetails(this, this.currentAddress, this.memory));
             IntcodeInstructionReturn iir = i.performInstructionOnMemory(this, this.currentAddress, this.memory);
             if(iir.isFinished()) {
                 this.computationEntirelyFinished = true;
-            }else if(iir.isAwaitingInput()) {
+            }
+            if(iir.isAwaitingInput()) {
                 this.computationAwaitingInput = true;
-            }else if(iir.needsToMoveToNewAddress()) {
+            }
+            if(iir.needsToMoveToNewAddress()) {
                 this.currentAddress = iir.getNewAddressToMoveTo();
+            }
+            if(iir.needsToMoveRelativeBaseAddress()) {
+                //System.out.println("MOVING ADDRESS BY: " + iir.getValueToMoveByRelativeAddress());
+                this.relativeBaseAddress += iir.getValueToMoveByRelativeAddress();
             }
         }
     }
 
     private IntcodeInstruction fetchInstructionAtCurrentAddress() {
-        int instructionModeValue = this.memory.getIntAtAddress(this.currentAddress);
+        long instructionModeValue = this.memory.getIntAtAddress(this.currentAddress);
         int modeSettings = (int)Math.floor(instructionModeValue / 100.0);
-        int intcodeInstructionId = instructionModeValue % 100;
+        long intcodeInstructionId = instructionModeValue % 100;
 
         if(!this.instructionSet.containsKey(intcodeInstructionId)) {
             throw new UnsupportedIntcodeInstruction(intcodeInstructionId);
@@ -76,11 +83,11 @@ public class IntcodeComputer {
         return i;
     }
 
-    public void addOutputString(int i) {
+    public void addOutputString(long i) {
         this.output.add(i);
     }
 
-    public int getOutput() {
+    public long getOutput() {
         return this.output.remove();
     }
 
@@ -88,7 +95,7 @@ public class IntcodeComputer {
         return this.output.size() > 0;
     }
 
-    public void addToInput(int input) {
+    public void addToInput(long input) {
         this.input.add(input);
     }
 
@@ -96,16 +103,24 @@ public class IntcodeComputer {
         return this.input.size() > 0;
     }
 
-    public int getInput() {
+    public long getInput() {
         return this.input.remove();
     }
 
-    public int getResultOfComputation() {
+    public long readMemoryAddress(int address) {
+        return this.memory.getIntAtAddress(address);
+    }
+
+    public long getResultOfComputation() {
         return this.memory.getIntAtAddress(0);
     }
 
     public boolean isComputationEntirelyFinished() {
         return computationEntirelyFinished;
+    }
+
+    public int getRelativeBaseAddress() {
+        return this.relativeBaseAddress;
     }
 
     public boolean isComputationAwaitingInput() {

@@ -6,42 +6,19 @@ import net.chewett.adventofcode2019.intcode.ParameterMode;
 import net.chewett.adventofcode2019.intcode.instructionreturns.IntcodeInstructionReturn;
 import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddressPointerInstructionReturn;
 
-public class LessThanInstruction extends TwoParameterInstruction {
+public class LessThanInstruction extends ThreeParameterInstruction {
 
     @Override
-    public int getIntsConsumed() {
-        return 4;
-    }
-
-    @Override
-    public int getIntcodeInstructionNumber() {
+    public long getIntcodeInstructionNumber() {
         return 7;
     }
 
     @Override
     public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        int operandAValue;
-        int operandBValue;
+        long operandAValue = this.getValueOfOperand(icc, memory, currentAddress + 1, this.operandAMode);
+        long operandBValue = this.getValueOfOperand(icc, memory, currentAddress + 2, this.operandBMode);
 
-        if(this.operandAMode == 0) {
-            int locOfOperandA = memory.getIntAtAddress(currentAddress + 1);
-            operandAValue = memory.getIntAtAddress(locOfOperandA);
-        }else if (this.operandAMode == 1) {
-            operandAValue = memory.getIntAtAddress(currentAddress + 1);
-        }else{
-            throw new RuntimeException("Unsupported parameter mode");
-    }
-
-        if(this.operandBMode == 0) {
-            int locOfOperandB = memory.getIntAtAddress(currentAddress + 2);
-            operandBValue = memory.getIntAtAddress(locOfOperandB);
-        }else if (this.operandBMode == 1) {
-            operandBValue = memory.getIntAtAddress(currentAddress + 2);
-        }else{
-            throw new RuntimeException("Unsupported parameter mode");
-        }
-
-        int locToStoreResult = memory.getIntAtAddress(currentAddress + 3);
+        int locToStoreResult = this.getMemoryAddressToOperateOn(icc, memory, currentAddress + 3, this.operandCMode);
         memory.storeIntAtAddress(locToStoreResult, (operandAValue < operandBValue ? 1 : 0));
 
         return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());

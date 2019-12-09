@@ -5,7 +5,7 @@ package net.chewett.adventofcode2019.intcode.exceptions;
  */
 public class UnsupportedIntcodeInstruction extends RuntimeException {
 
-    public UnsupportedIntcodeInstruction(int instructionId) {
+    public UnsupportedIntcodeInstruction(long instructionId) {
         super("Cannot find instruction ID: " + instructionId);
     }
 

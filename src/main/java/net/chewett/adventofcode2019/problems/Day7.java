@@ -99,7 +99,7 @@ public class Day7 {
                 };
 
                 Intcode ic = new Intcode(thrusterProgramExample);
-                int currentInput = 0;
+                long currentInput = 0;
                 for (int i = 0; i < amplifiers.length; i++) {
                     amplifiers[i].addToInput(thrusterPhase.get(i));
                     amplifiers[i].addToInput(currentInput);
@@ -108,7 +108,7 @@ public class Day7 {
                     currentInput = amplifiers[i].getOutput();
                 }
 
-                maxThrustSignal = Math.max(maxThrustSignal, currentInput);
+                maxThrustSignal = Math.max((int)maxThrustSignal, (int)currentInput);
             }
 
             System.out.println("Found max thrust: " + maxThrustSignal);

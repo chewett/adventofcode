@@ -6,6 +6,8 @@ public class IntcodeInstructionReturn {
     protected boolean finished = false;
     protected boolean needsToMoveToAddress = false;
     protected int newAddress = 0;
+    protected boolean needsToMoveRelativeBaseAddress = false;
+    protected int valueToMoveByRelativeAddress = 0;
 
 
     public boolean isAwaitingInput() {
@@ -24,5 +26,11 @@ public class IntcodeInstructionReturn {
         return this.newAddress;
     }
 
+    public boolean needsToMoveRelativeBaseAddress() {
+        return this.needsToMoveRelativeBaseAddress;
+    }
 
+    public int getValueToMoveByRelativeAddress() {
+        return this.valueToMoveByRelativeAddress;
+    }
 }

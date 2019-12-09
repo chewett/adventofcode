@@ -9,4 +9,9 @@ abstract public class OneParameterInstruction extends IntcodeInstruction {
         this.operandMode = modeSetting;
     }
 
+    @Override
+    public int getIntsConsumed() {
+        return 2;
+    }
+
 }

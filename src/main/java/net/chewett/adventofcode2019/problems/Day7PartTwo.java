@@ -99,7 +99,7 @@ public class Day7PartTwo {
                 }
 
                 boolean finalAmpIsFinished = false;
-                int currentInput = 0;
+                long currentInput = 0;
                 while (!finalAmpIsFinished) {
                     for (IntcodeComputer amplifier : amplifiers) {
                         amplifier.addToInput(currentInput);
@@ -111,7 +111,7 @@ public class Day7PartTwo {
                         finalAmpIsFinished = true;
                     }
                 }
-                maxThrustSignal = Math.max(maxThrustSignal, currentInput);
+                maxThrustSignal = Math.max((int)maxThrustSignal, (int)currentInput);
             }
 
             System.out.println("Found max thrust: " + maxThrustSignal);

@@ -9,32 +9,16 @@ import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddres
 public class JumpIfTrueInstruction extends TwoParameterInstruction {
 
     @Override
-    public int getIntsConsumed() {
-        return 3;
-    }
-
-    @Override
-    public int getIntcodeInstructionNumber() {
+    public long getIntcodeInstructionNumber() {
         return 5;
     }
 
     @Override
     public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        int valueToCheck;
-        if(this.operandAMode == 0) {
-            valueToCheck = memory.getIntAtAddress(memory.getIntAtAddress(currentAddress + 1));
-        }else{
-            valueToCheck = memory.getIntAtAddress(currentAddress + 1);
-        }
+        long valueToCheck = this.getValueOfOperand(icc, memory, currentAddress + 1, this.operandAMode);
 
         if(valueToCheck != 0) {
-            int newPointerAddress;
-            if(this.operandBMode == 0) {
-                newPointerAddress = memory.getIntAtAddress(memory.getIntAtAddress(currentAddress + 2));
-            }else{
-                newPointerAddress = memory.getIntAtAddress(currentAddress + 2);
-            }
-
+            int newPointerAddress = (int)this.getValueOfOperand(icc, memory, currentAddress + 2, this.operandBMode);
             return new MoveCurrentAddressPointerInstructionReturn(newPointerAddress);
         }
 

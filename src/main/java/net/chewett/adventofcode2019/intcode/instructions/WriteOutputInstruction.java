@@ -8,26 +8,13 @@ import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddres
 public class WriteOutputInstruction extends OneParameterInstruction {
 
     @Override
-    public int getIntsConsumed() {
-        return 2;
-    }
-
-    @Override
-    public int getIntcodeInstructionNumber() {
+    public long getIntcodeInstructionNumber() {
         return 4;
     }
 
     @Override
     public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        //FIXME: This just writes out the results, change this to have some way of outputting stuff.
-
-        int newOutput;
-        if(this.operandMode == 0) {
-            newOutput = memory.getIntAtAddress(memory.getIntAtAddress(currentAddress + 1));
-        }else{
-            newOutput = memory.getIntAtAddress(currentAddress + 1);
-        }
-
+        long newOutput = this.getValueOfOperand(icc, memory, currentAddress + 1, this.operandMode);
         icc.addOutputString(newOutput);
         return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());
     }

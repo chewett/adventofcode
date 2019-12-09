@@ -7,8 +7,10 @@ public class ParameterMode {
             return "Loc";
         }else if(mode == 1) {
             return "Val";
+        }else if(mode == 2) {
+            return "Rel";
         }else{
-            throw new RuntimeException("UnsupportedMode");
+            throw new RuntimeException("UnsupportedMode - " + mode);
         }
     }
 }

@@ -116,7 +116,7 @@ public class Day5 {
         icc.initIntcode(ic);
         icc.runIntcode();
 
-        int finalOutput = 0;
+        long finalOutput = 0;
         while(icc.hasOutputToRead()) {
             finalOutput = icc.getOutput();
         }
@@ -146,7 +146,7 @@ public class Day5 {
         Intcode ic2 = new Intcode(diagProgram);
         icc2.initIntcode(ic2);
         icc2.runIntcode();
-        int finalOutput2 = 0;
+        long finalOutput2 = 0;
         while(icc2.hasOutputToRead()) {
             finalOutput2 = icc2.getOutput();
         }

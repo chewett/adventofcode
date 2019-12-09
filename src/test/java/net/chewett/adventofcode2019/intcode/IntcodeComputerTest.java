@@ -36,6 +36,7 @@ public class IntcodeComputerTest {
         instructions.add(new JumpIfFalseInstruction());
         instructions.add(new LessThanInstruction());
         instructions.add(new EqualsInstruction());
+        instructions.add(new AdjustRelativeBaseInstruction());
 
         return new IntcodeComputer(instructions);
     }
@@ -47,7 +48,7 @@ public class IntcodeComputerTest {
         icc.initIntcode(new Intcode("1,0,0,0,99"));
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
-        int finalResult = icc.getResultOfComputation();
+        long finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(2, finalResult);
     }
@@ -59,7 +60,7 @@ public class IntcodeComputerTest {
         icc.initIntcode(new Intcode("2,2,2,0,99"));
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
-        int finalResult = icc.getResultOfComputation();
+        long finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(4, finalResult);
     }
@@ -71,7 +72,7 @@ public class IntcodeComputerTest {
         icc.initIntcode(new Intcode("1101,5,10,0,99"));
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
-        int finalResult = icc.getResultOfComputation();
+        long finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(15, finalResult);
     }
@@ -83,7 +84,7 @@ public class IntcodeComputerTest {
         icc.initIntcode(new Intcode("1102,3,9,0,99"));
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
-        int finalResult = icc.getResultOfComputation();
+        long finalResult = icc.getResultOfComputation();
 
         Assert.assertEquals(27, finalResult);
     }
@@ -97,7 +98,7 @@ public class IntcodeComputerTest {
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
 
-        int output = icc.getOutput();
+        long output = icc.getOutput();
         Assert.assertEquals(999, output);
     }
 
@@ -110,7 +111,7 @@ public class IntcodeComputerTest {
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
 
-        int output = icc.getOutput();
+        long output = icc.getOutput();
         Assert.assertEquals(1000, output);
     }
 
@@ -123,10 +124,80 @@ public class IntcodeComputerTest {
         icc.runIntcode();
         Assert.assertTrue(icc.isComputationEntirelyFinished());
 
-        int output = icc.getOutput();
+        long output = icc.getOutput();
         Assert.assertEquals(1001, output);
     }
 
+    @Test
+    public void testLargeMemorySpace() {
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+        Intcode ic = new Intcode("99");
+        icc.initIntcode(ic);
+        icc.runIntcode();
 
+        long expectedZero = icc.readMemoryAddress(10000);
+        Assert.assertEquals(0, expectedZero);
+    }
+
+    @Test
+    public void basicIntcodeAddParameterRelativeBaseModeTest() {
+        IntcodeComputer icc = this.getBasicAddComputer();
+
+        icc.initIntcode(new Intcode("2201,1,2,0,99"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        long finalResult = icc.getResultOfComputation();
+
+        Assert.assertEquals(3, finalResult);
+    }
+
+    @Test
+    public void testLargeNumberSupport() {
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+
+        icc.initIntcode(new Intcode("1102,34915192,34915192,7,4,7,99,0"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        long finalResult = icc.getOutput();
+
+        Assert.assertEquals(1219070632396864L, finalResult);
+    }
+
+    @Test
+    public void testOutputLargeNumber() {
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+
+        icc.initIntcode(new Intcode("104,1125899906842624,99"));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        long finalResult = icc.getOutput();
+
+        Assert.assertEquals(1125899906842624L, finalResult);
+    }
+
+    @Test
+    public void testRelativeOutputInstruction() {
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+
+        icc.initIntcode(new Intcode("109,5,203,-5,99"));
+        icc.addToInput(12);
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        long finalResult = icc.getResultOfComputation();
+
+        Assert.assertEquals(12, (int)finalResult);
+    }
+
+    @Test
+    public void testRelativeOutputInstructionTwo() {
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+
+        icc.initIntcode(new Intcode("109,7,203,-2,99,0"));
+        icc.addToInput(12);
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+
+        Assert.assertEquals(12, icc.readMemoryAddress(5));
+    }
 
 }

@@ -6,24 +6,19 @@ import net.chewett.adventofcode2019.intcode.ParameterMode;
 import net.chewett.adventofcode2019.intcode.instructionreturns.IntcodeInstructionReturn;
 import net.chewett.adventofcode2019.intcode.instructionreturns.MoveCurrentAddressPointerInstructionReturn;
 
-public class AddInstruction extends TwoParameterInstruction {
+public class AddInstruction extends ThreeParameterInstruction {
 
     @Override
-    public int getIntsConsumed() {
-        return 4;
-    }
-
-    @Override
-    public int getIntcodeInstructionNumber() {
+    public long getIntcodeInstructionNumber() {
         return 1;
     }
 
     @Override
     public IntcodeInstructionReturn performInstructionOnMemory(IntcodeComputer icc, int currentAddress, IntcodeComputerMemory memory) {
-        int operandAValue = this.getValueOfOperand(memory, currentAddress + 1, this.operandAMode);
-        int operandBValue = this.getValueOfOperand(memory, currentAddress + 2, this.operandBMode);
+        long operandAValue = this.getValueOfOperand(icc, memory, currentAddress + 1, this.operandAMode);
+        long operandBValue = this.getValueOfOperand(icc, memory, currentAddress + 2, this.operandBMode);
 
-        int locToStoreResult = memory.getIntAtAddress(currentAddress + 3);
+        int locToStoreResult = this.getMemoryAddressToOperateOn (icc, memory, currentAddress + 3, this.operandCMode);
         memory.storeIntAtAddress(locToStoreResult, operandAValue + operandBValue);
 
         return new MoveCurrentAddressPointerInstructionReturn(currentAddress + this.getIntsConsumed());
