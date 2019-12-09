@@ -4,6 +4,9 @@ import net.chewett.adventofcode2019.intcode.instructions.*;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -199,5 +202,59 @@ public class IntcodeComputerTest {
 
         Assert.assertEquals(12, icc.readMemoryAddress(5));
     }
+
+    @Test
+    public void testOutputProgram() {
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+        String program = "109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99";
+
+        icc.initIntcode(new Intcode(program));
+        icc.runIntcode();
+        Assert.assertTrue(icc.isComputationEntirelyFinished());
+
+        List<String> programOutput = new ArrayList<>();
+        while(icc.hasOutputToRead()) {
+            programOutput.add(String.valueOf(icc.getOutput()));
+        }
+
+        Assert.assertEquals(program, String.join(",", programOutput));
+
+    }
+
+
+    @Test
+    public void testDay9BoostProgramPartOne() throws Exception {
+        File file = new File("day_9_input.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        //Day seven input is a single line, so just load that
+        String boostProgram = br.readLine();
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+
+        Intcode ic = new Intcode(boostProgram);
+        icc.initIntcode(ic);
+        icc.addToInput(1);
+        icc.runIntcode();
+
+        Assert.assertEquals(4006117640L, icc.getOutput());
+    }
+
+    @Test
+    public void testDay9BoostProgramPartTwo() throws Exception {
+        File file = new File("day_9_input.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        //Day seven input is a single line, so just load that
+        String boostProgram = br.readLine();
+        IntcodeComputer icc = this.getFullyFeaturedComputer();
+
+        Intcode ic = new Intcode(boostProgram);
+        icc.initIntcode(ic);
+        icc.addToInput(2);
+        icc.runIntcode();
+
+        Assert.assertEquals(88231, icc.getOutput());
+    }
+
 
 }
