@@ -234,6 +234,7 @@ public class Day10 {
             "###.##.####.##.#..##",
         };
 
+        //This is the actual problem.
         asteroidsOne = new String[] {
             "##.##..#.####...#.#.####",
             "##.###..##.#######..##..",
@@ -264,44 +265,56 @@ public class Day10 {
 
         int maxAsteroidsFound = 0;
         Asteroid bestOneForStation = field.get(0);
+        //Loop over every asteroid
         for(Asteroid a :field) {
+            //I like this way of doing it. An asteroid is only blocking another one if the angle of each asteroid
+            //is identical. Therefore if we store all unique angles of every asteroid, we can find out how many unique
+            //different asteroids it can see. Therefore use a hash set of and just store all the angles!
             Set<Double> seenAsteroids = new HashSet<>();
             for(Asteroid a2: field) {
-                if(a.equals(a2)) {
+                if(a.equals(a2)) { //Ignore itself when looping over the data.
                     continue;
                 }
-
+                //Calculcate the angle and store it (a set wont store the duplicates so dont bother checking)
                 seenAsteroids.add(a.getAngleToAsteroid(a2));
             }
+            //If we have found more this time, store the new max, and the best one for a station (to be used later!)
             if(maxAsteroidsFound < seenAsteroids.size()) {
-                maxAsteroidsFound = Math.max(maxAsteroidsFound, seenAsteroids.size());
+                maxAsteroidsFound = seenAsteroids.size();
                 bestOneForStation = a;
             }
         }
 
+        //Answer for part 1.
+        System.out.println("The best station can see " + maxAsteroidsFound + " asteroids directly");
 
+        //Store a queue of asteroid in a key which is the angle to the asteroid.
+        //This lets me know every asteroid that is on each angle. The queue will be used later!
         Map<Double, Queue<Asteroid>> angleMapping = new HashMap<>();
         for(Asteroid a : field) {
-            Set<Double> seenAsteroids = new HashSet<>();
-            if(bestOneForStation.equals(a)) {
+            if(bestOneForStation.equals(a)) { //Again ignore the best station for this.
                 continue;
             }
 
+            //Work out the angle, store it in the queue (creating it if we need to) and also store the distance to the observation
+            //station in the asteroid. We will use this in a minute.
             double angle = bestOneForStation.getAngleToAsteroid(a);
             if(!angleMapping.containsKey(angle)) {
                 angleMapping.put(angle, new LinkedList<>());
             }
-
             double distanceTo = bestOneForStation.getDistanceTo(a);
             a.storeDistanceToStation(distanceTo);
             angleMapping.get(angle).add(a);
 
         }
 
+        //Get every angle out of the mapping and convert that to an array list. Once converted sort it in an ascending order.
         Set<Double> allAngles = angleMapping.keySet();
         List<Double> allAnglesSort = new ArrayList<>(allAngles);
-
         Collections.sort(allAnglesSort);
+
+        //Loop over every angle, taking out the queue, converting it an an array list, sorting it, then putting the result back in as a queue.
+        //This leaves the map with queues which are ordered in ascending distance to the base station. This is important for the next step.
         for(double d : allAnglesSort) {
             Queue<Asteroid> asteroidsToOrder = angleMapping.get(d);
             List<Asteroid> asteroidsToOrderList = new ArrayList<>(asteroidsToOrder);
@@ -309,7 +322,13 @@ public class Day10 {
             angleMapping.put(d, new LinkedList<>(asteroidsToOrderList));
         }
 
-
+        //Right, this is the clever bit:
+        //Loop over every angle (using the sorted list of angles from 0 -> 359.99 if there is one).
+        //For each queue, if there is an element in the queue pop it off and increment the astroid number.
+        //If the asteroid number is 200, print out the number and finish.
+        //If it isnt 200, continue popping the next double. Keep doing this until the 200th asteroid is found.
+        //This works because the queues are sorted in distance order which means the closer "first ones it can see" are popped off first.
+        //Since the asteroid laser destroys from the 0 angle to 359.99 angle this looping over the angles sorted emulates this behaviour.
         int asteroidNo = 0;
         while(asteroidNo < 200) {
             for(double d : allAnglesSort) {
@@ -322,16 +341,8 @@ public class Day10 {
                         return;
                     }
                 }
-
-
             }
         }
-
-
-
-        System.out.println("Found max asteroids: " + maxAsteroidsFound);
-
-
     }
 
 }
