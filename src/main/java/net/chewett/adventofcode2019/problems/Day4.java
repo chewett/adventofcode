@@ -1,9 +1,9 @@
 package net.chewett.adventofcode2019.problems;
 
 import net.chewett.adventofcode2019.passwords.PasswordFinder;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * Taken from: https://adventofcode.com/2019/day/4

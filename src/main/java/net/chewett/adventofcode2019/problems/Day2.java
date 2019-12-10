@@ -6,8 +6,6 @@ import net.chewett.adventofcode2019.intcode.instructions.AddInstruction;
 import net.chewett.adventofcode2019.intcode.instructions.FinishInstruction;
 import net.chewett.adventofcode2019.intcode.instructions.IntcodeInstruction;
 import net.chewett.adventofcode2019.intcode.instructions.MultiplyInstruction;
-import net.chewett.adventofcode2019.spaceship.Spaceship;
-import net.chewett.adventofcode2019.spaceship.SpaceshipModule;
 
 import java.io.BufferedReader;
 import java.io.File;

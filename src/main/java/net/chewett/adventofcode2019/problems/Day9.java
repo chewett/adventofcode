@@ -3,6 +3,7 @@ package net.chewett.adventofcode2019.problems;
 import net.chewett.adventofcode2019.intcode.Intcode;
 import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.instructions.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
