@@ -18,7 +18,7 @@ public class Moon {
         return velocity;
     }
 
-    public void applyGravity(Moon m) {
+    public void applyGravityX(Moon m) {
         if(this.getPos().getX() > m.getPos().getX()) {
             this.getVelocity().setX(this.getVelocity().getX() - 1);
             m.getVelocity().setX(m.getVelocity().getX() + 1);
@@ -26,7 +26,9 @@ public class Moon {
             this.getVelocity().setX(this.getVelocity().getX() + 1);
             m.getVelocity().setX(m.getVelocity().getX() - 1);
         }
+    }
 
+    public void applyGravityY(Moon m) {
         if(this.getPos().getY() > m.getPos().getY()) {
             this.getVelocity().setY(this.getVelocity().getY() - 1);
             m.getVelocity().setY(m.getVelocity().getY() + 1);
@@ -34,7 +36,9 @@ public class Moon {
             this.getVelocity().setY(this.getVelocity().getY() + 1);
             m.getVelocity().setY(m.getVelocity().getY() - 1);
         }
+    }
 
+    public void applyGravityZ(Moon m) {
         if(this.getPos().getZ() > m.getPos().getZ()) {
             this.getVelocity().setZ(this.getVelocity().getZ() - 1);
             m.getVelocity().setZ(m.getVelocity().getZ() + 1);
@@ -44,10 +48,28 @@ public class Moon {
         }
     }
 
-    public void applyVelocity() {
+    public void applyGravity(Moon m) {
+        this.applyGravityX(m);
+        this.applyGravityY(m);
+        this.applyGravityZ(m);
+    }
+
+    public void applyVelocityX() {
         this.getPos().setX(this.getPos().getX() + this.getVelocity().getX());
+    }
+
+    public void applyVelocityY() {
         this.getPos().setY(this.getPos().getY() + this.getVelocity().getY());
+    }
+
+    public void applyVelocityZ() {
         this.getPos().setZ(this.getPos().getZ() + this.getVelocity().getZ());
+    }
+
+    public void applyVelocity() {
+        this.applyVelocityX();
+        this.applyVelocityY();
+        this.applyVelocityZ();
     }
 
     public int getPotentialEnergy() {
