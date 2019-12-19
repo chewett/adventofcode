@@ -35,6 +35,9 @@ public class IntcodeComputer {
         //Init the memory and set the current address to 0
         this.initMemory(intcode);
         this.currentAddress = 0;
+        this.relativeBaseAddress = 0;
+        this.computationEntirelyFinished = false;
+        this.computationAwaitingInput = false;
     }
 
     public void runIntcode() {
