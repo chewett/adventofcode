@@ -23,6 +23,10 @@ public class MapArea {
 
     }
 
+    public Map<Point, Character> getMapData() {
+        return mapData;
+    }
+
     public void setMapData(int x, int y, char letter) {
         this.mapData.put(new Point(x, y), letter);
     }
@@ -34,7 +38,7 @@ public class MapArea {
 
 
     public int getDirectionToMoveToPoint(int startX, int startY, int endX, int endY) {
-        System.out.println("Getting direction to move in for " + startX+","+startY+" to " + endX + "," + endY);
+        //System.out.println("Getting direction to move in for " + startX+","+startY+" to " + endX + "," + endY);
         Map<Point, GraphNode> allNodes = new HashMap<>();
         GraphNode gn = new GraphNode(0, startX, startY);
         GraphNode endNode = new GraphNode(999999, endX, endY);
@@ -115,7 +119,7 @@ public class MapArea {
         while(currentNode != null) {
             List<Point> adjacentNodes = currentNode.getAdjacentPoints();
             for(Point p : adjacentNodes) {
-                if(!allNodes.containsKey(p) && this.getMapData(p.x, p.y) == '.') {
+                if(!allNodes.containsKey(p) && (this.getMapData(p.x, p.y) == '.' || this.getMapData(p.x, p.y) == 'O')) {
                     GraphNode newNode = new GraphNode(currentNode.getCost() + 1, p.x, p.y);
                     newNode.linkNode(currentNode);
                     currentNode.linkNode(newNode);

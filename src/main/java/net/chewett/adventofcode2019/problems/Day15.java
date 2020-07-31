@@ -1,6 +1,7 @@
 package net.chewett.adventofcode2019.problems;
 
 import net.chewett.adventofcode2019.MapArea;
+import net.chewett.adventofcode2019.OxygenRefillingModel;
 import net.chewett.adventofcode2019.intcode.Intcode;
 import net.chewett.adventofcode2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode2019.intcode.instructions.*;
@@ -13,15 +14,6 @@ import java.util.*;
 import java.util.List;
 
 public class Day15 {
-
-    public static int calculateDirectionToPoint(Point startingPoint, Point endingPoint) {
-
-
-
-
-        return 1;
-    }
-
 
     public static void main(String[] args) {
         try {
@@ -55,22 +47,26 @@ public class Day15 {
             int x = 0;
             int y = 0;
 
-            boolean notFound = true;
             Point pointToVisit = pointsToVisitNext.remove();
             Point oxygenPoint = new Point(1,1);
-            while(notFound) {
-                System.out.println("Current position " + x + "," + y + " Objective: " + pointToVisit.x + "," + pointToVisit.y);
+            while(pointToVisit != null) {
+                while(pointToVisit.x == x && pointToVisit.y == y) {
+                    pointToVisit = pointsToVisitNext.remove();
+                }
+
                 int direction = ma.getDirectionToMoveToPoint(x, y, (int)pointToVisit.getX(), (int)pointToVisit.getY());
                 Point newPointImAimingFor = ma.getPointInDirection(new Point(x, y), direction);
-                System.out.println("Moving in direction " + direction);
                 icc.addToInput(direction);
                 icc.runIntcode();
                 long moveResult = icc.getOutput();
-                System.out.println("Result of move: " + moveResult);
                 if(moveResult == 0) {
                     ma.setMapData(newPointImAimingFor.x, newPointImAimingFor.y, '#');
                     if(newPointImAimingFor.x == pointToVisit.x && newPointImAimingFor.y == pointToVisit.y) {
-                        pointToVisit = pointsToVisitNext.remove();
+                        if(pointsToVisitNext.size() > 0) {
+                            pointToVisit = pointsToVisitNext.remove();
+                        }else{
+                            pointToVisit = null;
+                        }
                     }
                 }else if(moveResult == 1) {
                     x = newPointImAimingFor.x;
@@ -78,35 +74,33 @@ public class Day15 {
 
                     ma.setMapData(newPointImAimingFor.x, newPointImAimingFor.y, '.');
                     if(newPointImAimingFor.equals(pointToVisit)) {
-                        System.out.println("Found position, getting new one");
                         pointsToVisitNext.addAll(ma.findAdjacentUnexploredPoints(x, y));
                         pointToVisit = pointsToVisitNext.remove();
                         while(pointToVisit.x == x && pointToVisit.y == y) {
-                            System.out.println("Throwing away new position");
-                            pointToVisit = pointsToVisitNext.remove();
+                            if(pointsToVisitNext.size() > 0) {
+                                pointToVisit = pointsToVisitNext.remove();
+                            }else{
+                                pointToVisit = null;
+                            }
                         }
                     }
                 }else if(moveResult == 2) {
+                    x = newPointImAimingFor.x;
+                    y = newPointImAimingFor.y;
                     ma.setMapData(newPointImAimingFor.x, newPointImAimingFor.y, 'O');
-                    System.out.println("Found Oxygen point " + newPointImAimingFor);
                     oxygenPoint = newPointImAimingFor;
-                    notFound = false;
                 }
-                ma.draw(x, y);
             }
-
 
             System.out.println("Found: " + ma.calculateCostBetweenPoints(0, 0, oxygenPoint.x, oxygenPoint.y));
 
+            OxygenRefillingModel orm = new OxygenRefillingModel(ma);
 
-
-
+            int minutesToFill = orm.getMinutesToFillAreaWithOxygen();
+            System.out.println("Minutes to fill the area with oxygen: " + minutesToFill);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
