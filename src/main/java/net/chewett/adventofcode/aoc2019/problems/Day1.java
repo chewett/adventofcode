@@ -47,9 +47,9 @@ import java.io.IOException;
  */
 public class Day1 {
 
-    public static void main(String[] argv) {
+    public void solve() {
         try {
-            File file = new File("day_1_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_1_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;
@@ -68,6 +68,11 @@ public class Day1 {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] argv) {
+       Day1 d = new Day1();
+       d.solve();
     }
 
 }
