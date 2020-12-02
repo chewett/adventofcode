@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class Day14PartTwo {
 
-    public static void main(String[] args) {
+    public void solve() {
         try {
-            File file = new File("day_14_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_14_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             List<String> reactionStringsList = new ArrayList<>();
@@ -89,7 +89,11 @@ public class Day14PartTwo {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public static void main(String[] args) {
+        Day14PartTwo d = new Day14PartTwo();
+        d.solve();
     }
 
 

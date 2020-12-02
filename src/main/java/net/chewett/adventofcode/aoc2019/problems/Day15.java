@@ -15,9 +15,9 @@ import java.util.List;
 
 public class Day15 {
 
-    public static void main(String[] args) {
+    public void solve() {
         try {
-            File file = new File("day_15_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_15_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String oxygenRobot = br.readLine();
@@ -102,5 +102,10 @@ public class Day15 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Day15 d = new Day15();
+        d.solve();
     }
 }

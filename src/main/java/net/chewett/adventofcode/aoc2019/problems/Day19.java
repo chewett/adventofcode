@@ -12,14 +12,12 @@ import java.util.List;
 
 public class Day19 {
 
-
-    public static void main(String[] args) {
+    public void solve() {
         try {
-            File file = new File("day_19_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_19_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String tractorBeamRobot = br.readLine();
-
 
             //Set up my Instruction set
             List<IntcodeInstruction> instructions = new ArrayList<>();
@@ -64,15 +62,13 @@ public class Day19 {
 
             System.out.println("Number of points the tractor beam is finding " + tractorBeamPointPulling);
 
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
-
+    public static void main(String[] args) {
+       Day19 d = new Day19();
+       d.solve();
     }
 }

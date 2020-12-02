@@ -65,10 +65,9 @@ public class Day13PartTwo {
         return new Point(0,0);
     }
 
-    public static void main(String[] args) {
-
+    public void solve() {
         try {
-            File file = new File("day_13_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_13_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             //Day eleven input is a single line, so just load that
@@ -130,14 +129,14 @@ public class Day13PartTwo {
                     screenData.put(curPoint, icc.getOutput());
                 }
             }
-
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Day13PartTwo d = new Day13PartTwo();
+        d.solve();
     }
 
 

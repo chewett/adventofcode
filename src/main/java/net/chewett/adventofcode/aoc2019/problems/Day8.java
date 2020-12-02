@@ -66,9 +66,9 @@ import java.io.IOException;
  */
 public class Day8 {
 
-    public static void main(String[] argv) {
+    public void solve() {
         try {
-            File file = new File("day_8_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_8_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             //Day two input is a single line, so just load that
@@ -86,5 +86,10 @@ public class Day8 {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] argv) {
+       Day8 d = new Day8();
+       d.solve();
     }
 }

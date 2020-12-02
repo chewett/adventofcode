@@ -12,10 +12,9 @@ import java.util.List;
 
 public class Day17PartTwo {
 
-    public static void main(String[] args) {
-
+    public void solve() {
         try {
-            File file = new File("day_17_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_17_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String oxygenRobot = br.readLine();
@@ -52,17 +51,20 @@ public class Day17PartTwo {
                 }
             }
 
-           for(String s : rows) {
-               System.out.println(s);
-           }
+            for(String s : rows) {
+                System.out.println(s);
+            }
 
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
+    public static void main(String[] args) {
+        Day17PartTwo d = new Day17PartTwo();
+        d.solve();
     }
 
 }

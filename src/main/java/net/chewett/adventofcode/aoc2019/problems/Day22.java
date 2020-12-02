@@ -12,13 +12,12 @@ import java.util.List;
 public class Day22 {
 
 
-
-    public static void main(String[] args) {
+    public void solve() {
         List<Integer> spaceDeck = new ArrayList<>();
         DeckShuffler.initDeckWithNumberOfNumbers(spaceDeck, 10007);
 
         try {
-            File file = new File("day_22_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_22_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;
@@ -49,6 +48,11 @@ public class Day22 {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Day22 d = new Day22();
+        d.solve();
     }
 
 }

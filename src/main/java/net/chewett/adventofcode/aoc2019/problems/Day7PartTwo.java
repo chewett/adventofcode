@@ -50,10 +50,9 @@ import java.util.List;
  */
 public class Day7PartTwo {
 
-    public static void main(String[] args) {
-
+    public void solve() {
         try {
-            File file = new File("day_7_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_7_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             //Day seven input is a single line, so just load that
@@ -119,6 +118,10 @@ public class Day7PartTwo {
         }catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Day7PartTwo d = new Day7PartTwo();
     }
 
 }

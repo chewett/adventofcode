@@ -17,10 +17,9 @@ import java.util.List;
  */
 public class Day11 {
 
-    public static void main(String[] args) {
-
+    public void solve() {
         try {
-            File file = new File("day_11_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_11_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             //Day eleven input is a single line, so just load that
@@ -118,6 +117,11 @@ public class Day11 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        Day11 d = new Day11();
+        d.solve();
     }
 
 }

@@ -82,9 +82,9 @@ import java.io.IOException;
  */
 public class Day3 {
 
-    public static void main(String[] argv) {
+    public void solve() {
         try {
-            File file = new File("day_3_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_2_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String wireOneString = br.readLine();
@@ -99,10 +99,11 @@ public class Day3 {
         } catch(IOException e) {
             e.printStackTrace();
         }
+    }
 
-
-
-
+    public static void main(String[] argv) {
+       Day3 d = new Day3();
+       d.solve();
     }
 
 }

@@ -12,10 +12,10 @@ import java.util.List;
 
 public class Day17 {
 
-    public static void main(String[] args) {
+    public void solve() {
 
         try {
-            File file = new File("day_17_input.txt");
+            File file = new File(getClass().getResource("/aoc2019/day_17_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String oxygenRobot = br.readLine();
@@ -58,9 +58,9 @@ public class Day17 {
                     if(rows.get(y).substring(x, x+1).equals("#")) {
                         if(
                                 rows.get(y).substring(x-1, x).equals("#") &&
-                                rows.get(y).substring(x+1, x+2).equals("#") &&
-                                rows.get(y-1).substring(x, x+1).equals("#") &&
-                                rows.get(y+1).substring(x, x+1).equals("#")
+                                        rows.get(y).substring(x+1, x+2).equals("#") &&
+                                        rows.get(y-1).substring(x, x+1).equals("#") &&
+                                        rows.get(y+1).substring(x, x+1).equals("#")
                         ){
                             totalCombinations += x * y;
                         }
@@ -76,8 +76,11 @@ public class Day17 {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-
+    public static void main(String[] args) {
+        Day17 d = new Day17();
+        d.solve();
     }
 
 }

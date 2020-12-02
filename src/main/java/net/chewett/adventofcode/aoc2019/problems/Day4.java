@@ -39,6 +39,7 @@ import java.util.List;
 public class Day4 {
 
     public static void main(String[] args) {
+        //TODO: Load the start and end from the file.
         int START_NUM = 153517;
         int END_NUM = 630395;
 
