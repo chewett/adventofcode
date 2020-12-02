@@ -67,7 +67,7 @@ public class Day13PartTwo {
 
     public void solve() {
         try {
-            File file = new File(getClass().getResource("/aoc2019/day_13_input.txt").getFile());
+            File file = new File(getClass().getResource("/aoc2019/2019_day_13_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             //Day eleven input is a single line, so just load that

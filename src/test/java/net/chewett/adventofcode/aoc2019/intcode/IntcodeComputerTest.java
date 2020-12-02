@@ -224,7 +224,7 @@ public class IntcodeComputerTest {
 
     @Test
     public void testDay9BoostProgramPartOne() throws Exception {
-        File file = new File("day_9_input.txt");
+        File file = new File("2019_day_9_input.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         //Day seven input is a single line, so just load that
@@ -241,7 +241,7 @@ public class IntcodeComputerTest {
 
     @Test
     public void testDay9BoostProgramPartTwo() throws Exception {
-        File file = new File("day_9_input.txt");
+        File file = new File("2019_day_9_input.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         //Day seven input is a single line, so just load that

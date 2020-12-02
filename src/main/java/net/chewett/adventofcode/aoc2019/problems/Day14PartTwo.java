@@ -15,7 +15,7 @@ public class Day14PartTwo {
 
     public void solve() {
         try {
-            File file = new File(getClass().getResource("/aoc2019/day_14_input.txt").getFile());
+            File file = new File(getClass().getResource("/aoc2019/2019_day_14_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             List<String> reactionStringsList = new ArrayList<>();

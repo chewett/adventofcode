@@ -17,7 +17,7 @@ public class Day22 {
         DeckShuffler.initDeckWithNumberOfNumbers(spaceDeck, 10007);
 
         try {
-            File file = new File(getClass().getResource("/aoc2019/day_22_input.txt").getFile());
+            File file = new File(getClass().getResource("/aoc2019/2019_day_22_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;

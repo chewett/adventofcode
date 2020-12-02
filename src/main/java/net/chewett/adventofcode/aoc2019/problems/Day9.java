@@ -63,7 +63,7 @@ public class Day9 {
     public void solve() {
 
         try {
-            File file = new File(getClass().getResource("/aoc2019/day_9_input.txt").getFile());
+            File file = new File(getClass().getResource("/aoc2019/2019_day_9_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             //Day seven input is a single line, so just load that

@@ -49,7 +49,7 @@ public class Day1 {
 
     public void solve() {
         try {
-            File file = new File(getClass().getResource("/aoc2019/day_1_input.txt").getFile());
+            File file = new File(getClass().getResource("/aoc2019/2019_day_1_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;

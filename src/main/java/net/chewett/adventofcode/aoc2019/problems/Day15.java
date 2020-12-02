@@ -17,7 +17,7 @@ public class Day15 {
 
     public void solve() {
         try {
-            File file = new File(getClass().getResource("/aoc2019/day_15_input.txt").getFile());
+            File file = new File(getClass().getResource("/aoc2019/2019_day_15_input.txt").getFile());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String oxygenRobot = br.readLine();
