@@ -224,10 +224,9 @@ public class IntcodeComputerTest {
 
     @Test
     public void testDay9BoostProgramPartOne() throws Exception {
-        File file = new File("2019_day_9_input.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        BufferedReader br = new BufferedReader(new FileReader(getClass().getResource("/aoc2019/2019_day_9_input.txt").getFile()));
 
-        //Day seven input is a single line, so just load that
+        //Day 9 input is a single line, so just load that
         String boostProgram = br.readLine();
         IntcodeComputer icc = this.getFullyFeaturedComputer();
 
@@ -241,10 +240,9 @@ public class IntcodeComputerTest {
 
     @Test
     public void testDay9BoostProgramPartTwo() throws Exception {
-        File file = new File("2019_day_9_input.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        BufferedReader br = new BufferedReader(new FileReader(getClass().getResource("/aoc2019/2019_day_9_input.txt").getFile()));
 
-        //Day seven input is a single line, so just load that
+        //Day 9 input is a single line, so just load that
         String boostProgram = br.readLine();
         IntcodeComputer icc = this.getFullyFeaturedComputer();
 
