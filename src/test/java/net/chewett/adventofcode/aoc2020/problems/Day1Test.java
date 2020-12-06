@@ -15,7 +15,7 @@ public class Day1Test {
      */
     @Test
     public void testExampleInputPartOne() {
-        List<Integer> ints = new ArrayList<Integer>();
+        List<Integer> ints = new ArrayList<>();
         ints.add(1721);
         ints.add(979);
         ints.add(366);
@@ -46,7 +46,7 @@ public class Day1Test {
      */
     @Test
     public void testExampleInputPartTwo() {
-        List<Integer> ints = new ArrayList<Integer>();
+        List<Integer> ints = new ArrayList<>();
         ints.add(1721);
         ints.add(979);
         ints.add(366);
