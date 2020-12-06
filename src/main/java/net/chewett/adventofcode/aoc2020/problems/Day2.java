@@ -64,8 +64,8 @@ public class Day2 {
             String[] p2 = p1[0].split(" ");
             char letter = p2[1].charAt(0);
             String[] p3 = p2[0].split("-");
-            int minOccurences = Integer.parseInt(p3[0]);
-            int maxOccurences = Integer.parseInt(p3[1]);
+            int minOccurrences = Integer.parseInt(p3[0]);
+            int maxOccurrences = Integer.parseInt(p3[1]);
 
             //PartOneSolving
             int curOccurences = 0;
@@ -74,7 +74,7 @@ public class Day2 {
                     curOccurences++;
                 }
             }
-            if(curOccurences >= minOccurences && curOccurences <= maxOccurences) {
+            if(curOccurences >= minOccurrences && curOccurences <= maxOccurrences) {
                 validPasswordsForPartOne++;
             }
         }
