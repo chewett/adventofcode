@@ -51,17 +51,20 @@ import java.util.Set;
  */
 public class Day1 {
 
-    public void solve() {
-        List<Integer> ints = ProblemLoader.loadProblemIntoIntegerList(2020, 1);
-
+    public long solvePartOne(List<Integer> ints) {
         Set<Integer> s = new HashSet<>(ints);
 
         for (int i : ints) {
             int diff = 2020 - i;
             if (s.contains(diff)) {
-                System.out.println("Found: " + i + " and " + diff + " which multiply to " + (diff * i));
+                return diff * i;
             }
         }
+        return -1;
+    }
+
+    public long solvePartTwo(List<Integer> ints) {
+        Set<Integer> s = new HashSet<>(ints);
 
         for (int i : ints) {
             int initialDiff = 2020 - i;
@@ -69,16 +72,24 @@ public class Day1 {
             for (int j : ints) {
                 int diff = initialDiff - j;
                 if (s.contains(diff)) {
-                    System.out.println("Found: " + i + " and " + j + " and " + diff + " which multiply to " + (diff * i * j));
+                    return diff * i * j;
                 }
             }
         }
-
+        return -1;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        List<Integer> ints = ProblemLoader.loadProblemIntoIntegerList(2020, 1);
+
         Day1 d = new Day1();
-        d.solve();
+        long partOne = d.solvePartOne(ints);
+        System.out.println("Found two numbers which add to 2020 and multiply to " + partOne);
+
+        long partTwo = d.solvePartTwo(ints);
+        System.out.println("Found three numbers which add to 2020 and multiply to " + partTwo);
+
+
     }
 
 }
