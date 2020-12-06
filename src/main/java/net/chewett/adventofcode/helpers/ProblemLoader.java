@@ -42,4 +42,52 @@ public class ProblemLoader {
         return ints;
     }
 
+    public static List<List<Character>> loadProblemIntoXYCharList(int year, int day) {
+        String filePath = "/aoc" + year + "/" + year + "_day_" + day + "_input.txt";
+
+        List<List<Character>> chars = new ArrayList<>();
+        try {
+            File file = new File(ProblemLoader.class.getResource(filePath).getFile());
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String st;
+            while ((st = br.readLine()) != null) {
+                List<Character> rowList = new ArrayList<>();
+                for(int i = 0; i < st.length(); i++) {
+                    rowList.add(st.charAt(i));
+                }
+                chars.add(rowList);
+            }
+        }catch (IOException e) {
+            //This shouldnt really happen so lets just catch it all and throw a runtime exception so its clear what the issue is.
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load problem", e);
+        }
+
+        return chars;
+    }
+
+    public static List<String> loadProblemIntoStringArray(int year, int day) {
+        String filePath = "/aoc" + year + "/" + year + "_day_" + day + "_input.txt";
+
+        List<String> lines = new ArrayList<>();
+        try {
+            File file = new File(ProblemLoader.class.getResource(filePath).getFile());
+            BufferedReader br = new BufferedReader(new FileReader(file));
+
+            String st;
+            while ((st = br.readLine()) != null) {
+                lines.add(st);
+            }
+        }catch (IOException e) {
+            //This shouldnt really happen so lets just catch it all and throw a runtime exception so its clear what the issue is.
+            e.printStackTrace();
+            throw new RuntimeException("Failed to load problem", e);
+        }
+
+        return lines;
+    }
+
+
+
 }
