@@ -124,69 +124,66 @@ public class Day7 {
     }
 
     public int solvePartTwo(List<String> bagDetails) {
-        Map<String, List<String>> bagMap = new HashMap<>();
-
-        for(String s : bagDetails) {
-            String[] bagSplit = s.substring(0, s.length() - 2).split(" bags contain ");
-
-            String biggerBag = bagSplit[0].replace(" ", "");
-            String[] bagPieces = bagSplit[1].split(", ");
-            List<String> bagsThatAreInside = new ArrayList<>();
-            for(String bag : bagPieces) {
-                String[] finalBagParts = bag.replace("bags", "").replace("bag", "").split(" ");
-                if(finalBagParts[0].equals("no")) {
-
-                }else {
-                    bagsThatAreInside.add(finalBagParts[0] + " " + finalBagParts[1] + finalBagParts[2]);
-                }
-            }
-
-            bagMap.put(biggerBag, bagsThatAreInside);
+        List<Bag> bags = new ArrayList<>();
+        //Hold a map of bagname -> bag object to make it faster to find bags we are interested in
+        Map<String, Bag> bagMap = new HashMap<>();
+        //We will create a list of bags we want to find the size for. Not all of them will be calculated as we will stop
+        //when we have the value of the shiny gold bag.
+        List<String> bagsToCalculateSizeFor = new ArrayList<>();
+        for(String bagString : bagDetails) {
+            //Create the bag object, store it in the map, and add it to the list of things to calculate
+            Bag newBag = new Bag(bagString);
+            bags.add(newBag);
+            bagMap.put(newBag.getBagName(), newBag);
+            bagsToCalculateSizeFor.add(newBag.getBagName());
         }
 
-        Map<String, Integer> bagNumbers = new HashMap<>();
+        //We will store a mapping of bag name -> number of bags it contains for faster lookups
+        Map<String, Integer> numberOfBagsInBag = new HashMap<>();
+        //Keep track of bags we have already calculated so we only iterate over the ones with no value
+        List<String> bagsToRemoveForCalculation = new ArrayList<>();
 
-        List<String> thingsToRemove = new ArrayList<>();
-        for(Map.Entry<String, List<String>> e : bagMap.entrySet()) {
-            if(e.getValue().size() == 0) {
-                bagNumbers.put(e.getKey(), 0);
-                thingsToRemove.add(e.getKey());
-            }
-        }
-        for(String s : thingsToRemove) {
-            bagMap.remove(s);
-        }
+        //Keep running until we have found the number of bags inside the shiny gold bag
+        while(numberOfBagsInBag.get("shiny gold") == null) {
 
-        while(bagNumbers.get("shinygold") == null) {
-            thingsToRemove = new ArrayList<>();
+            //Loop over every bag which we still are trying to calculate
+            for(String bagNameToCheck : bagsToCalculateSizeFor) {
+                Bag bagToCheck = bagMap.get(bagNameToCheck);
 
-            for(Map.Entry<String, List<String>> e : bagMap.entrySet()) {
-                int bagsFoundInThis = 0;
-                boolean allBagsHaveCount = true;
-                for(String bagString : e.getValue()) {
-                    String[] bagStringParts = bagString.split(" ");
-                    int bagNumberCount = Integer.parseInt(bagStringParts[0]);
-                    String bagNewColour = bagStringParts[1];
+                //If this bag contains no bags then store that value and note it to be removed once the loop is over
+                if(bagToCheck.getContainingBags().size() == 0) {
+                    numberOfBagsInBag.put(bagToCheck.getBagName(), 0);
+                    bagsToRemoveForCalculation.add(bagToCheck.getBagName());
+                }else{
+                    //Store whether we have found the number of bags each bag contains inside this bag
+                    boolean allComponentBagsHaveValues = true;
+                    int totalBagsInsideThisBag = 0;
+                    for(Map.Entry<String, Integer> component : bagToCheck.getContainingBags().entrySet()) {
+                        if(numberOfBagsInBag.containsKey(component.getKey())) {
+                            //Keep a running total of the number of nested bags this bag contains.
+                            totalBagsInsideThisBag += (1 + numberOfBagsInBag.get(component.getKey())) * component.getValue();
+                        }else{
+                            //Oh well, cant find a value for this, break out of the loop
+                            allComponentBagsHaveValues = false;
+                            break;
+                        }
+                    }
 
-                    if(bagNumbers.get(bagNewColour) != null) {
-                        bagsFoundInThis += ((1 + bagNumbers.get(bagNewColour)) * bagNumberCount);
-                    }else{
-                        allBagsHaveCount = false;
+                    //If we did find we have a value for every bag, then store it and mark it for removal
+                    if(allComponentBagsHaveValues) {
+                        numberOfBagsInBag.put(bagToCheck.getBagName(), totalBagsInsideThisBag);
+                        bagsToRemoveForCalculation.add(bagToCheck.getBagName());
                     }
                 }
-
-                if(allBagsHaveCount) {
-                    bagNumbers.put(e.getKey(), bagsFoundInThis);
-                    thingsToRemove.add(e.getKey());
-                }
             }
 
-            for(String s : thingsToRemove) {
-                bagMap.remove(s);
-            }
+            //Remove all the bags that we have found values for and iterate again.
+            //This loop will end once we have found a size for the shiny gold bag
+            bagsToCalculateSizeFor.removeAll(bagsToRemoveForCalculation);
+            bagsToRemoveForCalculation = new ArrayList<>();
         }
 
-        return bagNumbers.get("shinygold");
+        return numberOfBagsInBag.get("shiny gold");
     }
 
     public static void main(String[] args) {
