@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
+import net.chewett.adventofcode.aoc2020.Bag;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 
 import java.util.ArrayList;
@@ -77,24 +78,19 @@ import java.util.Map;
 public class Day7 {
 
     public int solvePartOne(List<String> bagDetails) {
+        List<Bag> bags = new ArrayList<>();
+        for(String bagString : bagDetails) {
+            bags.add(new Bag(bagString));
+        }
+
         Map<String, List<String>> bagMap = new HashMap<>();
 
-        for(String s : bagDetails) {
-            String[] bagSplit = s.substring(0, s.length() - 2).split(" bags contain ");
-
-            String biggerBag = bagSplit[0].replace(" ", "");
-            String[] bagPieces = bagSplit[1].split(", ");
-            List<String> bagsThatAreInside = new ArrayList<>();
-            for(String bag : bagPieces) {
-                String[] finalBagParts = bag.replace("bags", "").replace("bag", "").split(" ");
-                if(finalBagParts[0].equals("no")) {
-
-                }else {
-                    bagsThatAreInside.add(finalBagParts[0] + " " + finalBagParts[1] + finalBagParts[2]);
-                }
+        for(Bag b : bags) {
+            List<String> allBags = new ArrayList<>();
+            for(Map.Entry<String, Integer> bagInsideBag : b.getContainingBags().entrySet()) {
+                allBags.add(bagInsideBag.getKey());
             }
-
-            bagMap.put(biggerBag, bagsThatAreInside);
+            bagMap.put(b.getBagName(), allBags);
         }
 
         boolean foundShinyGold = false;
@@ -102,24 +98,19 @@ public class Day7 {
         for(Map.Entry<String, List<String>> p : bagMap.entrySet()) {
             List<String> currentBags = new ArrayList<>();
             List<String> newBags = new ArrayList<>();
-            currentBags.add("x " + p.getKey());
+            currentBags.add(p.getKey());
 
             foundShinyGold = false;
             while(currentBags.size() > 0 && !foundShinyGold) {
-                for(String bagColourNumber : currentBags) {
-                    String bagColour = bagColourNumber.split(" ")[1];
-                    for(String bagToAdd : bagMap.get(bagColour)) {
-                        newBags.add(bagToAdd);
-                    }
+                for(String bagColour : currentBags) {
+                    newBags.addAll(bagMap.get(bagColour));
                 }
 
                 currentBags = newBags;
                 newBags = new ArrayList<>();
 
-                for(String s : currentBags) {
-                    if(s.contains("shinygold")) {
-                        foundShinyGold = true;
-                    }
+                if(currentBags.contains("shiny gold")) {
+                    foundShinyGold = true;
                 }
             }
 
