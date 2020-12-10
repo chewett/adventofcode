@@ -14,6 +14,24 @@ import java.util.List;
 public class ProblemLoader {
 
     /**
+     * Given a year and a day this will load the problem input, read it line by line, convert each line to a long
+     * and then return that as a list.
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return List of longs that are inside the given file
+     */
+    public static List<Long> loadProblemIntoLongList(int year, int day) {
+        List<String> stringData = ProblemLoader.loadProblemIntoStringArray(year, day);
+        List<Long> longData = new ArrayList<>();
+        for(String str : stringData) {
+            longData.add(Long.parseLong(str));
+        }
+
+        return longData;
+    }
+
+
+    /**
      * Given a year and a day this will load the problem input, read it line by line, convert each line to an integer
      * and then return that as a list.
      * @param year Year to load the problem for
@@ -65,6 +83,14 @@ public class ProblemLoader {
         }
 
         return chars;
+    }
+
+    public static String loadProblemIntoString(int year, int day) {
+        List<String> st = ProblemLoader.loadProblemIntoStringArray(year, day);
+        if(st.size() > 1) {
+            throw new RuntimeException("The problem for year " + year + " day " + day + " is longer than a single line");
+        }
+        return st.get(0);
     }
 
     public static List<String> loadProblemIntoStringArray(int year, int day) {
