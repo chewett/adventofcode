@@ -39,22 +39,10 @@ public class ProblemLoader {
      * @return List of integers that are inside the given file
      */
     public static List<Integer> loadProblemIntoIntegerList(int year, int day) {
-        String filePath = "/aoc" + year + "/" + year + "_day_" + day + "_input.txt";
-
+        List<String> stringData = ProblemLoader.loadProblemIntoStringArray(year, day);
         List<Integer> ints = new ArrayList<>();
-        try {
-            File file = new File(ProblemLoader.class.getResource(filePath).getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
-
-            String st;
-            while ((st = br.readLine()) != null) {
-                int val = Integer.parseInt(st);
-                ints.add(val);
-            }
-        }catch (IOException e) {
-            //This shouldnt really happen so lets just catch it all and throw a runtime exception so its clear what the issue is.
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load problem", e);
+        for(String str : stringData) {
+            ints.add(Integer.parseInt(str));
         }
 
         return ints;
