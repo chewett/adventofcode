@@ -48,31 +48,34 @@ public class ProblemLoader {
         return ints;
     }
 
+    /**
+     * Given a year and a day this will laod the problem input, read it line by line, and convert a two dimensional
+     * list of characters
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return List of List of characters that are inside the file
+     */
     public static List<List<Character>> loadProblemIntoXYCharList(int year, int day) {
-        String filePath = "/aoc" + year + "/" + year + "_day_" + day + "_input.txt";
-
+        List<String> strings = ProblemLoader.loadProblemIntoStringArray(year, day);
         List<List<Character>> chars = new ArrayList<>();
-        try {
-            File file = new File(ProblemLoader.class.getResource(filePath).getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
-
-            String st;
-            while ((st = br.readLine()) != null) {
-                List<Character> rowList = new ArrayList<>();
-                for(int i = 0; i < st.length(); i++) {
-                    rowList.add(st.charAt(i));
-                }
-                chars.add(rowList);
+        for(String st : strings) {
+            List<Character> rowList = new ArrayList<>();
+            for(int i = 0; i < st.length(); i++) {
+                rowList.add(st.charAt(i));
             }
-        }catch (IOException e) {
-            //This shouldnt really happen so lets just catch it all and throw a runtime exception so its clear what the issue is.
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load problem", e);
+            chars.add(rowList);
         }
 
         return chars;
     }
 
+    /**
+     * Given a year and a day this will load the problem input and return a string of the first line.
+     * If there is an issue with the format (should only ever be a programming bug) a Runtime exception is thrown
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return A string representing the first line of the file
+     */
     public static String loadProblemIntoString(int year, int day) {
         List<String> st = ProblemLoader.loadProblemIntoStringArray(year, day);
         if(st.size() > 1) {
@@ -81,6 +84,12 @@ public class ProblemLoader {
         return st.get(0);
     }
 
+    /**
+     * Given a year and a day this will load the problem input and return a list of strings representing the file
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return A list of strings representing the file
+     */
     public static List<String> loadProblemIntoStringArray(int year, int day) {
         String filePath = "/aoc" + year + "/" + year + "_day_" + day + "_input.txt";
 
@@ -94,7 +103,7 @@ public class ProblemLoader {
                 lines.add(st);
             }
         }catch (IOException e) {
-            //This shouldnt really happen so lets just catch it all and throw a runtime exception so its clear what the issue is.
+            //This shouldn't really happen so lets just catch it all and throw a runtime exception so its clear what the issue is.
             e.printStackTrace();
             throw new RuntimeException("Failed to load problem", e);
         }
