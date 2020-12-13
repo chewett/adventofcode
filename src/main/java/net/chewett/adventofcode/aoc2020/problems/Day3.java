@@ -67,8 +67,6 @@ import java.util.List;
  * Starting at the top-left corner of your map and following a slope of right 3 and down 1, how many trees would you
  * encounter?
  *
- * Your puzzle answer was 178.
- *
  * --- Part Two ---
  * Time to check the rest of the slopes - you need to minimize the probability of a sudden arboreal stop, after all.
  *
