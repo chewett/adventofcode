@@ -57,16 +57,7 @@ public class ProblemLoader {
      */
     public static List<List<Character>> loadProblemIntoXYCharList(int year, int day) {
         List<String> strings = ProblemLoader.loadProblemIntoStringArray(year, day);
-        List<List<Character>> chars = new ArrayList<>();
-        for(String st : strings) {
-            List<Character> rowList = new ArrayList<>();
-            for(int i = 0; i < st.length(); i++) {
-                rowList.add(st.charAt(i));
-            }
-            chars.add(rowList);
-        }
-
-        return chars;
+        return FormatConversion.convertStringArrayToCharListList(strings);
     }
 
     /**
