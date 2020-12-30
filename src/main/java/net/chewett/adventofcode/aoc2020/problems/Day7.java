@@ -83,8 +83,8 @@ public class Day7 {
             bags.add(new Bag(bagString));
         }
 
+        //Create a map of which bag contains which bags
         Map<String, List<String>> bagMap = new HashMap<>();
-
         for(Bag b : bags) {
             List<String> allBags = new ArrayList<>();
             for(Map.Entry<String, Integer> bagInsideBag : b.getContainingBags().entrySet()) {
@@ -93,30 +93,36 @@ public class Day7 {
             bagMap.put(b.getBagName(), allBags);
         }
 
-        boolean foundShinyGold = false;
+        boolean foundShinyGold;
         int containsShinyGold = 0;
+        //Loop over each bag type and check to see if there (eventually) is a shiny bag inside of it
         for(Map.Entry<String, List<String>> p : bagMap.entrySet()) {
             List<String> currentBags = new ArrayList<>();
             List<String> newBags = new ArrayList<>();
+            //Add the current set of bags
             currentBags.add(p.getKey());
 
             foundShinyGold = false;
+            //Keep iterating over the bag list until we have exhausted all bags inside this bag
             while(currentBags.size() > 0 && !foundShinyGold) {
+                //Add in all the bags in the current bag set
                 for(String bagColour : currentBags) {
                     newBags.addAll(bagMap.get(bagColour));
                 }
 
+                //Then set that equal to the current bags, and reset the new bags
                 currentBags = newBags;
                 newBags = new ArrayList<>();
 
+                //If any of the current bags now contain shiny gold, stop searching for this instance.
                 if(currentBags.contains("shiny gold")) {
                     foundShinyGold = true;
+                    break;
                 }
             }
 
             if(foundShinyGold) {
                 containsShinyGold++;
-                foundShinyGold = false;
             }
         }
 
