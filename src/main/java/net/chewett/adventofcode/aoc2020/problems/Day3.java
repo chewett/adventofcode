@@ -111,7 +111,7 @@ public class Day3 {
         return this.getHits(slope, 3, 1);
     }
 
-   public long solvePartTwo(List<List<Character>> slope) {
+    public long solvePartTwo(List<List<Character>> slope) {
         int[][] slopesToCheck = new int[][]{ {1,1}, {3,1}, {5,1}, {7,1}, {1, 2} };
 
         long hitsMultiplied = 1L;
