@@ -102,6 +102,13 @@ import java.util.Set;
  */
 public class Day9 {
 
+
+    /**
+     * Simple function to solve part one given a cipher and the preamble length
+     * @param cipher Cipher text to process
+     * @param preambleLength The length of the preamble
+     * @return Returns the first number that is not the sum of two previous numbers or -1 if none is found
+     */
     public long solvePartOne(List<Long> cipher, int preambleLength) {
         //Loop over every value in the cipher starting at preamble +1
         for(int curIndex = preambleLength; curIndex < cipher.size(); curIndex++) {
@@ -133,6 +140,13 @@ public class Day9 {
         return -1;
     }
 
+    /**
+     * Looks over the string to try and find a set of continuous numbers that add up to the weakness value
+     * @param cipher Cipher text to process
+     * @param nonMatchingValue The non-matching value found in part one that we are going to try and find two numbers
+     *                         summing to this
+     * @return The sum of the smallest and largest number in the range
+     */
     public long solvePartTwo(List<Long> cipher, long nonMatchingValue) {
         //Loop over each item going backwards as the higher numbers will fail faster (and therefore run quicker potentially)
         for(int index = cipher.size() -1; index >= 0; index--) {
