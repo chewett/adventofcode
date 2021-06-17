@@ -1,6 +1,8 @@
 package net.chewett.adventofcode.datastructures;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,6 +61,23 @@ public class DiscretePositionGrid<T> {
             }
         }
         return count;
+    }
+
+    /**
+     * Returns a list of all the values stored in the data structure that have once been set
+     * This will not return values from X/Y positions that have not been set but if it has been set to the default
+     * value it will return that
+     * @return List of values in the data structure
+     */
+    public List<T> getAllValuesStored() {
+        List<T> vals = new ArrayList<>();
+        for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
+            for(Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
+                vals.add(yEntry.getValue());
+            }
+        }
+
+        return vals;
     }
 
 
