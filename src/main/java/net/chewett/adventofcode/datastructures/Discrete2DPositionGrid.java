@@ -9,12 +9,12 @@ import java.util.Map;
  * Simple discrete grid of x/y points that allows getting/putting values at any position with a default value
  * @param <T> Type of value you want to store in the grid
  */
-public class DiscretePositionGrid<T> {
+public class Discrete2DPositionGrid<T> {
 
     Map<Integer, Map<Integer, T>> positionStore = new HashMap<>();
     private T defaultValue;
 
-    public DiscretePositionGrid(T defaultValue) {
+    public Discrete2DPositionGrid(T defaultValue) {
         this.defaultValue = defaultValue;
     }
 
