@@ -1,11 +1,9 @@
 package net.chewett.adventofcode.aoc2015.problems;
-import net.chewett.adventofcode.datastructures.DiscretePositionGrid;
+import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 
 import java.awt.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * --- Day 6: Probably a Fire Hazard ---
@@ -72,7 +70,7 @@ public class Day6 {
      * @return The number of lights that have been lit
      */
     public long solvePartOne(List<String> instructions) {
-        DiscretePositionGrid<Integer> dpg = new DiscretePositionGrid<>(0);
+        Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
 
         for(String instruction : instructions) {
             //String faffing to produce what we need
@@ -128,7 +126,7 @@ public class Day6 {
      * @return
      */
     public long solvePartTwo(List<String> instructions) {
-        DiscretePositionGrid<Integer> dpg = new DiscretePositionGrid<>(0);
+        Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
 
         for(String instruction : instructions) {
             //String faffing to produce what we need
