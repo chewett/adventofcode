@@ -387,9 +387,9 @@ public class Day19 {
         List<String> grammarData = ProblemLoader.loadProblemIntoStringArray(2020, 19);
         Day19 d = new Day19();
         long p1 = d.solvePartOne(grammarData);
-        System.out.println(p1);
+        System.out.println("The number of matches with the ruleset for part one is " + p1);
         long p2 = d.solvePartTwo(grammarData);
-        System.out.println(p2);
+        System.out.println("The number of matches for the modified ruleset for part two is " + p2);
 
     }
 
