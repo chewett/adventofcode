@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class Day23Test {
 
@@ -13,7 +13,7 @@ public class Day23Test {
     public void testExampleInputPartOne() {
         String cupLabels = "389125467";
         Day23 d = new Day23();
-        Assert.assertEquals(67384529, d.solvePartOne(cupLabels));
+        Assertions.assertEquals(67384529, d.solvePartOne(cupLabels));
     }
 
     /**
@@ -23,7 +23,7 @@ public class Day23Test {
     public void testRealPartOne() {
         String cupLabels = ProblemLoader.loadProblemIntoString(2020, 23);
         Day23 d = new Day23();
-        Assert.assertEquals(97624853, d.solvePartOne(cupLabels));
+        Assertions.assertEquals(97624853, d.solvePartOne(cupLabels));
     }
 
     /**
@@ -33,7 +33,7 @@ public class Day23Test {
     public void testExampleInputPartTwo() {
         String cupLabels = "389125467";
         Day23 d = new Day23();
-        Assert.assertEquals(149245887792L, d.solvePartTwo(cupLabels));
+        Assertions.assertEquals(149245887792L, d.solvePartTwo(cupLabels));
     }
 
     /**
@@ -43,7 +43,7 @@ public class Day23Test {
     public void testRealPartTwo() {
         String cupLabels = ProblemLoader.loadProblemIntoString(2020, 23);
         Day23 d = new Day23();
-        Assert.assertEquals(664642452305L, d.solvePartTwo(cupLabels));
+        Assertions.assertEquals(664642452305L, d.solvePartTwo(cupLabels));
     }
 
 }

@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Day19Test {
         rules.add("aba");
 
         Day19 d = new Day19();
-        Assert.assertEquals(2, d.solvePartOne(rules));
+        Assertions.assertEquals(2, d.solvePartOne(rules));
     }
 
     /**
@@ -51,7 +51,7 @@ public class Day19Test {
         rules.add("aaaabbb");
 
         Day19 d = new Day19();
-        Assert.assertEquals(2, d.solvePartOne(rules));
+        Assertions.assertEquals(2, d.solvePartOne(rules));
     }
 
     /**
@@ -61,7 +61,7 @@ public class Day19Test {
     public void testRealPartOne() {
         List<String> rules = ProblemLoader.loadProblemIntoStringArray(2020, 19);
         Day19 d = new Day19();
-        Assert.assertEquals(272, d.solvePartOne(rules));
+        Assertions.assertEquals(272, d.solvePartOne(rules));
     }
 
     /**
@@ -120,7 +120,7 @@ public class Day19Test {
         rules.add("aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba");
 
         Day19 d = new Day19();
-        Assert.assertEquals(12, d.solvePartTwo(rules));
+        Assertions.assertEquals(12, d.solvePartTwo(rules));
 
     }
 
@@ -131,7 +131,7 @@ public class Day19Test {
     public void testRealPartTwo() {
         List<String> rules = ProblemLoader.loadProblemIntoStringArray(2020, 19);
         Day19 d = new Day19();
-        Assert.assertEquals(374, d.solvePartTwo(rules));
+        Assertions.assertEquals(374, d.solvePartTwo(rules));
     }
 
 }

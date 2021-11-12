@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,7 +135,7 @@ public class Day20Test {
     public void testExampleInputPartOne() {
         List<String> tileData = this.getExampleData();
         Day20 d = new Day20();
-        Assert.assertEquals(20899048083289L, d.solvePartOne(tileData));
+        Assertions.assertEquals(20899048083289L, d.solvePartOne(tileData));
     }
 
     /**
@@ -145,7 +145,7 @@ public class Day20Test {
     public void testRealPartOne() {
         List<String> tileData = ProblemLoader.loadProblemIntoStringArray(2020, 20);
         Day20 d = new Day20();
-        Assert.assertEquals(27798062994017L, d.solvePartOne(tileData));
+        Assertions.assertEquals(27798062994017L, d.solvePartOne(tileData));
     }
 
     /**
@@ -155,7 +155,7 @@ public class Day20Test {
     public void testExampleInputPartTwo() {
         List<String> tileData = this.getExampleData();
         Day20 d = new Day20();
-        Assert.assertEquals(273, d.solvePartTwo(tileData));
+        Assertions.assertEquals(273, d.solvePartTwo(tileData));
     }
 
     /**
@@ -165,7 +165,7 @@ public class Day20Test {
     public void testRealPartTwo() {
         List<String> tileData = ProblemLoader.loadProblemIntoStringArray(2020, 20);
         Day20 d = new Day20();
-        Assert.assertEquals(2366, d.solvePartTwo(tileData));
+        Assertions.assertEquals(2366, d.solvePartTwo(tileData));
     }
 
 }

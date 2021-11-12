@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Day16Test {
 
         Day16 d = new Day16();
 
-        Assert.assertEquals(71, d.solvePartOne(ticketLines));
+        Assertions.assertEquals(71, d.solvePartOne(ticketLines));
     }
 
     /**
@@ -40,7 +40,7 @@ public class Day16Test {
     public void testRealPartOne() {
         List<String> ticketLines = ProblemLoader.loadProblemIntoStringArray(2020, 16);
         Day16 d = new Day16();
-        Assert.assertEquals(23044, d.solvePartOne(ticketLines));
+        Assertions.assertEquals(23044, d.solvePartOne(ticketLines));
     }
 
     /**
@@ -63,7 +63,7 @@ public class Day16Test {
         ticketLines.add("5,14,9");
 
         Day16 d = new Day16();
-        Assert.assertEquals(156, d.solvePartTwo(ticketLines));
+        Assertions.assertEquals(156, d.solvePartTwo(ticketLines));
     }
 
     /**
@@ -73,7 +73,7 @@ public class Day16Test {
     public void testRealPartTwo() {
         List<String> ticketLines = ProblemLoader.loadProblemIntoStringArray(2020, 16);
         Day16 d = new Day16();
-        Assert.assertEquals(3765150732757L, d.solvePartTwo(ticketLines));
+        Assertions.assertEquals(3765150732757L, d.solvePartTwo(ticketLines));
     }
 
 }

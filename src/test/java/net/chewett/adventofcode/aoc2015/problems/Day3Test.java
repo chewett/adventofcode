@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2015.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class Day3Test {
 
@@ -12,7 +12,7 @@ public class Day3Test {
     @Test
     public void testExampleInputPartOne() {
         Day3 d = new Day3();
-        Assert.assertEquals(2, d.solvePartOne(">"));
+        Assertions.assertEquals(2, d.solvePartOne(">"));
     }
 
     /**
@@ -21,7 +21,7 @@ public class Day3Test {
     @Test
     public void testExampleInput2PartOne() {
         Day3 d = new Day3();
-        Assert.assertEquals(4, d.solvePartOne("^>v<"));
+        Assertions.assertEquals(4, d.solvePartOne("^>v<"));
     }
 
     /**
@@ -30,7 +30,7 @@ public class Day3Test {
     @Test
     public void testExampleInput3PartOne() {
         Day3 d = new Day3();
-        Assert.assertEquals(2, d.solvePartOne("^v^v^v^v^v"));
+        Assertions.assertEquals(2, d.solvePartOne("^v^v^v^v^v"));
     }
 
     /**
@@ -39,7 +39,7 @@ public class Day3Test {
     @Test
     public void testRealPartOne() {
         Day3 d = new Day3();
-        Assert.assertEquals(2592, d.solvePartOne(ProblemLoader.loadProblemIntoString(2015, 3)));
+        Assertions.assertEquals(2592, d.solvePartOne(ProblemLoader.loadProblemIntoString(2015, 3)));
     }
 
     /**
@@ -48,7 +48,7 @@ public class Day3Test {
     @Test
     public void testExampleInputPartTwo() {
         Day3 d = new Day3();
-        Assert.assertEquals(3, d.solvePartTwo("^v"));
+        Assertions.assertEquals(3, d.solvePartTwo("^v"));
     }
 
     /**
@@ -57,7 +57,7 @@ public class Day3Test {
     @Test
     public void testExampleInput2PartTwo() {
         Day3 d = new Day3();
-        Assert.assertEquals(3, d.solvePartTwo("^>v<"));
+        Assertions.assertEquals(3, d.solvePartTwo("^>v<"));
     }
 
     /**
@@ -66,7 +66,7 @@ public class Day3Test {
     @Test
     public void testExampleInput3PartTwo() {
         Day3 d = new Day3();
-        Assert.assertEquals(11, d.solvePartTwo("^v^v^v^v^v"));
+        Assertions.assertEquals(11, d.solvePartTwo("^v^v^v^v^v"));
     }
 
     /**
@@ -75,7 +75,7 @@ public class Day3Test {
     @Test
     public void testRealPartTwo() {
         Day3 d = new Day3();
-        Assert.assertEquals(2360, d.solvePartTwo(ProblemLoader.loadProblemIntoString(2015, 3)));
+        Assertions.assertEquals(2360, d.solvePartTwo(ProblemLoader.loadProblemIntoString(2015, 3)));
     }
 
 }

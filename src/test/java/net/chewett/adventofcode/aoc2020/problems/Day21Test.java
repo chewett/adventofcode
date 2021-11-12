@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class Day21Test {
     public void testExampleInputPartOne() {
         List<String> foodstuffList = this.getExampleData();
         Day21 d = new Day21();
-        Assert.assertEquals(5, d.solvePartOne(foodstuffList));
+        Assertions.assertEquals(5, d.solvePartOne(foodstuffList));
     }
 
     /**
@@ -42,7 +42,7 @@ public class Day21Test {
     public void testRealPartOne() {
         List<String> foodstuffList = ProblemLoader.loadProblemIntoStringArray(2020, 21);
         Day21 d = new Day21();
-        Assert.assertEquals(2075, d.solvePartOne(foodstuffList));
+        Assertions.assertEquals(2075, d.solvePartOne(foodstuffList));
     }
 
     /**
@@ -52,7 +52,7 @@ public class Day21Test {
     public void testExampleInputPartTwo() {
         List<String> foodstuffList = this.getExampleData();
         Day21 d = new Day21();
-        Assert.assertEquals("mxmxvkd,sqjhc,fvjkl", d.solvePartTwo(foodstuffList));
+        Assertions.assertEquals("mxmxvkd,sqjhc,fvjkl", d.solvePartTwo(foodstuffList));
     }
 
     /**
@@ -62,7 +62,7 @@ public class Day21Test {
     public void testRealPartTwo() {
         List<String> foodstuffList = ProblemLoader.loadProblemIntoStringArray(2020, 21);
         Day21 d = new Day21();
-        Assert.assertEquals("zfcqk,mdtvbb,ggdbl,frpvd,mgczn,zsfzq,kdqls,kktsjbh", d.solvePartTwo(foodstuffList));
+        Assertions.assertEquals("zfcqk,mdtvbb,ggdbl,frpvd,mgczn,zsfzq,kdqls,kktsjbh", d.solvePartTwo(foodstuffList));
     }
 
 }

@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2015.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class Day4Test {
 
@@ -12,7 +12,7 @@ public class Day4Test {
     @Test
     public void testExampleInputPartOne() {
         Day4 d = new Day4();
-        Assert.assertEquals(609043, d.solvePartOne("abcdef"));
+        Assertions.assertEquals(609043, d.solvePartOne("abcdef"));
     }
 
     /**
@@ -21,7 +21,7 @@ public class Day4Test {
     @Test
     public void testExampleInput2PartOne() {
         Day4 d = new Day4();
-        Assert.assertEquals(1048970, d.solvePartOne("pqrstuv"));
+        Assertions.assertEquals(1048970, d.solvePartOne("pqrstuv"));
     }
 
     /**
@@ -31,7 +31,7 @@ public class Day4Test {
     public void testRealPartOne() {
         Day4 d = new Day4();
         String secretKey = ProblemLoader.loadProblemIntoString(2015, 4);
-        Assert.assertEquals(282749, d.solvePartOne(secretKey));
+        Assertions.assertEquals(282749, d.solvePartOne(secretKey));
     }
 
     /**
@@ -41,7 +41,7 @@ public class Day4Test {
     public void testRealPartTwo() {
         Day4 d = new Day4();
         String secretKey = ProblemLoader.loadProblemIntoString(2015, 4);
-        Assert.assertEquals(9962624, d.solvePartTwo(secretKey));
+        Assertions.assertEquals(9962624, d.solvePartTwo(secretKey));
     }
 
 }

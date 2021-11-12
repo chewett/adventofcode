@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +81,7 @@ public class Day10Test {
         Day10 d = new Day10();
         long partOneAnswer = d.solvePartOne(jolts);
 
-        Assert.assertEquals(35, partOneAnswer);
+        Assertions.assertEquals(35, partOneAnswer);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Day10Test {
         Day10 d = new Day10();
         long partOneAnswer = d.solvePartOne(jolts);
 
-        Assert.assertEquals(220, partOneAnswer);
+        Assertions.assertEquals(220, partOneAnswer);
     }
 
     /**
@@ -106,7 +106,7 @@ public class Day10Test {
         Day10 d = new Day10();
         long partOneAnswer = d.solvePartOne(jolts);
 
-        Assert.assertEquals(1904, partOneAnswer);
+        Assertions.assertEquals(1904, partOneAnswer);
     }
 
     /**
@@ -119,7 +119,7 @@ public class Day10Test {
         Day10 d = new Day10();
         long partTwoAnswer = d.solvePartTwo(jolts);
 
-        Assert.assertEquals(8, partTwoAnswer);
+        Assertions.assertEquals(8, partTwoAnswer);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Day10Test {
         Day10 d = new Day10();
         long partTwoAnswer = d.solvePartTwo(jolts);
 
-        Assert.assertEquals(19208, partTwoAnswer);
+        Assertions.assertEquals(19208, partTwoAnswer);
     }
 
     /**
@@ -144,7 +144,7 @@ public class Day10Test {
         Day10 d = new Day10();
         long partTwoAnswer = d.solvePartTwo(jolts);
 
-        Assert.assertEquals(10578455953408L, partTwoAnswer);
+        Assertions.assertEquals(10578455953408L, partTwoAnswer);
     }
 
 

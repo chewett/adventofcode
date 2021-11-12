@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Day13Test {
         Day13 d = new Day13();
         int partOneAnswer = d.solvePartOne(notes);
 
-        Assert.assertEquals(295, partOneAnswer);
+        Assertions.assertEquals(295, partOneAnswer);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Day13Test {
         Day13 d = new Day13();
         int partOneAnswer = d.solvePartOne(notes);
 
-        Assert.assertEquals(104, partOneAnswer);
+        Assertions.assertEquals(104, partOneAnswer);
     }
 
     /**
@@ -52,7 +52,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(1068781, partTwoAnswer);
+        Assertions.assertEquals(1068781, partTwoAnswer);
     }
 
     /**
@@ -67,7 +67,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(3417, partTwoAnswer);
+        Assertions.assertEquals(3417, partTwoAnswer);
     }
 
     /**
@@ -82,7 +82,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(754018, partTwoAnswer);
+        Assertions.assertEquals(754018, partTwoAnswer);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(779210, partTwoAnswer);
+        Assertions.assertEquals(779210, partTwoAnswer);
     }
 
     /**
@@ -112,7 +112,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(1261476, partTwoAnswer);
+        Assertions.assertEquals(1261476, partTwoAnswer);
     }
 
     /**
@@ -127,7 +127,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(1202161486, partTwoAnswer);
+        Assertions.assertEquals(1202161486, partTwoAnswer);
     }
 
     /**
@@ -139,7 +139,7 @@ public class Day13Test {
         Day13 d = new Day13();
         long partTwoAnswer = d.solvePartTwo(notes);
 
-        Assert.assertEquals(842186186521918L, partTwoAnswer);
+        Assertions.assertEquals(842186186521918L, partTwoAnswer);
     }
 
 

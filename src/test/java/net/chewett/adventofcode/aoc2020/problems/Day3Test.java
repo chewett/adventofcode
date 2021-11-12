@@ -2,8 +2,8 @@ package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.FormatConversion;
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class Day3Test {
@@ -34,7 +34,7 @@ public class Day3Test {
 
         Day3 d = new Day3();
         int partOneAnswer = d.solvePartOne(slope);
-        Assert.assertEquals(7, partOneAnswer);
+        Assertions.assertEquals(7, partOneAnswer);
     }
 
     /**
@@ -46,7 +46,7 @@ public class Day3Test {
         Day3 d = new Day3();
         int partOneAnswer = d.solvePartOne(slope);
 
-        Assert.assertEquals(178, partOneAnswer);
+        Assertions.assertEquals(178, partOneAnswer);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Day3Test {
         Day3 d = new Day3();
         long partTwoAnswer = d.solvePartTwo(slope);
 
-        Assert.assertEquals(336, partTwoAnswer);
+        Assertions.assertEquals(336, partTwoAnswer);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Day3Test {
         Day3 d = new Day3();
         long partTwoAnswer = d.solvePartTwo(slope);
 
-        Assert.assertEquals(3492520200L, partTwoAnswer);
+        Assertions.assertEquals(3492520200L, partTwoAnswer);
     }
 
 }

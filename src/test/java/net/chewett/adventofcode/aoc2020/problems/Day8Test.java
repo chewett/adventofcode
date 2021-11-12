@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Day8Test {
 
         Day8 d = new Day8();
         int partOneAnswer = d.solvePartOne(lines);
-        Assert.assertEquals(5, partOneAnswer);
+        Assertions.assertEquals(5, partOneAnswer);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Day8Test {
         Day8 d = new Day8();
         int partOneAnswer = d.solvePartOne(lines);
 
-        Assert.assertEquals(1939, partOneAnswer);
+        Assertions.assertEquals(1939, partOneAnswer);
     }
 
     /**
@@ -63,7 +63,7 @@ public class Day8Test {
         Day8 d = new Day8();
         int partTwoAnswer = d.solvePartTwo(lines);
 
-        Assert.assertEquals(8, partTwoAnswer);
+        Assertions.assertEquals(8, partTwoAnswer);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Day8Test {
         Day8 d = new Day8();
         int partTwoAnswer = d.solvePartTwo(lines);
 
-        Assert.assertEquals(2212, partTwoAnswer);
+        Assertions.assertEquals(2212, partTwoAnswer);
     }
 
 }

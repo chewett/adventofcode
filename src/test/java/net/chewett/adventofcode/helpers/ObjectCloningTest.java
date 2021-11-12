@@ -1,7 +1,7 @@
 package net.chewett.adventofcode.helpers;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,9 @@ public class ObjectCloningTest {
         newList.get(0).add(0, '2');
         newList.get(0).add(0, '3');
 
-        Assert.assertEquals('z', (char)cll.get(0).get(0));
-        Assert.assertEquals('y', (char)cll.get(0).get(1));
-        Assert.assertEquals('x', (char)cll.get(0).get(2));
+        Assertions.assertEquals('z', (char)cll.get(0).get(0));
+        Assertions.assertEquals('y', (char)cll.get(0).get(1));
+        Assertions.assertEquals('x', (char)cll.get(0).get(2));
     }
 
 }

@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class Day7Test {
         Day7 d = new Day7();
         long partOneAnswer = d.solvePartOne(bagDetails);
 
-        Assert.assertEquals(4, partOneAnswer);
+        Assertions.assertEquals(4, partOneAnswer);
     }
 
     /**
@@ -66,7 +66,7 @@ public class Day7Test {
         List<String> bagDetails = ProblemLoader.loadProblemIntoStringArray(2020, 7);
         Day7 d = new Day7();
         int partOneAnswer = d.solvePartOne(bagDetails);
-        Assert.assertEquals(337, partOneAnswer);
+        Assertions.assertEquals(337, partOneAnswer);
     }
 
     /**
@@ -79,7 +79,7 @@ public class Day7Test {
         Day7 d = new Day7();
         int partTwoAnswer = d.solvePartTwo(bagDetails);
 
-        Assert.assertEquals(32, partTwoAnswer);
+        Assertions.assertEquals(32, partTwoAnswer);
     }
 
     /**
@@ -92,7 +92,7 @@ public class Day7Test {
         Day7 d = new Day7();
         int partTwoAnswer = d.solvePartTwo(bagDetails);
 
-        Assert.assertEquals(126, partTwoAnswer);
+        Assertions.assertEquals(126, partTwoAnswer);
     }
 
     /**
@@ -103,7 +103,7 @@ public class Day7Test {
         List<String> bagDetails = ProblemLoader.loadProblemIntoStringArray(2020, 7);
         Day7 d = new Day7();
         int partTwoAnswer = d.solvePartTwo(bagDetails);
-        Assert.assertEquals(50100, partTwoAnswer);
+        Assertions.assertEquals(50100, partTwoAnswer);
     }
 
 }

@@ -1,7 +1,7 @@
 package net.chewett.adventofcode.aoc2015;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ByteHexConversionTest {
 
@@ -9,7 +9,7 @@ public class ByteHexConversionTest {
     public void testConvertBytesToHexWithNoInput() {
         byte[] b = new byte[0];
         String str = ByteHexConversion.convertBytesToHex(b);
-        Assert.assertEquals(0, str.length());
+        Assertions.assertEquals(0, str.length());
     }
 
     @Test
@@ -18,8 +18,8 @@ public class ByteHexConversionTest {
         b[0] = (byte) 0xa;
 
         String str = ByteHexConversion.convertBytesToHex(b);
-        Assert.assertEquals(2, str.length());
-        Assert.assertEquals("0a", str);
+        Assertions.assertEquals(2, str.length());
+        Assertions.assertEquals("0a", str);
     }
 
     @Test
@@ -29,8 +29,8 @@ public class ByteHexConversionTest {
         b[1] = (byte) 0xFE;
 
         String str = ByteHexConversion.convertBytesToHex(b);
-        Assert.assertEquals(4, str.length());
-        Assert.assertEquals("cafe", str);
+        Assertions.assertEquals(4, str.length());
+        Assertions.assertEquals("cafe", str);
     }
 
 }

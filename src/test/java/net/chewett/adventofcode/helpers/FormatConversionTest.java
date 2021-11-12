@@ -1,7 +1,7 @@
 package net.chewett.adventofcode.helpers;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +25,17 @@ public class FormatConversionTest {
 
         List<List<Character>> rotated = FormatConversion.rotateCharListListAnticlockwise(testList);
 
-        Assert.assertEquals('1', (char)rotated.get(2).get(0));
-        Assert.assertEquals('2', (char)rotated.get(1).get(0));
-        Assert.assertEquals('3', (char)rotated.get(0).get(0));
+        Assertions.assertEquals('1', (char)rotated.get(2).get(0));
+        Assertions.assertEquals('2', (char)rotated.get(1).get(0));
+        Assertions.assertEquals('3', (char)rotated.get(0).get(0));
 
-        Assert.assertEquals('4', (char)rotated.get(2).get(1));
-        Assert.assertEquals('5', (char)rotated.get(1).get(1));
-        Assert.assertEquals('6', (char)rotated.get(0).get(1));
+        Assertions.assertEquals('4', (char)rotated.get(2).get(1));
+        Assertions.assertEquals('5', (char)rotated.get(1).get(1));
+        Assertions.assertEquals('6', (char)rotated.get(0).get(1));
 
-        Assert.assertEquals('7', (char)rotated.get(2).get(2));
-        Assert.assertEquals('8', (char)rotated.get(1).get(2));
-        Assert.assertEquals('9', (char)rotated.get(0).get(2));
+        Assertions.assertEquals('7', (char)rotated.get(2).get(2));
+        Assertions.assertEquals('8', (char)rotated.get(1).get(2));
+        Assertions.assertEquals('9', (char)rotated.get(0).get(2));
 
     }
 
@@ -51,33 +51,33 @@ public class FormatConversionTest {
         strings.add("5678910");
 
         List<List<Character>> chars = FormatConversion.convertStringArrayToCharListList(strings);
-        Assert.assertEquals('a', (char)chars.get(0).get(0));
-        Assert.assertEquals('b', (char)chars.get(0).get(1));
-        Assert.assertEquals('c', (char)chars.get(0).get(2));
-        Assert.assertEquals('d', (char)chars.get(0).get(3));
-        Assert.assertEquals('e', (char)chars.get(0).get(4));
-        Assert.assertEquals('f', (char)chars.get(0).get(5));
+        Assertions.assertEquals('a', (char)chars.get(0).get(0));
+        Assertions.assertEquals('b', (char)chars.get(0).get(1));
+        Assertions.assertEquals('c', (char)chars.get(0).get(2));
+        Assertions.assertEquals('d', (char)chars.get(0).get(3));
+        Assertions.assertEquals('e', (char)chars.get(0).get(4));
+        Assertions.assertEquals('f', (char)chars.get(0).get(5));
 
-        Assert.assertEquals('g', (char)chars.get(1).get(0));
-        Assert.assertEquals('h', (char)chars.get(1).get(1));
-        Assert.assertEquals('i', (char)chars.get(1).get(2));
-        Assert.assertEquals('j', (char)chars.get(1).get(3));
-        Assert.assertEquals('k', (char)chars.get(1).get(4));
-        Assert.assertEquals('l', (char)chars.get(1).get(5));
-        Assert.assertEquals('m', (char)chars.get(1).get(6));
+        Assertions.assertEquals('g', (char)chars.get(1).get(0));
+        Assertions.assertEquals('h', (char)chars.get(1).get(1));
+        Assertions.assertEquals('i', (char)chars.get(1).get(2));
+        Assertions.assertEquals('j', (char)chars.get(1).get(3));
+        Assertions.assertEquals('k', (char)chars.get(1).get(4));
+        Assertions.assertEquals('l', (char)chars.get(1).get(5));
+        Assertions.assertEquals('m', (char)chars.get(1).get(6));
 
-        Assert.assertEquals('1', (char)chars.get(2).get(0));
-        Assert.assertEquals('2', (char)chars.get(2).get(1));
-        Assert.assertEquals('3', (char)chars.get(2).get(2));
-        Assert.assertEquals('4', (char)chars.get(2).get(3));
+        Assertions.assertEquals('1', (char)chars.get(2).get(0));
+        Assertions.assertEquals('2', (char)chars.get(2).get(1));
+        Assertions.assertEquals('3', (char)chars.get(2).get(2));
+        Assertions.assertEquals('4', (char)chars.get(2).get(3));
 
-        Assert.assertEquals('5', (char)chars.get(3).get(0));
-        Assert.assertEquals('6', (char)chars.get(3).get(1));
-        Assert.assertEquals('7', (char)chars.get(3).get(2));
-        Assert.assertEquals('8', (char)chars.get(3).get(3));
-        Assert.assertEquals('9', (char)chars.get(3).get(4));
-        Assert.assertEquals('1', (char)chars.get(3).get(5));
-        Assert.assertEquals('0', (char)chars.get(3).get(6));
+        Assertions.assertEquals('5', (char)chars.get(3).get(0));
+        Assertions.assertEquals('6', (char)chars.get(3).get(1));
+        Assertions.assertEquals('7', (char)chars.get(3).get(2));
+        Assertions.assertEquals('8', (char)chars.get(3).get(3));
+        Assertions.assertEquals('9', (char)chars.get(3).get(4));
+        Assertions.assertEquals('1', (char)chars.get(3).get(5));
+        Assertions.assertEquals('0', (char)chars.get(3).get(6));
     }
 
     /**
@@ -88,33 +88,33 @@ public class FormatConversionTest {
         String[] strings = new String[]{"abcdef", "ghijklm", "1234", "5678910"};
 
         List<List<Character>> chars = FormatConversion.convertStringArrayToCharListList(strings);
-        Assert.assertEquals('a', (char)chars.get(0).get(0));
-        Assert.assertEquals('b', (char)chars.get(0).get(1));
-        Assert.assertEquals('c', (char)chars.get(0).get(2));
-        Assert.assertEquals('d', (char)chars.get(0).get(3));
-        Assert.assertEquals('e', (char)chars.get(0).get(4));
-        Assert.assertEquals('f', (char)chars.get(0).get(5));
+        Assertions.assertEquals('a', (char)chars.get(0).get(0));
+        Assertions.assertEquals('b', (char)chars.get(0).get(1));
+        Assertions.assertEquals('c', (char)chars.get(0).get(2));
+        Assertions.assertEquals('d', (char)chars.get(0).get(3));
+        Assertions.assertEquals('e', (char)chars.get(0).get(4));
+        Assertions.assertEquals('f', (char)chars.get(0).get(5));
 
-        Assert.assertEquals('g', (char)chars.get(1).get(0));
-        Assert.assertEquals('h', (char)chars.get(1).get(1));
-        Assert.assertEquals('i', (char)chars.get(1).get(2));
-        Assert.assertEquals('j', (char)chars.get(1).get(3));
-        Assert.assertEquals('k', (char)chars.get(1).get(4));
-        Assert.assertEquals('l', (char)chars.get(1).get(5));
-        Assert.assertEquals('m', (char)chars.get(1).get(6));
+        Assertions.assertEquals('g', (char)chars.get(1).get(0));
+        Assertions.assertEquals('h', (char)chars.get(1).get(1));
+        Assertions.assertEquals('i', (char)chars.get(1).get(2));
+        Assertions.assertEquals('j', (char)chars.get(1).get(3));
+        Assertions.assertEquals('k', (char)chars.get(1).get(4));
+        Assertions.assertEquals('l', (char)chars.get(1).get(5));
+        Assertions.assertEquals('m', (char)chars.get(1).get(6));
 
-        Assert.assertEquals('1', (char)chars.get(2).get(0));
-        Assert.assertEquals('2', (char)chars.get(2).get(1));
-        Assert.assertEquals('3', (char)chars.get(2).get(2));
-        Assert.assertEquals('4', (char)chars.get(2).get(3));
+        Assertions.assertEquals('1', (char)chars.get(2).get(0));
+        Assertions.assertEquals('2', (char)chars.get(2).get(1));
+        Assertions.assertEquals('3', (char)chars.get(2).get(2));
+        Assertions.assertEquals('4', (char)chars.get(2).get(3));
 
-        Assert.assertEquals('5', (char)chars.get(3).get(0));
-        Assert.assertEquals('6', (char)chars.get(3).get(1));
-        Assert.assertEquals('7', (char)chars.get(3).get(2));
-        Assert.assertEquals('8', (char)chars.get(3).get(3));
-        Assert.assertEquals('9', (char)chars.get(3).get(4));
-        Assert.assertEquals('1', (char)chars.get(3).get(5));
-        Assert.assertEquals('0', (char)chars.get(3).get(6));
+        Assertions.assertEquals('5', (char)chars.get(3).get(0));
+        Assertions.assertEquals('6', (char)chars.get(3).get(1));
+        Assertions.assertEquals('7', (char)chars.get(3).get(2));
+        Assertions.assertEquals('8', (char)chars.get(3).get(3));
+        Assertions.assertEquals('9', (char)chars.get(3).get(4));
+        Assertions.assertEquals('1', (char)chars.get(3).get(5));
+        Assertions.assertEquals('0', (char)chars.get(3).get(6));
     }
 
     /**
@@ -147,9 +147,9 @@ public class FormatConversionTest {
 
         List<String> newList = FormatConversion.convertCharListListToStringList(cll);
 
-        Assert.assertEquals("zyx", newList.get(0));
-        Assert.assertEquals("onetwo", newList.get(1));
-        Assert.assertEquals("123456", newList.get(2));
+        Assertions.assertEquals("zyx", newList.get(0));
+        Assertions.assertEquals("onetwo", newList.get(1));
+        Assertions.assertEquals("123456", newList.get(2));
     }
 
     @Test
@@ -179,23 +179,23 @@ public class FormatConversionTest {
 
         List<List<Character>> flipCharListList = FormatConversion.flipCharListList(cll);
 
-        Assert.assertEquals('x', (char)flipCharListList.get(0).get(0));
-        Assert.assertEquals('y', (char)flipCharListList.get(0).get(1));
-        Assert.assertEquals('z', (char)flipCharListList.get(0).get(2));
+        Assertions.assertEquals('x', (char)flipCharListList.get(0).get(0));
+        Assertions.assertEquals('y', (char)flipCharListList.get(0).get(1));
+        Assertions.assertEquals('z', (char)flipCharListList.get(0).get(2));
 
-        Assert.assertEquals('o', (char)flipCharListList.get(1).get(0));
-        Assert.assertEquals('w', (char)flipCharListList.get(1).get(1));
-        Assert.assertEquals('t', (char)flipCharListList.get(1).get(2));
-        Assert.assertEquals('e', (char)flipCharListList.get(1).get(3));
-        Assert.assertEquals('n', (char)flipCharListList.get(1).get(4));
-        Assert.assertEquals('o', (char)flipCharListList.get(1).get(5));
+        Assertions.assertEquals('o', (char)flipCharListList.get(1).get(0));
+        Assertions.assertEquals('w', (char)flipCharListList.get(1).get(1));
+        Assertions.assertEquals('t', (char)flipCharListList.get(1).get(2));
+        Assertions.assertEquals('e', (char)flipCharListList.get(1).get(3));
+        Assertions.assertEquals('n', (char)flipCharListList.get(1).get(4));
+        Assertions.assertEquals('o', (char)flipCharListList.get(1).get(5));
 
-        Assert.assertEquals('6', (char)flipCharListList.get(2).get(0));
-        Assert.assertEquals('5', (char)flipCharListList.get(2).get(1));
-        Assert.assertEquals('4', (char)flipCharListList.get(2).get(2));
-        Assert.assertEquals('3', (char)flipCharListList.get(2).get(3));
-        Assert.assertEquals('2', (char)flipCharListList.get(2).get(4));
-        Assert.assertEquals('1', (char)flipCharListList.get(2).get(5));
+        Assertions.assertEquals('6', (char)flipCharListList.get(2).get(0));
+        Assertions.assertEquals('5', (char)flipCharListList.get(2).get(1));
+        Assertions.assertEquals('4', (char)flipCharListList.get(2).get(2));
+        Assertions.assertEquals('3', (char)flipCharListList.get(2).get(3));
+        Assertions.assertEquals('2', (char)flipCharListList.get(2).get(4));
+        Assertions.assertEquals('1', (char)flipCharListList.get(2).get(5));
     }
 
 

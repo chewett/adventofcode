@@ -1,8 +1,8 @@
 package net.chewett.adventofcode;
 
 import net.chewett.adventofcode.helpers.ChineseRemainderTheorem;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ChineseRemainderTheoremTest {
         remainders.add(0); remainders.add(11); remainders.add(16);
 
         long solution = ChineseRemainderTheorem.solve(values, remainders);
-        Assert.assertEquals(3417, solution);
+        Assertions.assertEquals(3417, solution);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class ChineseRemainderTheoremTest {
         remainders.add(2); remainders.add(3); remainders.add(2);
 
         long solution = ChineseRemainderTheorem.solve(values, remainders);
-        Assert.assertEquals(23, solution);
+        Assertions.assertEquals(23, solution);
     }
 
 

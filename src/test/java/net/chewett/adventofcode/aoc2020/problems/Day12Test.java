@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class Day12Test {
         List<String> instructions = this.getExampleInstructions();
         Day12 d = new Day12();
 
-        Assert.assertEquals(25, d.solvePartOne(instructions));
+        Assertions.assertEquals(25, d.solvePartOne(instructions));
     }
 
     /**
@@ -38,7 +38,7 @@ public class Day12Test {
     public void testRealPartOne() {
         List<String> instructions = ProblemLoader.loadProblemIntoStringArray(2020, 12);
         Day12 d = new Day12();
-        Assert.assertEquals(1152, d.solvePartOne(instructions));
+        Assertions.assertEquals(1152, d.solvePartOne(instructions));
     }
 
     /**
@@ -49,7 +49,7 @@ public class Day12Test {
         List<String> instructions = this.getExampleInstructions();
         Day12 d = new Day12();
 
-        Assert.assertEquals(286, d.solvePartTwo(instructions));
+        Assertions.assertEquals(286, d.solvePartTwo(instructions));
     }
 
     /**
@@ -59,7 +59,7 @@ public class Day12Test {
     public void testRealPartTwo() {
         List<String> instructions = ProblemLoader.loadProblemIntoStringArray(2020, 12);
         Day12 d = new Day12();
-        Assert.assertEquals(58637, d.solvePartTwo(instructions));
+        Assertions.assertEquals(58637, d.solvePartTwo(instructions));
     }
 
 }

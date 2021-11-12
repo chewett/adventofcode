@@ -2,8 +2,8 @@ package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.FormatConversion;
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Day18Test {
         problem.add("7 + 5");
         Day18 d = new Day18();
         long ans = d.solvePartTwo(problem);
-        Assert.assertEquals(12, ans);
+        Assertions.assertEquals(12, ans);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class Day18Test {
         problem.add("7 * 5");
         Day18 d = new Day18();
         long ans = d.solvePartTwo(problem);
-        Assert.assertEquals(35, ans);
+        Assertions.assertEquals(35, ans);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class Day18Test {
         problem.add("5 * 2 + 5");
         Day18 d = new Day18();
         long ans = d.solvePartTwo(problem);
-        Assert.assertEquals(35, ans);
+        Assertions.assertEquals(35, ans);
     }
 
 
@@ -47,7 +47,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("1 + 2 * 3 + 4 * 5 + 6");
         Day18 d = new Day18();
-        Assert.assertEquals(71, d.solvePartOne(problems));
+        Assertions.assertEquals(71, d.solvePartOne(problems));
     }
 
     /**
@@ -58,7 +58,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("1 + (2 * 3) + (4 * (5 + 6))");
         Day18 d = new Day18();
-        Assert.assertEquals(51, d.solvePartOne(problems));
+        Assertions.assertEquals(51, d.solvePartOne(problems));
     }
 
     /**
@@ -69,7 +69,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("2 * 3 + (4 * 5)");
         Day18 d = new Day18();
-        Assert.assertEquals(26, d.solvePartOne(problems));
+        Assertions.assertEquals(26, d.solvePartOne(problems));
     }
 
     /**
@@ -80,7 +80,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("5 + (8 * 3 + 9 + 3 * 4 * 3)");
         Day18 d = new Day18();
-        Assert.assertEquals(437, d.solvePartOne(problems));
+        Assertions.assertEquals(437, d.solvePartOne(problems));
     }
 
     /**
@@ -91,7 +91,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))");
         Day18 d = new Day18();
-        Assert.assertEquals(12240, d.solvePartOne(problems));
+        Assertions.assertEquals(12240, d.solvePartOne(problems));
     }
 
     /**
@@ -102,7 +102,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2");
         Day18 d = new Day18();
-        Assert.assertEquals(13632, d.solvePartOne(problems));
+        Assertions.assertEquals(13632, d.solvePartOne(problems));
     }
 
     /**
@@ -112,7 +112,7 @@ public class Day18Test {
     public void testRealPartOne() {
         List<String> problems = ProblemLoader.loadProblemIntoStringArray(2020, 18);
         Day18 d = new Day18();
-        Assert.assertEquals(13976444272545L, d.solvePartOne(problems));
+        Assertions.assertEquals(13976444272545L, d.solvePartOne(problems));
     }
 
     /**
@@ -123,7 +123,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("1 + 2 * 3 + 4 * 5 + 6");
         Day18 d = new Day18();
-        Assert.assertEquals(231, d.solvePartTwo(problems));
+        Assertions.assertEquals(231, d.solvePartTwo(problems));
     }
 
     /**
@@ -134,7 +134,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("1 + (2 * 3) + (4 * (5 + 6))");
         Day18 d = new Day18();
-        Assert.assertEquals(51, d.solvePartTwo(problems));
+        Assertions.assertEquals(51, d.solvePartTwo(problems));
     }
 
     /**
@@ -145,7 +145,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("2 * 3 + (4 * 5)");
         Day18 d = new Day18();
-        Assert.assertEquals(46, d.solvePartTwo(problems));
+        Assertions.assertEquals(46, d.solvePartTwo(problems));
     }
 
     /**
@@ -156,7 +156,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("5 + (8 * 3 + 9 + 3 * 4 * 3)");
         Day18 d = new Day18();
-        Assert.assertEquals(1445, d.solvePartTwo(problems));
+        Assertions.assertEquals(1445, d.solvePartTwo(problems));
     }
 
     /**
@@ -167,7 +167,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))");
         Day18 d = new Day18();
-        Assert.assertEquals(669060, d.solvePartTwo(problems));
+        Assertions.assertEquals(669060, d.solvePartTwo(problems));
     }
 
     /**
@@ -178,7 +178,7 @@ public class Day18Test {
         List<String> problems = new ArrayList<>();
         problems.add("((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2");
         Day18 d = new Day18();
-        Assert.assertEquals(23340, d.solvePartTwo(problems));
+        Assertions.assertEquals(23340, d.solvePartTwo(problems));
     }
 
     /**
@@ -188,7 +188,7 @@ public class Day18Test {
     public void testRealPartTwo() {
         List<String> problems = ProblemLoader.loadProblemIntoStringArray(2020, 18);
         Day18 d = new Day18();
-        Assert.assertEquals(88500956630893L, d.solvePartTwo(problems));
+        Assertions.assertEquals(88500956630893L, d.solvePartTwo(problems));
     }
 
 

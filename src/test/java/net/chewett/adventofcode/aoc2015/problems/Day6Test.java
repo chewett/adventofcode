@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2015.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class Day6Test {
         List<String> instructions = new ArrayList<>();
         instructions.add("turn on 0,0 through 999,999");
         Day6 d = new Day6();
-        Assert.assertEquals(1000000, d.solvePartOne(instructions));
+        Assertions.assertEquals(1000000, d.solvePartOne(instructions));
     }
 
     /**
@@ -28,7 +28,7 @@ public class Day6Test {
         List<String> instructions = new ArrayList<>();
         instructions.add("toggle 0,0 through 999,0");
         Day6 d = new Day6();
-        Assert.assertEquals(1000, d.solvePartOne(instructions));
+        Assertions.assertEquals(1000, d.solvePartOne(instructions));
     }
 
     /**
@@ -39,7 +39,7 @@ public class Day6Test {
         List<String> instructions = new ArrayList<>();
         instructions.add("turn off 499,499 through 500,500");
         Day6 d = new Day6();
-        Assert.assertEquals(0, d.solvePartOne(instructions));
+        Assertions.assertEquals(0, d.solvePartOne(instructions));
     }
 
     /**
@@ -49,7 +49,7 @@ public class Day6Test {
     public void testRealPartOne() {
         List<String> instructions = ProblemLoader.loadProblemIntoStringArray(2015, 6);
         Day6 d = new Day6();
-        Assert.assertEquals(569999, d.solvePartOne(instructions));
+        Assertions.assertEquals(569999, d.solvePartOne(instructions));
     }
 
     /**
@@ -60,7 +60,7 @@ public class Day6Test {
         List<String> instructions = new ArrayList<>();
         instructions.add("turn on 0,0 through 0,0");
         Day6 d = new Day6();
-        Assert.assertEquals(1, d.solvePartTwo(instructions));
+        Assertions.assertEquals(1, d.solvePartTwo(instructions));
     }
 
     /**
@@ -71,7 +71,7 @@ public class Day6Test {
         List<String> instructions = new ArrayList<>();
         instructions.add("toggle 0,0 through 999,999");
         Day6 d = new Day6();
-        Assert.assertEquals(2000000, d.solvePartTwo(instructions));
+        Assertions.assertEquals(2000000, d.solvePartTwo(instructions));
     }
 
     /**
@@ -84,7 +84,7 @@ public class Day6Test {
         List<String> instructions = new ArrayList<>();
         instructions.add("turn off 0,0 through 0,2");
         Day6 d = new Day6();
-        Assert.assertEquals(0, d.solvePartTwo(instructions));
+        Assertions.assertEquals(0, d.solvePartTwo(instructions));
     }
 
     /**
@@ -94,7 +94,7 @@ public class Day6Test {
     public void testRealPartTwo() {
         List<String> instructions = ProblemLoader.loadProblemIntoStringArray(2015, 6);
         Day6 d = new Day6();
-        Assert.assertEquals(17836115, d.solvePartTwo(instructions));
+        Assertions.assertEquals(17836115, d.solvePartTwo(instructions));
     }
 
 }

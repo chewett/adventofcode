@@ -2,8 +2,8 @@ package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.FormatConversion;
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Day17Test {
         List<List<Character>> listListChar = FormatConversion.convertStringArrayToCharListList(gridData);
 
         Day17 d = new Day17();
-        Assert.assertEquals(112, d.solvePartOne(listListChar));
+        Assertions.assertEquals(112, d.solvePartOne(listListChar));
     }
 
     /**
@@ -32,7 +32,7 @@ public class Day17Test {
     public void testRealPartOne() {
         List<List<Character>> ticketLines = ProblemLoader.loadProblemIntoXYCharList(2020, 17);
         Day17 d = new Day17();
-        Assert.assertEquals(368, d.solvePartOne(ticketLines));
+        Assertions.assertEquals(368, d.solvePartOne(ticketLines));
     }
 
     /**
@@ -47,7 +47,7 @@ public class Day17Test {
         List<List<Character>> listListChar = FormatConversion.convertStringArrayToCharListList(gridData);
 
         Day17 d = new Day17();
-        Assert.assertEquals(848, d.solvePartTwo(listListChar));
+        Assertions.assertEquals(848, d.solvePartTwo(listListChar));
     }
 
     /**
@@ -57,7 +57,7 @@ public class Day17Test {
     public void testRealPartTwo() {
         List<List<Character>> ticketLines = ProblemLoader.loadProblemIntoXYCharList(2020, 17);
         Day17 d = new Day17();
-        Assert.assertEquals(2696, d.solvePartTwo(ticketLines));
+        Assertions.assertEquals(2696, d.solvePartTwo(ticketLines));
     }
 
 }

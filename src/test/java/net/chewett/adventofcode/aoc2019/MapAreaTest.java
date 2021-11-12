@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2019;
 
 import net.chewett.adventofcode.aoc2019.MapArea;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class MapAreaTest {
 
@@ -21,36 +21,36 @@ public class MapAreaTest {
         MapArea ma = new MapArea();
         ma.setMapData(0, 0, '.');
 
-        Assert.assertEquals('.', ma.getMapData(0, 0));
-        Assert.assertEquals('?', ma.getMapData(0, 1));
+        Assertions.assertEquals('.', ma.getMapData(0, 0));
+        Assertions.assertEquals('?', ma.getMapData(0, 1));
     }
 
     @Test
     public void testPathingMoveNorth() {
         MapArea ma = this.getBasicMapArea();
         int directionToMove = ma.getDirectionToMoveToPoint(0, 10, 0, 6);
-        Assert.assertEquals(1, directionToMove);
+        Assertions.assertEquals(1, directionToMove);
     }
 
     @Test
     public void testPathingMoveSouth() {
         MapArea ma = this.getBasicMapArea();
         int directionToMove = ma.getDirectionToMoveToPoint(0, 10, 0, 15);
-        Assert.assertEquals(2, directionToMove);
+        Assertions.assertEquals(2, directionToMove);
     }
 
     @Test
     public void testPathingMoveEast() {
         MapArea ma = this.getBasicMapArea();
         int directionToMove = ma.getDirectionToMoveToPoint(0, 10, 10, 10);
-        Assert.assertEquals(4, directionToMove);
+        Assertions.assertEquals(4, directionToMove);
     }
 
     @Test
     public void testPathingMoveWest() {
         MapArea ma = this.getBasicMapArea();
         int directionToMove = ma.getDirectionToMoveToPoint(10, 10, 0, 10);
-        Assert.assertEquals(3, directionToMove);
+        Assertions.assertEquals(3, directionToMove);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class MapAreaTest {
         ma.setMapData(1, 1, '?');
 
         int directionToMove = ma.getDirectionToMoveToPoint(0, 0, 1, 1);
-        Assert.assertEquals(4, directionToMove);
+        Assertions.assertEquals(4, directionToMove);
     }
 
 

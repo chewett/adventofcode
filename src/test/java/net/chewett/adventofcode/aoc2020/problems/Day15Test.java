@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Day15Test {
     public void testExampleInputPartOne() {
         Day15 d = new Day15();
         String numbers = "1,3,2";
-        Assert.assertEquals(1, d.solvePartOne(numbers));
+        Assertions.assertEquals(1, d.solvePartOne(numbers));
     }
 
     /**
@@ -26,7 +26,7 @@ public class Day15Test {
     public void testExampleInput2PartOne() {
         Day15 d = new Day15();
         String numbers = "2,1,3";
-        Assert.assertEquals(10, d.solvePartOne(numbers));
+        Assertions.assertEquals(10, d.solvePartOne(numbers));
     }
 
     /**
@@ -36,7 +36,7 @@ public class Day15Test {
     public void testExampleInput3PartOne() {
         Day15 d = new Day15();
         String numbers = "1,2,3";
-        Assert.assertEquals(27, d.solvePartOne(numbers));
+        Assertions.assertEquals(27, d.solvePartOne(numbers));
     }
 
     /**
@@ -46,7 +46,7 @@ public class Day15Test {
     public void testExampleInput4PartOne() {
         Day15 d = new Day15();
         String numbers = "2,3,1";
-        Assert.assertEquals(78, d.solvePartOne(numbers));
+        Assertions.assertEquals(78, d.solvePartOne(numbers));
     }
 
     /**
@@ -56,7 +56,7 @@ public class Day15Test {
     public void testExampleInput5PartOne() {
         Day15 d = new Day15();
         String numbers = "3,2,1";
-        Assert.assertEquals(438, d.solvePartOne(numbers));
+        Assertions.assertEquals(438, d.solvePartOne(numbers));
     }
 
     /**
@@ -66,7 +66,7 @@ public class Day15Test {
     public void testExampleInput6PartOne() {
         Day15 d = new Day15();
         String numbers = "3,1,2";
-        Assert.assertEquals(1836, d.solvePartOne(numbers));
+        Assertions.assertEquals(1836, d.solvePartOne(numbers));
     }
 
     /**
@@ -78,7 +78,7 @@ public class Day15Test {
         Day15 d = new Day15();
         long partOneAnswer = d.solvePartOne(numbers);
 
-        Assert.assertEquals(276, partOneAnswer);
+        Assertions.assertEquals(276, partOneAnswer);
     }
 
     /**
@@ -97,7 +97,7 @@ public class Day15Test {
         String numbers = ProblemLoader.loadProblemIntoString(2020, 15);
         Day15 d = new Day15();
 
-        Assert.assertEquals(31916, d.solvePartTwo(numbers));
+        Assertions.assertEquals(31916, d.solvePartTwo(numbers));
     }
 
 }

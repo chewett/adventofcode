@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2019;
 
 import net.chewett.adventofcode.aoc2019.Orbiter;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class OrbiterTest {
 
@@ -10,7 +10,7 @@ public class OrbiterTest {
     public void testNoOrbits() {
         Orbiter o = new Orbiter("o");
 
-        Assert.assertEquals(0, o.calculateOrbits());
+        Assertions.assertEquals(0, o.calculateOrbits());
     }
 
     @Test
@@ -19,7 +19,7 @@ public class OrbiterTest {
         Orbiter o2 = new Orbiter("o2");
         o.addOrbit(o2);
 
-        Assert.assertEquals(1, o.calculateOrbits());
+        Assertions.assertEquals(1, o.calculateOrbits());
 
     }
 
@@ -31,8 +31,8 @@ public class OrbiterTest {
         o.addOrbit(o2);
         o2.addOrbit(o3);
 
-        Assert.assertEquals(1, o2.calculateOrbits());
-        Assert.assertEquals(3, o.calculateOrbits());
+        Assertions.assertEquals(1, o2.calculateOrbits());
+        Assertions.assertEquals(3, o.calculateOrbits());
     }
 
     @Test

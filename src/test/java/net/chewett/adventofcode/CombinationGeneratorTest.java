@@ -1,8 +1,8 @@
 package net.chewett.adventofcode;
 
 import net.chewett.adventofcode.helpers.CombinationGenerator;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
@@ -24,7 +24,7 @@ public class CombinationGeneratorTest {
             realValuesSet.add(tmpString);
         }
 
-        Assert.assertEquals(expectedValuesSet, realValuesSet);
+        Assertions.assertEquals(expectedValuesSet, realValuesSet);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class CombinationGeneratorTest {
         List<Integer> noElementList = new ArrayList<>();
 
         List<List<Integer>> generatedList = CombinationGenerator.createCombinationsWhereEachElementCanOrCannotExist(noElementList);
-        Assert.assertEquals(1, generatedList.size());
+        Assertions.assertEquals(1, generatedList.size());
         this.confirmExpectedItemsAreInReturnedValue(generatedList, "");
     }
 
@@ -42,7 +42,7 @@ public class CombinationGeneratorTest {
         oneElementList.add(12);
 
         List<List<Integer>> generatedList = CombinationGenerator.createCombinationsWhereEachElementCanOrCannotExist(oneElementList);
-        Assert.assertEquals(2, generatedList.size());
+        Assertions.assertEquals(2, generatedList.size());
         this.confirmExpectedItemsAreInReturnedValue(generatedList, ";12");
     }
 
@@ -52,7 +52,7 @@ public class CombinationGeneratorTest {
         twoElementList.add(13); twoElementList.add(15);
 
         List<List<Integer>> generatedList = CombinationGenerator.createCombinationsWhereEachElementCanOrCannotExist(twoElementList);
-        Assert.assertEquals(4, generatedList.size());
+        Assertions.assertEquals(4, generatedList.size());
         this.confirmExpectedItemsAreInReturnedValue(generatedList, ";13;15;13,15");
     }
 
@@ -62,7 +62,7 @@ public class CombinationGeneratorTest {
         threeElementsList.add(99); threeElementsList.add(95); threeElementsList.add(90);
 
         List<List<Integer>> generatedList = CombinationGenerator.createCombinationsWhereEachElementCanOrCannotExist(threeElementsList);
-        Assert.assertEquals(8, generatedList.size());
+        Assertions.assertEquals(8, generatedList.size());
         this.confirmExpectedItemsAreInReturnedValue(generatedList, ";99;95;90;95,99;90,95;90,99;90,95,99");
     }
 

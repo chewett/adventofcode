@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2019;
 
 import net.chewett.adventofcode.aoc2019.DeckShuffler;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ public class DeckShufflerTest {
     public void testInitDeck() {
         List<Integer> spaceDeck = new ArrayList<>();
         DeckShuffler.initDeckWithNumberOfNumbers(spaceDeck, 10);
-        Assert.assertEquals(10, spaceDeck.size());
+        Assertions.assertEquals(10, spaceDeck.size());
         for(int i = 0; i < 10; i++) {
-            Assert.assertEquals(i, (int)spaceDeck.get(i));
+            Assertions.assertEquals(i, (int)spaceDeck.get(i));
         }
     }
 
@@ -29,7 +29,7 @@ public class DeckShufflerTest {
 
         int indexNum = 0;
         for(int i = 9; i >= 0; i--) {
-            Assert.assertEquals(i, (int)spaceDeck.get(indexNum));
+            Assertions.assertEquals(i, (int)spaceDeck.get(indexNum));
             indexNum++;
         }
     }
@@ -43,7 +43,7 @@ public class DeckShufflerTest {
 
         int[] expectedNumbers = new int[] {3,4,5,6,7,8,9,0,1,2};
         for(int i = 0; i < 10; i++) {
-            Assert.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
+            Assertions.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
         }
     }
 
@@ -56,7 +56,7 @@ public class DeckShufflerTest {
 
         int[] expectedNumbers = new int[] {6,7,8,9,0,1,2,3,4,5};
         for(int i = 0; i < 10; i++) {
-            Assert.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
+            Assertions.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
         }
     }
 
@@ -69,7 +69,7 @@ public class DeckShufflerTest {
 
         int[] expectedNumbers = new int[] {0,7,4,1,8,5,2,9,6,3};
         for(int i = 0; i < 10; i++) {
-            Assert.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
+            Assertions.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
         }
     }
 
@@ -84,7 +84,7 @@ public class DeckShufflerTest {
 
         int[] expectedNumbers = new int[] {0,3,6,9,2,5,8,1,4,7};
         for(int i = 0; i < 10; i++) {
-            Assert.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
+            Assertions.assertEquals(expectedNumbers[i], (int)spaceDeck.get(i));
         }
     }
 

@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2020.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +78,7 @@ public class Day4Test {
 
         Day4 d = new Day4();
         int partOneAnswer = d.solvePartOne(lines);
-        Assert.assertEquals(2, partOneAnswer);
+        Assertions.assertEquals(2, partOneAnswer);
     }
 
     /**
@@ -91,7 +91,7 @@ public class Day4Test {
 
         Day4 d = new Day4();
         int partOneAnswer = d.solvePartOne(lines);
-        Assert.assertEquals(4, partOneAnswer);
+        Assertions.assertEquals(4, partOneAnswer);
     }
 
     /**
@@ -103,7 +103,7 @@ public class Day4Test {
 
         Day4 d = new Day4();
         int partOneAnswer = d.solvePartOne(lines);
-        Assert.assertEquals(4, partOneAnswer);
+        Assertions.assertEquals(4, partOneAnswer);
     }
 
     /**
@@ -115,7 +115,7 @@ public class Day4Test {
         Day4 d = new Day4();
         int partOneAnswer = d.solvePartOne(lines);
 
-        Assert.assertEquals(256, partOneAnswer);
+        Assertions.assertEquals(256, partOneAnswer);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Day4Test {
         Day4 d = new Day4();
         long partTwoAnswer = d.solvePartTwo(lines);
 
-        Assert.assertEquals(2, partTwoAnswer);
+        Assertions.assertEquals(2, partTwoAnswer);
     }
 
 
@@ -142,7 +142,7 @@ public class Day4Test {
         Day4 d = new Day4();
         long partTwoAnswer = d.solvePartTwo(lines);
 
-        Assert.assertEquals(0, partTwoAnswer);
+        Assertions.assertEquals(0, partTwoAnswer);
     }
 
     /**
@@ -155,7 +155,7 @@ public class Day4Test {
         Day4 d = new Day4();
         long partTwoAnswer = d.solvePartTwo(lines);
 
-        Assert.assertEquals(4, partTwoAnswer);
+        Assertions.assertEquals(4, partTwoAnswer);
     }
 
     /**
@@ -167,7 +167,7 @@ public class Day4Test {
         Day4 d = new Day4();
         long partTwoAnswer = d.solvePartTwo(lines);
 
-        Assert.assertEquals(198, partTwoAnswer);
+        Assertions.assertEquals(198, partTwoAnswer);
     }
 
 

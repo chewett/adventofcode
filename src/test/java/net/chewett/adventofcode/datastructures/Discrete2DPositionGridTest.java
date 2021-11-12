@@ -1,27 +1,27 @@
 package net.chewett.adventofcode.datastructures;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class Discrete2DPositionGridTest {
 
     @Test
     public void testIntConstructor() {
         Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
-        Assert.assertNotNull(dpg);
+        Assertions.assertNotNull(dpg);
     }
 
     @Test
     public void testCharConstructor() {
         Discrete2DPositionGrid<Character> dpg = new Discrete2DPositionGrid<>('0');
-        Assert.assertNotNull(dpg);
+        Assertions.assertNotNull(dpg);
     }
 
     @Test
     public void testGetValueAtPositionWithDefault() {
         Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
         int i = dpg.getValueAtPosition(123, 456);
-        Assert.assertEquals(0, i);
+        Assertions.assertEquals(0, i);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class Discrete2DPositionGridTest {
         Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
         dpg.setValueAtPosition(123, 456, 111);
         int i = dpg.getValueAtPosition(123, 456);
-        Assert.assertEquals(111, i);
+        Assertions.assertEquals(111, i);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class Discrete2DPositionGridTest {
         //Set the same value twice to make sure its not doing some funky stuff to count it
         dpg.setValueAtPosition(11, 3, 7);
 
-        Assert.assertEquals(5, dpg.countInstancesOfValue(7));
+        Assertions.assertEquals(5, dpg.countInstancesOfValue(7));
     }
 
 
