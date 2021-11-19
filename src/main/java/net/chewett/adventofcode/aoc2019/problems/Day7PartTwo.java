@@ -1,6 +1,6 @@
 package net.chewett.adventofcode.aoc2019.problems;
 
-import net.chewett.adventofcode.aoc2019.PermutationGenerator;
+import net.chewett.adventofcode.helpers.PermutationGenerator;
 import net.chewett.adventofcode.aoc2019.intcode.Intcode;
 import net.chewett.adventofcode.aoc2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
