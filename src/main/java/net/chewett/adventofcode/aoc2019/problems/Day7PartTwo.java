@@ -65,7 +65,8 @@ public class Day7PartTwo {
             thrusterValues.add(8);
             thrusterValues.add(9);
 
-            List<List<Integer>> thrusterPhaseCombinations = PermutationGenerator.generatePermutations(thrusterValues);
+            PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+            List<List<Integer>> thrusterPhaseCombinations = pg.generatePermutations(thrusterValues);
 
             //Set up my Instruction set
             List<IntcodeInstruction> instructions = new ArrayList<>();

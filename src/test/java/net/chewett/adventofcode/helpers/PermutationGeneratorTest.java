@@ -10,7 +10,8 @@ public class PermutationGeneratorTest {
     @Test
     public void testNoPermutations() {
         List<Integer> ints = new ArrayList<>();
-        List<List<Integer>> permutations = PermutationGenerator.generatePermutations(ints);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> permutations = pg.generatePermutations(ints);
         Assertions.assertEquals(0, permutations.size());
     }
 
@@ -18,7 +19,8 @@ public class PermutationGeneratorTest {
     public void testSinglePermutation() {
         List<Integer> ints = new ArrayList<>();
         ints.add(1);
-        List<List<Integer>> permutations = PermutationGenerator.generatePermutations(ints);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> permutations = pg.generatePermutations(ints);
         Assertions.assertEquals(1, permutations.size());
     }
 
@@ -27,7 +29,8 @@ public class PermutationGeneratorTest {
         List<Integer> ints = new ArrayList<>();
         ints.add(1);
         ints.add(2);
-        List<List<Integer>> permutations = PermutationGenerator.generatePermutations(ints);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> permutations = pg.generatePermutations(ints);
         Assertions.assertEquals(2, permutations.size());
     }
 
@@ -37,7 +40,8 @@ public class PermutationGeneratorTest {
         ints.add(1);
         ints.add(2);
         ints.add(3);
-        List<List<Integer>> permutations = PermutationGenerator.generatePermutations(ints);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> permutations = pg.generatePermutations(ints);
         Assertions.assertEquals(6, permutations.size());
     }
 
@@ -48,7 +52,8 @@ public class PermutationGeneratorTest {
         ints.add(2);
         ints.add(3);
         ints.add(4);
-        List<List<Integer>> permutations = PermutationGenerator.generatePermutations(ints);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> permutations = pg.generatePermutations(ints);
         Assertions.assertEquals(24, permutations.size());
     }
 
@@ -60,7 +65,8 @@ public class PermutationGeneratorTest {
         ints.add(3);
         ints.add(4);
         ints.add(5);
-        List<List<Integer>> permutations = PermutationGenerator.generatePermutations(ints);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> permutations = pg.generatePermutations(ints);
         Assertions.assertEquals(120, permutations.size());
     }
 
