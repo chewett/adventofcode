@@ -1,9 +1,7 @@
-package net.chewett.adventofcode.aoc2019;
+package net.chewett.adventofcode.helpers;
 
-import net.chewett.adventofcode.aoc2019.PermutationGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 

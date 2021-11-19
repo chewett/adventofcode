@@ -1,4 +1,4 @@
-package net.chewett.adventofcode.aoc2019;
+package net.chewett.adventofcode.helpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ public class PermutationGenerator {
 
     /**
      * Assume numbers are unique
-     * @param numbers
-     * @return
+     * @param numbers List of elements to permute
+     * @return Returns a list of lists representing every element in every order
      */
     public static List<List<Integer>> generatePermutations(List<Integer> numbers) {
         List<List<Integer>> allPermutations = new ArrayList<>();
@@ -33,5 +33,5 @@ public class PermutationGenerator {
         }
 
         return allPermutations;
-    };
+    }
 }
