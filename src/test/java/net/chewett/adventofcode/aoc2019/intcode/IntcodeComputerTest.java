@@ -1,8 +1,8 @@
 package net.chewett.adventofcode.aoc2019.intcode;
 
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,10 +50,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("1,0,0,0,99"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getResultOfComputation();
 
-        Assert.assertEquals(2, finalResult);
+        Assertions.assertEquals(2, finalResult);
     }
 
     @Test
@@ -62,10 +62,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("2,2,2,0,99"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getResultOfComputation();
 
-        Assert.assertEquals(4, finalResult);
+        Assertions.assertEquals(4, finalResult);
     }
 
     @Test
@@ -74,10 +74,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("1101,5,10,0,99"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getResultOfComputation();
 
-        Assert.assertEquals(15, finalResult);
+        Assertions.assertEquals(15, finalResult);
     }
 
     @Test
@@ -86,10 +86,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("1102,3,9,0,99"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getResultOfComputation();
 
-        Assert.assertEquals(27, finalResult);
+        Assertions.assertEquals(27, finalResult);
     }
 
     @Test
@@ -99,10 +99,10 @@ public class IntcodeComputerTest {
         icc.addToInput(1);
         icc.initIntcode(ic);
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
 
         long output = icc.getOutput();
-        Assert.assertEquals(999, output);
+        Assertions.assertEquals(999, output);
     }
 
     @Test
@@ -112,10 +112,10 @@ public class IntcodeComputerTest {
         icc.addToInput(8);
         icc.initIntcode(ic);
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
 
         long output = icc.getOutput();
-        Assert.assertEquals(1000, output);
+        Assertions.assertEquals(1000, output);
     }
 
     @Test
@@ -125,10 +125,10 @@ public class IntcodeComputerTest {
         icc.addToInput(10);
         icc.initIntcode(ic);
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
 
         long output = icc.getOutput();
-        Assert.assertEquals(1001, output);
+        Assertions.assertEquals(1001, output);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class IntcodeComputerTest {
         icc.runIntcode();
 
         long expectedZero = icc.readMemoryAddress(10000);
-        Assert.assertEquals(0, expectedZero);
+        Assertions.assertEquals(0, expectedZero);
     }
 
     @Test
@@ -148,10 +148,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("2201,1,2,0,99"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getResultOfComputation();
 
-        Assert.assertEquals(3, finalResult);
+        Assertions.assertEquals(3, finalResult);
     }
 
     @Test
@@ -160,10 +160,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("1102,34915192,34915192,7,4,7,99,0"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getOutput();
 
-        Assert.assertEquals(1219070632396864L, finalResult);
+        Assertions.assertEquals(1219070632396864L, finalResult);
     }
 
     @Test
@@ -172,10 +172,10 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode("104,1125899906842624,99"));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getOutput();
 
-        Assert.assertEquals(1125899906842624L, finalResult);
+        Assertions.assertEquals(1125899906842624L, finalResult);
     }
 
     @Test
@@ -185,10 +185,10 @@ public class IntcodeComputerTest {
         icc.initIntcode(new Intcode("109,5,203,-5,99"));
         icc.addToInput(12);
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
         long finalResult = icc.getResultOfComputation();
 
-        Assert.assertEquals(12, (int)finalResult);
+        Assertions.assertEquals(12, (int)finalResult);
     }
 
     @Test
@@ -198,9 +198,9 @@ public class IntcodeComputerTest {
         icc.initIntcode(new Intcode("109,7,203,-2,99,0"));
         icc.addToInput(12);
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
 
-        Assert.assertEquals(12, icc.readMemoryAddress(5));
+        Assertions.assertEquals(12, icc.readMemoryAddress(5));
     }
 
     @Test
@@ -210,14 +210,14 @@ public class IntcodeComputerTest {
 
         icc.initIntcode(new Intcode(program));
         icc.runIntcode();
-        Assert.assertTrue(icc.isComputationEntirelyFinished());
+        Assertions.assertTrue(icc.isComputationEntirelyFinished());
 
         List<String> programOutput = new ArrayList<>();
         while(icc.hasOutputToRead()) {
             programOutput.add(String.valueOf(icc.getOutput()));
         }
 
-        Assert.assertEquals(program, String.join(",", programOutput));
+        Assertions.assertEquals(program, String.join(",", programOutput));
 
     }
 
@@ -235,7 +235,7 @@ public class IntcodeComputerTest {
         icc.addToInput(1);
         icc.runIntcode();
 
-        Assert.assertEquals(4006117640L, icc.getOutput());
+        Assertions.assertEquals(4006117640L, icc.getOutput());
     }
 
     @Test
@@ -251,7 +251,7 @@ public class IntcodeComputerTest {
         icc.addToInput(2);
         icc.runIntcode();
 
-        Assert.assertEquals(88231, icc.getOutput());
+        Assertions.assertEquals(88231, icc.getOutput());
     }
 
 
