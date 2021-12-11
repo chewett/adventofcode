@@ -102,18 +102,13 @@ public class Day1 {
      * @return The number of times that the number has went up
      */
     public long solvePartOne(List<Integer> ints) {
-        int startI = -1;
+        int previousValue = ints.get(0);
         int increased = 0;
-        for(int i : ints) {
-            if(startI == -1) {
-                startI = i;
-            }
-
-            if(i > startI) {
+        for(int index = 1; index < ints.size(); index++) {
+            if(ints.get(index) > previousValue) {
                 increased++;
             }
-            startI = i;
-
+            previousValue = ints.get(index);
         }
 
         return increased;
@@ -125,15 +120,15 @@ public class Day1 {
      * @return The number of times the rolling 3 sum went up
      */
     public long solvePartTwo(List<Integer> ints) {
-        int startI = ints.get(0) + ints.get(1) + ints.get(2);
+        int previousRollingSum = ints.get(0) + ints.get(1) + ints.get(2);
         int increased = 0;
         for(int index = 3; index < ints.size(); index++) {
             int thisSum = ints.get(index - 2) + ints.get(index - 1) + ints.get(index);
 
-            if(thisSum > startI) {
+            if(thisSum > previousRollingSum) {
                 increased++;
             }
-            startI = thisSum;
+            previousRollingSum = thisSum;
 
         }
 
