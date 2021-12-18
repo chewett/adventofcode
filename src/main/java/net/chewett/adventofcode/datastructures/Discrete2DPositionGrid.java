@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.datastructures;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.Map;
 public class Discrete2DPositionGrid<T> {
 
     Map<Integer, Map<Integer, T>> positionStore = new HashMap<>();
-    private T defaultValue;
+    private final T defaultValue;
+    private int maxX = 0;
+    private int maxY = 0;
 
     public Discrete2DPositionGrid(T defaultValue) {
         this.defaultValue = defaultValue;
@@ -33,6 +36,15 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
+     * Gets the value at the X and Y position or returns the default value you have chosen
+     * @param p A point object representing the X and Y value to check the value at
+     * @return The value at the given position or the default value if not set
+     */
+    public T getValueAtPosition(Point p) {
+        return this.getValueAtPosition(p.x, p.y);
+    }
+
+    /**
      * Given an X and Y position this will set this position to the given value
      * @param x The X position to set the value at
      * @param y The Y position to set the value at
@@ -44,6 +56,23 @@ public class Discrete2DPositionGrid<T> {
         }
 
         this.positionStore.get(x).put(y, val);
+
+        //Keep track of the max X and Y values in the grid on insertion to avoid looping to find it when queried
+        if(x > this.maxX) {
+            this.maxX = x;
+        }
+        if(y > this.maxY) {
+            this.maxY = y;
+        }
+    }
+
+    /**
+     * Given an X and Y position this will set this position to the given value
+     * @param p A point object representing the X and Y value to set the value at
+     * @param val The new value to store in the data structure
+     */
+    public void setValueAtPosition(Point p, T val) {
+        this.setValueAtPosition(p.x, p.y, val);
     }
 
     /**
@@ -80,5 +109,19 @@ public class Discrete2DPositionGrid<T> {
         return vals;
     }
 
+    /**
+     * Returns the maximum X position stored in the grid
+     * @return highest X position stored in the grid
+     */
+    public int getMaxX() {
+        return this.maxX;
+    }
 
+    /**
+     * Returns the maximum y position stored in the grid
+     * @return highest y position stored in the grid
+     */
+    public int getMaxY() {
+        return this.maxY;
+    }
 }
