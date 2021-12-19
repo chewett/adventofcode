@@ -20,6 +20,14 @@ public class Point3DTest {
     }
 
     @Test
+    public void testConstructorWithString() {
+        Point3D p = new Point3D("-10,5,1");
+        Assertions.assertEquals(-10, p.getX());
+        Assertions.assertEquals(5, p.getY());
+        Assertions.assertEquals(1, p.getZ());
+    }
+
+    @Test
     public void testGetX() {
         Point3D p = new Point3D(1, 2, 3);
         Assertions.assertEquals(1, p.getX());

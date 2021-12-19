@@ -21,6 +21,13 @@ public class Point3D {
         this.z = point.getZ();
     }
 
+    public Point3D(String str) {
+        String[] parts = str.trim().split(",");
+        this.x = Integer.parseInt(parts[0]);
+        this.y = Integer.parseInt(parts[1]);
+        this.z = Integer.parseInt(parts[2]);
+    }
+
     /**
      * Gets the X value stored in this point
      * @return X value
