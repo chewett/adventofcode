@@ -49,6 +49,18 @@ public class ProblemLoader {
     }
 
     /**
+     * Given a year and a day this will load the problem input, split it on commas, and return an integer list
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return List of integers that are inside the given file
+     */
+    public static List<Integer> loadProblemFromCommaSeperatedStringIntoIntegerList(int year, int day) {
+        return FormatConversion.convertCommaSeperatedStringToIntList(
+            ProblemLoader.loadProblemIntoString(year, day)
+        );
+    }
+
+    /**
      * Given a year and a day this will laod the problem input, read it line by line, and convert a two dimensional
      * list of characters
      * @param year Year to load the problem for

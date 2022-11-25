@@ -1,7 +1,9 @@
 package net.chewett.adventofcode.helpers;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Simple conversion helpers
@@ -100,6 +102,10 @@ public class FormatConversion {
             flippedArray.add(newCharList);
         }
         return flippedArray;
+    }
+
+    public static List<Integer> convertCommaSeperatedStringToIntList(String str) {
+        return Arrays.stream(str.split(",")).map(Integer::valueOf).collect(Collectors.toList());
     }
 
 }
