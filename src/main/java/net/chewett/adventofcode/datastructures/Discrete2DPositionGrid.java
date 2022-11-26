@@ -16,6 +16,8 @@ public class Discrete2DPositionGrid<T> {
     private final T defaultValue;
     private int maxX = 0;
     private int maxY = 0;
+    private int minX = 0;
+    private int minY = 0;
 
     public Discrete2DPositionGrid(T defaultValue) {
         this.defaultValue = defaultValue;
@@ -64,6 +66,13 @@ public class Discrete2DPositionGrid<T> {
         if(y > this.maxY) {
             this.maxY = y;
         }
+
+        if(x < this.minX) {
+            this.minX = x;
+        }
+        if(y < this.minY) {
+            this.minY = y;
+        }
     }
 
     /**
@@ -110,6 +119,50 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
+     * Givne a value T this will find all the positions that this value is stored at
+     * @param t Value to find in the data structure
+     * @return All positions the value is found
+     */
+    public List<Point> getPositionsOfValue(T t) {
+        List<Point> locations = new ArrayList<>();
+        for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
+            for(Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
+                if(yEntry.getValue().equals(t)) {
+                    locations.add(new Point(xEntry.getKey(), yEntry.getKey()));
+                }
+            }
+        }
+
+        return locations;
+    }
+
+    /**
+     * Given the current point generate a list of all adjacent points
+     * @param p Point to find the adjacent values for
+     * @return List of all points directly adjacent to this one
+     */
+    public List<Point> getAdjacentPoints(Point p) {
+        int maxX = this.getMaxX();
+        int maxY = this.getMaxY();
+
+        List<Point> points = new ArrayList<>();
+        if(p.x > 0) {
+            points.add(new Point(p.x-1, p.y));
+        }
+        if(p.y > 0) {
+            points.add(new Point(p.x, p.y-1));
+        }
+        if(p.x < maxX) {
+            points.add(new Point(p.x+1, p.y));
+        }
+        if(p.y < maxY) {
+            points.add(new Point(p.x, p.y+1));
+        }
+
+        return points;
+    }
+
+    /**
      * Returns the maximum X position stored in the grid
      * @return highest X position stored in the grid
      */
@@ -123,5 +176,21 @@ public class Discrete2DPositionGrid<T> {
      */
     public int getMaxY() {
         return this.maxY;
+    }
+
+    /**
+     * Returns the minimum x position stored in the grid
+     * @return position x value stored in the grid
+     */
+    public int getMinX() {
+        return minX;
+    }
+
+    /**
+     * Returns the minimum y position stored in the grid
+     * @return smallest y position stored in the grid
+     */
+    public int getMinY() {
+        return minY;
     }
 }
