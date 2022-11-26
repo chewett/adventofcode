@@ -1,5 +1,7 @@
 package net.chewett.adventofcode.helpers;
 
+import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -119,5 +121,26 @@ public class FormatConversion {
         return charSet;
     }
 
+
+    /**
+     * Converts a List of character lists into a Discrete2DPositionGrid<Integer> with a default value of -1
+     * @param gridData The input grid data in List List Character format
+     * @return A Discrete2DPositionGrid
+     */
+    public static Discrete2DPositionGrid<Integer> convertCharArrayIntoDiscrete2DPositionGrid(List<List<Character>> gridData) {
+        Discrete2DPositionGrid<Integer> grid = new Discrete2DPositionGrid<>(-1);
+        int y = 0;
+        int x = 0;
+        for (List<Character> listChar : gridData) {
+            for (char c : listChar) {
+                grid.setValueAtPosition(x, y, Integer.parseInt("" + c));
+                x++;
+            }
+            y++;
+            x = 0;
+        }
+
+        return grid;
+    }
 
 }
