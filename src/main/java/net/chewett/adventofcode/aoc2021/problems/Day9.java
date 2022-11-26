@@ -98,7 +98,7 @@ public class Day9 {
                 boolean mostRisky = true;
 
                 //Find all the adjacent points and check to see if they are more or less risky
-                List<Point> adjacentPoints = grid.getAdjacentPoints(new Point(x, y));
+                List<Point> adjacentPoints = grid.getDirectlyAdjacentPoints(new Point(x, y));
                 for(Point adjacentPoint : adjacentPoints) {
                     mostRisky = mostRisky && curNumber < grid.getValueAtPosition(adjacentPoint);
                 }
@@ -156,7 +156,7 @@ public class Day9 {
                         //If its not 9, then its in the basin!
                         if(pointValue != 9) {
                             containedInBasin.add(currentPointToInvestigate);
-                            List<Point> adjacentPoints = grid.getAdjacentPoints(currentPointToInvestigate);
+                            List<Point> adjacentPoints = grid.getDirectlyAdjacentPoints(currentPointToInvestigate);
                             for(Point p : adjacentPoints) {
                                 //If a point around it isn't in our list already and isn't already in our check list add it!
                                 if(!containedInBasin.contains(p) && !basinCoordSearching.contains(p)) {

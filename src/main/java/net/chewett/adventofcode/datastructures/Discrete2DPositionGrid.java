@@ -137,30 +137,92 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
-     * Given the current point generate a list of all adjacent points
+     * Given a point generate a list of all directly adjacent points
      * @param p Point to find the adjacent values for
      * @return List of all points directly adjacent to this one
      */
-    public List<Point> getAdjacentPoints(Point p) {
+    public List<Point> getDirectlyAdjacentPoints(Point p) {
+        return this.getDirectlyAdjacentPoints(p.x, p.y);
+    }
+
+    /**
+     * Given an X and Y position generate a list of all directly adjacent points
+     * @param x X position to find adjacent values for
+     * @param y Y position to find adjacent values for
+     * @return List of all points directly adjacent to this one
+     */
+    public List<Point> getDirectlyAdjacentPoints(int x, int y) {
         int maxX = this.getMaxX();
         int maxY = this.getMaxY();
 
         List<Point> points = new ArrayList<>();
-        if(p.x > 0) {
-            points.add(new Point(p.x-1, p.y));
+        if(x > 0) {
+            points.add(new Point(x-1, y));
         }
-        if(p.y > 0) {
-            points.add(new Point(p.x, p.y-1));
+        if(y > 0) {
+            points.add(new Point(x, y-1));
         }
-        if(p.x < maxX) {
-            points.add(new Point(p.x+1, p.y));
+        if(x < maxX) {
+            points.add(new Point(x+1, y));
         }
-        if(p.y < maxY) {
-            points.add(new Point(p.x, p.y+1));
+        if(y < maxY) {
+            points.add(new Point(x, y+1));
         }
 
         return points;
     }
+
+
+    /**
+     * Given an X and Y position generate a list of all adjacent points
+     * @param x X position to find adjacent values for
+     * @param y Y position to find adjacent values for
+     * @return List of all points adjacent to this one
+     */
+    public List<Point> getAdjacentPoints(int x, int y) {
+        int maxX = this.getMaxX();
+        int maxY = this.getMaxY();
+
+        List<Point> adjacentPoints = new ArrayList<>();
+        if(x > 0) {
+            if(y > 0) {
+                adjacentPoints.add(new Point(x-1, y-1));
+            }
+            if(y < maxY) {
+                adjacentPoints.add(new Point(x-1, y+1));
+            }
+            adjacentPoints.add(new Point(x-1, y));
+        }
+
+        if(x < maxX) {
+            if(y > 0) {
+                adjacentPoints.add(new Point(x+1, y-1));
+            }
+            if(y < maxY) {
+                adjacentPoints.add(new Point(x+1, y+1));
+            }
+            adjacentPoints.add(new Point(x+1, y));
+        }
+
+        if(y > 0) {
+            adjacentPoints.add(new Point(x, y-1));
+        }
+        if(y < maxY) {
+            adjacentPoints.add(new Point(x, y+1));
+        }
+
+        return adjacentPoints;
+    }
+
+    /**
+     * Given a point generate a list of all adjacent points
+     * @param p Point to find the adjacent values for
+     * @return List of all points adjacent to this one
+     */
+    public List<Point> getAdjacentPoints(Point p) {
+        return this.getAdjacentPoints(p.x, p.y);
+    }
+
 
     /**
      * Returns the maximum X position stored in the grid
