@@ -223,6 +223,33 @@ public class Discrete2DPositionGrid<T> {
         return this.getAdjacentPoints(p.x, p.y);
     }
 
+    /**
+     * Print out the contents of the grid
+     * Depending on the data used in the grid, this might look terrible or nice!
+     */
+    public void print() {
+        this.print(null);
+    }
+
+    /**
+     * Print out the contents of the grid and treat a specific value as whitespace
+     * Depending on the data used in the grid, this might look terrible or nice!
+     * @param treatValAsWhitespace A value to treat as whitespace
+     */
+    public void print(T treatValAsWhitespace) {
+        for(int y = 0; y <= this.getMaxY(); y++) {
+            for (int x = 0; x <= this.getMaxX(); x++) {
+                T thisVal = this.getValueAtPosition(x, y);
+                if(thisVal == treatValAsWhitespace) {
+                    System.out.print(" ");
+                }else{
+                    System.out.print(thisVal);
+                }
+            }
+            System.out.println();
+        }
+    }
+
 
     /**
      * Returns the maximum X position stored in the grid
