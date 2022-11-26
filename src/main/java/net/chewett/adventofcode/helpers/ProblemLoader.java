@@ -1,5 +1,7 @@
 package net.chewett.adventofcode.helpers;
 
+import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -114,6 +116,17 @@ public class ProblemLoader {
         return lines;
     }
 
+    /**
+     * Given a year and a day this will load the problem input and return a Discrete2D position grid representing the
+     * problem input
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return Discrete2DPositionGrid representing the problem input
+     */
+    public static Discrete2DPositionGrid<Integer> loadProblemIntoDiscrete2DPositionGrid(int year, int day) {
+        List<List<Character>> gridData = ProblemLoader.loadProblemIntoXYCharList(year, day);
+        return FormatConversion.convertCharArrayIntoDiscrete2DPositionGrid(gridData);
+    }
 
 
 }
