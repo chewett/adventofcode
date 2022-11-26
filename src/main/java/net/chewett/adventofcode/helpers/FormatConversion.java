@@ -1,8 +1,6 @@
 package net.chewett.adventofcode.helpers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -107,5 +105,19 @@ public class FormatConversion {
     public static List<Integer> convertCommaSeperatedStringToIntList(String str) {
         return Arrays.stream(str.split(",")).map(Integer::valueOf).collect(Collectors.toList());
     }
+
+    /**
+     * Given a string this will return a Set with the characters of the string as the values inside the set
+     * @param str String to convert into a Set
+     * @return Set with all the characters of the string as members
+     */
+    public static Set<Character> convertStringToSet(String str) {
+        Set<Character> charSet = new HashSet<>();
+        for(int i = 0; i < str.length(); i++) {
+            charSet.add(str.charAt(i));
+        }
+        return charSet;
+    }
+
 
 }
