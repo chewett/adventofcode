@@ -172,7 +172,7 @@ public class Day17 {
      * @param xMomentum X momentum of the shot
      * @param xMin Minimum X position to land in zone
      * @param xMax Maximum X position to land in zone
-     * @return
+     * @return The number of steps taken to get to the zone or 0 if it won't reach
      */
     private int willShotLandInValidXPosition(int xMomentum, int xMin, int xMax) {
         int x = 0;
@@ -190,7 +190,7 @@ public class Day17 {
 
     /**
      * Given the number of steps to run and the momentum this works out the highest point it will reach
-     * @param yMomentum Y momentum
+     * @param yMomentum Initial Y momentum
      * @param stepsToRun Steps to simulate
      * @return Highest X position reached
      */
@@ -211,14 +211,15 @@ public class Day17 {
     }
 
     /**
-     *
-     * @param xMomentum
-     * @param yMomentum
-     * @param xMin
-     * @param xMax
-     * @param yMin
-     * @param yMax
-     * @return
+     * Given and X and Y momentum and the area that you want to land the probe in this will return whether it will
+     * reach the location or not
+     * @param xMomentum X momentum at the start
+     * @param yMomentum Y momentum at the start
+     * @param xMin Minimum X to be in the zone
+     * @param xMax Maximum X to be in the zone
+     * @param yMin Minimum Y to be in the zone
+     * @param yMax Maximum Y to be in the zone
+     * @return Returhns true if this will reach the zone, otherwise it will return false
      */
     private boolean willXYReach(int xMomentum, int yMomentum, int xMin, int xMax, int yMin, int yMax) {
         int x = 0;
@@ -270,7 +271,7 @@ public class Day17 {
     /**
      * Attempt to find the different ways we can shoot a shot into the zone
      * @param position Position range you want to shoot the probe into
-     * @return
+     * @return The number of differeny ways to reach the right zone
      */
     public long solvePartTwo(String position) {
         String[] tmp1 = position.split("(x=|, y=|\\.\\.)");
