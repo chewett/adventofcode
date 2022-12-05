@@ -238,16 +238,18 @@ public class Discrete2DPositionGrid<T> {
      */
     public void print(T treatValAsWhitespace) {
         for(int y = 0; y <= this.getMaxY(); y++) {
+            StringBuilder row = new StringBuilder();
             for (int x = 0; x <= this.getMaxX(); x++) {
                 T thisVal = this.getValueAtPosition(x, y);
                 if(thisVal == treatValAsWhitespace) {
-                    System.out.print(" ");
+                    row.append(" ");
                 }else{
-                    System.out.print(thisVal);
+                    row.append(thisVal);
                 }
             }
-            System.out.println();
+            System.out.println(row);
         }
+        System.out.println();
     }
 
 
