@@ -237,9 +237,9 @@ public class Discrete2DPositionGrid<T> {
      * @param treatValAsWhitespace A value to treat as whitespace
      */
     public void print(T treatValAsWhitespace) {
-        for(int y = 0; y <= this.getMaxY(); y++) {
+        for(int y = this.getMinY(); y <= this.getMaxY(); y++) {
             StringBuilder row = new StringBuilder();
-            for (int x = 0; x <= this.getMaxX(); x++) {
+            for (int x = this.getMinX(); x <= this.getMaxX(); x++) {
                 T thisVal = this.getValueAtPosition(x, y);
                 if(thisVal == treatValAsWhitespace) {
                     row.append(" ");
