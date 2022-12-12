@@ -128,5 +128,17 @@ public class ProblemLoader {
         return FormatConversion.convertCharArrayIntoDiscrete2DPositionGrid(gridData);
     }
 
+    /**
+     * Given a eyar and a day this will load the problem input and return a Discrete2D position grid representing the
+     * problem input storing characters in the grid
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return Discrete2DPositionGrid representing the problem input
+     */
+    public static Discrete2DPositionGrid<Character> loadProblemIntoDiscrete2DPositionGridCharacter(int year, int day) {
+        List<List<Character>> gridData = ProblemLoader.loadProblemIntoXYCharList(year, day);
+        return FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(gridData);
+    }
+
 
 }

@@ -143,4 +143,25 @@ public class FormatConversion {
         return grid;
     }
 
+    /**
+     * Converts a List of character lists into a Discrete2DPositionGrid<Character> with a default value of ' '
+     * @param gridData The input grid data in List List Character format
+     * @return A Discrete2DPositionGrid
+     */
+    public static Discrete2DPositionGrid<Character> convertCharArrayIntoDiscrete2DPositionGridCharacter(List<List<Character>> gridData) {
+        Discrete2DPositionGrid<Character> grid = new Discrete2DPositionGrid<>(' ');
+        int y = 0;
+        int x = 0;
+        for (List<Character> listChar : gridData) {
+            for (char c : listChar) {
+                grid.setValueAtPosition(x, y, c);
+                x++;
+            }
+            y++;
+            x = 0;
+        }
+
+        return grid;
+    }
+
 }
