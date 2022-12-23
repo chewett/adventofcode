@@ -51,9 +51,6 @@ public class Day17Test {
 
     /**
      * Test Day 17 part two with the real input (with the correct answer)
-     *
-     * This takes a very long time due to it being un-optimal, this needs fixing.
-     *
      */
     @Test
     public void testRealPartTwo() {
