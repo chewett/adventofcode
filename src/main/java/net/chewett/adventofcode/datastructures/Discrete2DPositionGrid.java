@@ -232,6 +232,35 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
+     * Print out the contents of the grid in a reverse order
+     * Depending on the data used in the grid, this might look terrible or nice!
+     */
+    public void printReversed() {
+        this.printReversed(null);
+    }
+
+    /**
+     * Print out the contents of the grid in a reverse order and treat a specific value as whitespace
+     * Depending on the data used in the grid, this might look terrible or nice!
+     * @param treatValAsWhitespace A value to treat as whitespace
+     */
+    public void printReversed(T treatValAsWhitespace) {
+        for(int y = this.getMaxY(); y >= this.getMinX(); y--) {
+            StringBuilder row = new StringBuilder();
+            for (int x = this.getMinX(); x <= this.getMaxX(); x++) {
+                T thisVal = this.getValueAtPosition(x, y);
+                if(thisVal == treatValAsWhitespace) {
+                    row.append(" ");
+                }else{
+                    row.append(thisVal);
+                }
+            }
+            System.out.println(row);
+        }
+        System.out.println();
+    }
+
+    /**
      * Print out the contents of the grid and treat a specific value as whitespace
      * Depending on the data used in the grid, this might look terrible or nice!
      * @param treatValAsWhitespace A value to treat as whitespace
@@ -283,5 +312,41 @@ public class Discrete2DPositionGrid<T> {
      */
     public int getMinY() {
         return minY;
+    }
+
+
+    /**
+     * Simple clone function to createa an exact duplicate of the current object
+     * @return Exact duplicate of the current object
+     */
+    public Discrete2DPositionGrid<T> clone() {
+        Discrete2DPositionGrid<T> newGrid = new Discrete2DPositionGrid<>(this.defaultValue);
+
+        for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
+            for (Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
+                newGrid.setValueAtPosition(xEntry.getKey(), yEntry.getKey(), yEntry.getValue());
+            }
+        }
+
+        return newGrid;
+    }
+
+    /**
+     * Goes through the entire column and finds the highest value contained in it
+     * This mostly assumes its an Int Discrete2DPositionalGrid but could work for a char too
+     * @param x Column Index
+     * @return The highest value in the column
+     */
+    public int getMaxYOfColumn(int x) {
+        int maxVal = 0;
+        for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
+            if (xEntry.getKey() == x) {
+                for (Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
+                    maxVal = Math.max(maxVal, yEntry.getKey());
+                }
+            }
+        }
+
+        return maxVal;
     }
 }
