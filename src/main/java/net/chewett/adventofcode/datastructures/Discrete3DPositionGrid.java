@@ -12,6 +12,13 @@ public class Discrete3DPositionGrid<T> {
     Map<Integer, Map<Integer, Map<Integer, T>>> positionStore = new HashMap<>();
     private T defaultValue;
 
+    private int maxX;
+    private int maxY;
+    private int maxZ;
+    private int minX;
+    private int minY;
+    private int minZ;
+
     public Discrete3DPositionGrid(T defaultValue) {
         this.defaultValue = defaultValue;
     }
@@ -70,6 +77,13 @@ public class Discrete3DPositionGrid<T> {
         }
 
         this.positionStore.get(x).get(y).put(z, val);
+
+        this.maxX = Math.max(x, this.maxX);
+        this.maxY = Math.max(y, this.maxY);
+        this.maxZ = Math.max(z, this.maxX);
+        this.minX = Math.min(x, this.minX);
+        this.minY = Math.min(x, this.minY);
+        this.minZ = Math.min(x, this.minZ);
     }
 
     /**
@@ -77,8 +91,8 @@ public class Discrete3DPositionGrid<T> {
      * @param value The value to search for
      * @return The number of times the value occurs in the datastructure
      */
-    public int countInstancesOfValue(T value) {
-        int count = 0;
+    public Long countInstancesOfValue(T value) {
+        long count = 0;
         for(Map.Entry<Integer, Map<Integer, Map<Integer, T>>> xEntry : this.positionStore.entrySet()) {
             for(Map.Entry<Integer, Map<Integer, T>> yEntry : xEntry.getValue().entrySet()) {
                 for(Map.Entry<Integer, T> zEntry : yEntry.getValue().entrySet()) {
@@ -89,6 +103,41 @@ public class Discrete3DPositionGrid<T> {
             }
         }
         return count;
+    }
+
+    /**
+     * Returns the full list of points directly adjacent to all the locations with value T
+     * Note: This may return more than one of the same point if a point of a neighbour more than once!
+     *
+     * Note: This does not find diagonal neighbours
+     *
+     *  z=1 z=2 z=3
+     *       O
+     *   O  OXO  O
+     *       O
+     *
+     *  All neighbours are found in all dimensions where X is a point with the value and O is an identified neighbour point
+     *
+     * @param value The value to search for to find neighbours
+     * @return A list of all points that neighbour something
+     */
+    public List<Point3D> getDirectlyAdjacentNeighboursOfPointsWithValue(T value) {
+        List<Point3D> positionsSet = new ArrayList<>();
+        for(Map.Entry<Integer, Map<Integer, Map<Integer, T>>> xMap : this.positionStore.entrySet()) {
+            int x = xMap.getKey();
+            for(Map.Entry<Integer, Map<Integer, T>> yMap : xMap.getValue().entrySet()) {
+                int y = yMap.getKey();
+                for(Map.Entry<Integer, T> zMap : yMap.getValue().entrySet()) {
+                    int z = zMap.getKey();
+                    if(zMap.getValue().equals(value)) {
+                        Point3D thisPoint = new Point3D(x, y, z);
+                        positionsSet.addAll(thisPoint.getDirectlyAdjacentNeighbours());
+                    }
+                }
+            }
+        }
+
+        return positionsSet;
     }
 
     /**
@@ -165,4 +214,27 @@ public class Discrete3DPositionGrid<T> {
     }
 
 
+    public int getMaxX() {
+        return maxX;
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public int getMaxZ() {
+        return maxZ;
+    }
+
+    public int getMinX() {
+        return minX;
+    }
+
+    public int getMinY() {
+        return minY;
+    }
+
+    public int getMinZ() {
+        return minZ;
+    }
 }
