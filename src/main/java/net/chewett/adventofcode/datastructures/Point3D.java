@@ -235,6 +235,23 @@ public class Point3D implements Comparable<Point3D> {
     }
 
     /**
+     * Returns all the directly adjacent neighbours
+     * @return
+     */
+    public List<Point3D> getDirectlyAdjacentNeighbours() {
+        List<Point3D> neighbours = new ArrayList<>();
+
+        neighbours.add(new Point3D(x-1, y, z));
+        neighbours.add(new Point3D(x+1, y, z));
+        neighbours.add(new Point3D(x, y-1, z));
+        neighbours.add(new Point3D(x, y+1, z));
+        neighbours.add(new Point3D(x, y, z-1));
+        neighbours.add(new Point3D(x, y, z+1));
+
+        return neighbours;
+    }
+
+    /**
      * Hash code function
      * @return Hash of this object
      */
