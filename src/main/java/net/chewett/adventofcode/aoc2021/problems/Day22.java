@@ -199,9 +199,17 @@ import java.util.List;
  */
 public class Day22 {
 
-    public long solvePartOne(List<String> rules) {
+    /**
+     * This is the "brute force" method where you just store all the values that meet the criteria
+     *
+     * Run through the startup pattern ignoring the bits outside +50 to -50 in all axis
+     *
+     * @param pattern
+     * @return Number of lit cubes
+     */
+    public long solvePartOne(List<String> pattern) {
         Discrete3DPositionGrid<Integer> grid = new Discrete3DPositionGrid<>(0);
-        for(String line : rules) {
+        for(String line : pattern) {
             String[] parts = line.split("( |=|\\.\\.|,)");
             String onOrOff = parts[0];
             int valueTOSet = onOrOff.equals("on") ? 1 : 0;
@@ -227,11 +235,18 @@ public class Day22 {
             }
         }
 
-
+        //Once you have finished just count the number of on cubes
         return grid.countInstancesOfValue(1);
     }
 
+    /**
+     * Part two is the "smart" method whereby you keep track of all the regions that are lit and then work out the area
+     * for each one.
+     * @param rules
+     * @return Number of lit cubes
+     */
     public long solvePartTwo(List<String> rules) {
+        //Keep track of all lit cubes
         List<Cuboid> litCubes = new ArrayList<>();
         for(String line : rules) {
             String[] parts = line.split("( |=|\\.\\.|,)");
@@ -247,12 +262,22 @@ public class Day22 {
             List<Cuboid> newLitCubeArray = new ArrayList<>();
             Cuboid newCube = new Cuboid(xStart, xEnd, yStart, yEnd, zStart, zEnd);
             for(Cuboid current : litCubes) {
-                if(current.intersects(newCube)) {
-                    //Do something
-                }else{
-                    //No intersections, just add this
+                if(!current.intersects(newCube)) {
+                    //No intersections, just add this to the lit cubes map
                     newLitCubeArray.add(current);
+                }else{
+
+                    //If there is an intersection we remove anything inside this cube area, and then store those new
+                    // cuboid list. This might generate up to 6 new cuboids after removing this cube... this is the
+                    // complex bit! Maths is hard!
+                    List<Cuboid> newCubesToDecideOnAction = current.removeCuboid(newCube);
+                    newLitCubeArray.addAll(newCubesToDecideOnAction);
                 }
+            }
+
+            //Once we have removed all the bits this overlaps this cuboid, we then add it if it was a turn on instruction
+            if(valueTOSet == 1) {
+                newLitCubeArray.add(newCube);
             }
 
             litCubes = newLitCubeArray;
@@ -266,11 +291,11 @@ public class Day22 {
     }
 
     public static void main(String[] args) {
-        List<String> rules = ProblemLoader.loadProblemIntoStringArray(2021, 22);
+        List<String> pattern = ProblemLoader.loadProblemIntoStringArray(2021, 22);
 
         Day22 d = new Day22();
-        System.out.println(d.solvePartOne(rules));
-        System.out.println(d.solvePartTwo(rules));
+        System.out.println("The lit cubes after the partial initialization is " + d.solvePartOne(pattern));
+        System.out.println("The lit cubes after the full initialization is " + d.solvePartTwo(pattern));
 
     }
 
