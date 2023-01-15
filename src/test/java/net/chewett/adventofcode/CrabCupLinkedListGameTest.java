@@ -4,42 +4,36 @@ import net.chewett.adventofcode.aoc2020.CrabCupLinkedListGame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class CrabCupLinkedListGameTest {
 
-    @Test
-    public void testExampleInputOneMove() {
-        CrabCupLinkedListGame cc = new CrabCupLinkedListGame(CrabCupGameTest.getExampleInput());
-        long output = cc.runGameForMoves(1);
-        Assertions.assertEquals(54673289L, output);
+    public static List<Integer> getExampleInput() {
+        List<Integer> l = new LinkedList<>();
+        l.add(3);
+        l.add(8);
+        l.add(9);
+        l.add(1);
+        l.add(2);
+        l.add(5);
+        l.add(4);
+        l.add(6);
+        l.add(7);
+
+        for(int i = 10; i <= 1000000; i++) {
+            l.add(i);
+        }
+
+        return l;
     }
 
     @Test
-    public void testExampleInputTwoMoves() {
-        CrabCupLinkedListGame cc = new CrabCupLinkedListGame(CrabCupGameTest.getExampleInput());
-        long output = cc.runGameForMoves(2);
-        Assertions.assertEquals(32546789L, output);
-    }
-
-    @Test
-    public void testExampleInputThreeMoves() {
-        CrabCupLinkedListGame cc = new CrabCupLinkedListGame(CrabCupGameTest.getExampleInput());
-        long output = cc.runGameForMoves(3);
-        Assertions.assertEquals(34672589L, output);
-    }
-
-    @Test
-    public void testExampleInputTenMoves() {
-        CrabCupLinkedListGame cc = new CrabCupLinkedListGame(CrabCupGameTest.getExampleInput());
-        long output = cc.runGameForMoves(10);
-        Assertions.assertEquals(92658374L, output);
-    }
-
-    @Test
-    public void testExampleInputOneHundredMoves() {
-        CrabCupLinkedListGame cc = new CrabCupLinkedListGame(CrabCupGameTest.getExampleInput());
-        long output = cc.runGameForMoves(100);
-        Assertions.assertEquals(67384529L, output);
+    public void testExampleInputTenMillionMoves() {
+        CrabCupLinkedListGame cc = new CrabCupLinkedListGame(CrabCupLinkedListGameTest.getExampleInput());
+        long output = cc.runGameForMoves(10000000);
+        Assertions.assertEquals(149245887792L, output);
     }
 
 }
