@@ -1,11 +1,7 @@
 package net.chewett.adventofcode.aoc2022.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-
-import java.util.HashSet;
-import java.util.HexFormat;
 import java.util.List;
-import java.util.Set;
 
 /**
  * --- Day 25: Full of Hot Air ---
@@ -134,13 +130,13 @@ public class Day25 {
      * @return Converted base 5 number
      */
     private String convertToBase5(long n) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         while(n > 0) {
-            output =  ""+ (n % 5) + output;
+            output.insert(0, "" + (n % 5));
             n = Math.floorDiv(n, 5);
         }
 
-        return output;
+        return output.toString();
     }
 
     /**
@@ -152,7 +148,7 @@ public class Day25 {
         //Convert to base five
         String baseFive = this.convertToBase5(n);
 
-        String newSnafuBase = "";
+        StringBuilder newSnafuBase = new StringBuilder();
         int carryOver = 0;
         for(int charIndex = baseFive.length() - 1; charIndex >= 0; charIndex--) {
             //Each time we loop the unit gets bigger by a factor of 5
@@ -168,7 +164,7 @@ public class Day25 {
             }
 
             //Convert from the standard bases we are using to this one
-            char charThisVal = '0';
+            char charThisVal;
             if(thisVal == 2) {
                 charThisVal = '2';
             }else if(thisVal == 1) {
@@ -181,14 +177,14 @@ public class Day25 {
                 charThisVal = '=';
             }
 
-            newSnafuBase = "" + charThisVal + newSnafuBase;
+            newSnafuBase.insert(0, "" + charThisVal);
         }
         //If we have finished and there is still a carry, add on the final 1
         if(carryOver == 1) {
-            newSnafuBase = "1" + newSnafuBase;
+            newSnafuBase.insert(0, "1");
         }
 
-        return newSnafuBase;
+        return newSnafuBase.toString();
     }
 
     /**
