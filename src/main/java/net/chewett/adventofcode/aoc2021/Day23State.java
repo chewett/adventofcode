@@ -3,16 +3,46 @@ package net.chewett.adventofcode.aoc2021;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Now this is a really bad way to solve this... It essentially hardcodes _EVERY_ possible state transformation and
+ * cost of movement.
+ *
+ * Now really the better way to solve this is code up a nice set of objects and programatically determine
+ * the costs, distances, whether its possible to move.
+ *
+ * The upside of hardcoding it is that its super fast since everything is just lookups of if statements...
+ *
+ * But it took a while to encode...
+ *
+ * I wouldn't do this again but it solved the issue
+ *
+ * The character mapping for this is:
+ * --------------------------------------------------------
+ * | 0  | 1  |    | 4  |    | 7  |    | 10 |    | 13 | 14 |
+ * --------------------------------------------------------
+ *           | 2  |    | 5  |    | 8  |    | 11 |
+ *           ------    ------    ------    ------
+ *           | 3  |    | 6  |    | 9  |    | 12 |
+ *           ------    ------    ------    ------
+ *           | 15 |    | 17 |    | 19 |    | 21 |
+ *           ------    ------    ------    ------
+ *           | 16 |    | 18 |    | 20 |    | 22 |
+ *           ------    ------    ------    ------
+ */
 public class Day23State implements Comparable<Day23State> {
 
+    // Store the states expected, either 15 or 23
     private int maxStates = 15;
 
+    //Store the states for everything, We map the states into an array of 15 or 23 chars
     private char[] states;
+    //Keep track of the energy to track new states energy
     private int energy;
 
     boolean extended=false;
 
     public Day23State(String state, int stateEnergy, boolean extended) {
+        //If its a "full length" string then just assume its extended
         if(extended || state.length() > 15) {
             this.maxStates = 15 + 8;
             extended = true;
@@ -20,11 +50,13 @@ public class Day23State implements Comparable<Day23State> {
         this.extended = extended;
         this.states = new char[this.maxStates];
 
+        //Read in the values to our own format
         for(int i = 0; i < state.length(); i++) {
             this.states[i] = state.charAt(i);
         }
         this.energy = stateEnergy;
 
+        //If its a short string but needs to be extended we have to do the dance to extend it
         if(extended && state.length() == 15) {
             this.states[16] = this.states[3];
             this.states[18] = this.states[6];
@@ -46,6 +78,10 @@ public class Day23State implements Comparable<Day23State> {
         this(state, stateEnergy, false);
     }
 
+    /**
+     * Mainly used as a simple way of storing this as a string rather than storing objects everywhere
+     * @return
+     */
     public String getState() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.states);
@@ -61,6 +97,11 @@ public class Day23State implements Comparable<Day23State> {
         return this.getEnergy() - o.getEnergy();
     }
 
+    /**
+     * Helper function really!
+     *
+     * It prints "empty" spaces as 0 as thats how its encoded. Maybe swap this for . going forward.
+     */
     public void printThis() {
         System.out.println("");
         System.out.println("Energy level: " + this.getEnergy());
@@ -76,25 +117,38 @@ public class Day23State implements Comparable<Day23State> {
 
     }
 
+    /**
+     * Given a position you are in, and a new position this creates the new object with the new energy state
+     * @param firstState Position of the thing moving
+     * @param secondState New position of the thing
+     * @return Object representing the move
+     */
     public Day23State createNewStateSwappingValue(int firstState, int secondState) {
+
+        //Handle the different energy costs
         int mult = 1;
-        if(this.states[firstState] == 'B') {
+        char thingMoving = this.states[firstState];
+        if(thingMoving == 'B') {
             mult = 10;
-        }else if(this.states[firstState] == 'C') {
+        }else if(thingMoving == 'C') {
             mult = 100;
-        }else if(this.states[firstState] == 'D') {
+        }else if(thingMoving == 'D') {
             mult = 1000;
         }
 
         int newEnergy = this.energy + (this.getEnergyForMove(firstState, secondState) * mult);
 
         StringBuilder stringState = new StringBuilder(this.getState());
-        stringState.setCharAt(secondState, this.states[firstState]);
+        stringState.setCharAt(secondState, thingMoving);
         stringState.setCharAt(firstState, '0');
 
         return new Day23State(stringState.toString(), newEnergy);
     }
 
+    /**
+     * Find all the new states you can got o from this state
+     * @return List of possible states
+     */
     public List<Day23State> getNewStates() {
         List<Day23State> newStates = new ArrayList<>();
         for(int stateToCheck = 0; stateToCheck < this.maxStates; stateToCheck++) {
@@ -109,7 +163,17 @@ public class Day23State implements Comparable<Day23State> {
         return newStates;
     }
 
-    public boolean isLeavingHallwayFree(int curPos) {
+    /**
+     * Helper function to determine if we can leave the hallway.
+     *
+     * This also checks if we are in the right position for ending, and stops us moving if thats the case
+     *
+     * Warning... lots of hardcoding here!
+     *
+     * @param curPos Current position
+     * @return Whether we can actually move out of the room we are in
+     */
+    public boolean canWeMoveIntoTheHallway(int curPos) {
         boolean allFree = true;
         char curChar = this.states[curPos];
 
@@ -176,7 +240,7 @@ public class Day23State implements Comparable<Day23State> {
             }
         }
 
-
+        //Handle only moving out if we have nothing in our way
         if(curPos == 3 || curPos == 15 || curPos == 16) {
             allFree = allFree && this.states[2] == '0';
             if(curPos > 3) {
@@ -217,10 +281,15 @@ public class Day23State implements Comparable<Day23State> {
             }
         }
 
-
+        //This should be the full set of data and'ed between everything so should be good to go
         return allFree;
     }
 
+    /**
+     * Helper function to check if all these fields free
+     * @param listOfInts List of fields to check to see if they are empty
+     * @return Returns whether these are all empty or not
+     */
     public boolean isAllFree(int[] listOfInts) {
         boolean allFree = true;
         for(int i : listOfInts) {
@@ -230,6 +299,10 @@ public class Day23State implements Comparable<Day23State> {
         return allFree;
     }
 
+    /**
+     * Helper to see if we have finished or not...
+     * @return
+     */
     public boolean isFinalState() {
         if(this.extended) {
             return this.getState().equals("00AA0BB0CC0DD00AABBCCDD");
@@ -238,6 +311,14 @@ public class Day23State implements Comparable<Day23State> {
         }
     }
 
+    /**
+     * Find all the locations we could move into from the current state
+     *
+     * This is a nightmare function to debug... I started and ended up keeping going...
+     *
+     * @param currentState Current state to check for if we could move into it
+     * @return List of locations we could move into
+     */
     public List<Integer> getStatesToMoveToForState(int currentState) {
         List<Integer> newStates = new ArrayList<>();
         char myValue = this.states[currentState];
@@ -252,9 +333,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(16);
                         } else if (this.isAllFree(new int[]{2, 3, 15}) && this.states[16] == 'A') {
                             newStates.add(15);
-                        } else if (this.isAllFree(new int[]{2, 3}) && this.states[15] == 'A') {
+                        } else if (this.isAllFree(new int[]{2, 3}) && this.states[15] == 'A' && this.states[16] == 'A') {
                             newStates.add(3);
-                        } else if (this.isAllFree(new int[]{2}) && this.states[3] == 'A') {
+                        } else if (this.isAllFree(new int[]{2}) && this.states[3] == 'A' && this.states[15] == 'A' && this.states[16] == 'A') {
                             newStates.add(2);
                         }
                     } else {
@@ -271,9 +352,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(18);
                         } else if (this.isAllFree(new int[]{4, 5, 6, 17}) && this.states[18] == 'B') {
                             newStates.add(17);
-                        } else if (this.isAllFree(new int[]{4, 5, 6}) && this.states[17] == 'B') {
+                        } else if (this.isAllFree(new int[]{4, 5, 6}) && this.states[17] == 'B' && this.states[18] == 'B') {
                             newStates.add(6);
-                        } else if (this.isAllFree(new int[]{4, 5}) && this.states[6] == 'B') {
+                        } else if (this.isAllFree(new int[]{4, 5}) && this.states[6] == 'B' && this.states[17] == 'B' && this.states[18] == 'B') {
                             newStates.add(5);
                         }
 
@@ -290,9 +371,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(20);
                         } else if (this.isAllFree(new int[]{4, 7, 8, 9, 19}) && this.states[20] == 'C') {
                             newStates.add(19);
-                        } else if (this.isAllFree(new int[]{4, 7, 8, 9}) && this.states[19] == 'C') {
+                        } else if (this.isAllFree(new int[]{4, 7, 8, 9}) && this.states[19] == 'C' && this.states[20] == 'C') {
                             newStates.add(9);
-                        } else if (this.isAllFree(new int[]{4, 7, 8}) && this.states[9] == 'C') {
+                        } else if (this.isAllFree(new int[]{4, 7, 8}) && this.states[9] == 'C' && this.states[19] == 'C' && this.states[20] == 'C') {
                             newStates.add(8);
                         }
 
@@ -310,9 +391,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(22);
                         } else if (this.isAllFree(new int[]{4, 7, 10, 11, 12, 21}) && this.states[22] == 'D') {
                             newStates.add(21);
-                        } else if (this.isAllFree(new int[]{4, 7, 10, 11, 12}) && this.states[21] == 'D') {
+                        } else if (this.isAllFree(new int[]{4, 7, 10, 11, 12}) && this.states[21] == 'D' && this.states[22] == 'D') {
                             newStates.add(12);
-                        } else if (this.isAllFree(new int[]{4, 7, 10, 11}) && this.states[12] == 'D') {
+                        } else if (this.isAllFree(new int[]{4, 7, 10, 11}) && this.states[12] == 'D' && this.states[21] == 'D' && this.states[22] == 'D') {
                             newStates.add(11);
                         }
                     } else {
@@ -334,9 +415,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(16);
                     } else if (this.isAllFree(new int[]{2, 3, 15}) && this.states[16] == 'A') {
                         newStates.add(15);
-                    } else if (this.isAllFree(new int[]{2, 3}) && this.states[15] == 'A') {
+                    } else if (this.isAllFree(new int[]{2, 3}) && this.states[15] == 'A' && this.states[16] == 'A') {
                         newStates.add(3);
-                    } else if (this.isAllFree(new int[]{2}) && this.states[3] == 'A') {
+                    } else if (this.isAllFree(new int[]{2}) && this.states[3] == 'A' && this.states[15] == 'A' && this.states[16] == 'A') {
                         newStates.add(2);
                     }
                 } else {
@@ -352,9 +433,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(18);
                     } else if (this.isAllFree(new int[]{5, 6, 17}) && this.states[18] == 'B') {
                         newStates.add(17);
-                    } else if (this.isAllFree(new int[]{5, 6}) && this.states[17] == 'B') {
+                    } else if (this.isAllFree(new int[]{5, 6}) && this.states[17] == 'B' && this.states[18] == 'B') {
                         newStates.add(6);
-                    } else if (this.isAllFree(new int[]{5}) && this.states[6] == 'B') {
+                    } else if (this.isAllFree(new int[]{5}) && this.states[6] == 'B' && this.states[17] == 'B' && this.states[18] == 'B') {
                         newStates.add(5);
                     }
 
@@ -371,9 +452,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(20);
                     } else if (this.isAllFree(new int[]{7, 8, 9, 19}) && this.states[20] == 'C') {
                         newStates.add(19);
-                    } else if (this.isAllFree(new int[]{7, 8, 9}) && this.states[19] == 'C') {
+                    } else if (this.isAllFree(new int[]{7, 8, 9}) && this.states[19] == 'C'  && this.states[20] == 'C') {
                         newStates.add(9);
-                    } else if (this.isAllFree(new int[]{7, 8}) && this.states[9] == 'C') {
+                    } else if (this.isAllFree(new int[]{7, 8}) && this.states[9] == 'C' && this.states[19] == 'C'  && this.states[20] == 'C') {
                         newStates.add(8);
                     }
 
@@ -391,9 +472,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(22);
                     } else if (this.isAllFree(new int[]{7, 10, 11, 12, 21}) && this.states[22] == 'D') {
                         newStates.add(21);
-                    } else if (this.isAllFree(new int[]{7, 10, 11, 12}) && this.states[21] == 'D') {
+                    } else if (this.isAllFree(new int[]{7, 10, 11, 12}) && this.states[21] == 'D' && this.states[22] == 'D') {
                         newStates.add(12);
-                    } else if (this.isAllFree(new int[]{7, 10, 11}) && this.states[12] == 'D') {
+                    } else if (this.isAllFree(new int[]{7, 10, 11}) && this.states[12] == 'D' && this.states[21] == 'D' && this.states[22] == 'D') {
                         newStates.add(11);
                     }
                 } else {
@@ -415,9 +496,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(16);
                     } else if (this.isAllFree(new int[]{4, 2, 3, 15}) && this.states[16] == 'A') {
                         newStates.add(15);
-                    } else if (this.isAllFree(new int[]{4, 2, 3}) && this.states[15] == 'A') {
+                    } else if (this.isAllFree(new int[]{4, 2, 3}) && this.states[15] == 'A' && this.states[16] == 'A') {
                         newStates.add(3);
-                    } else if (this.isAllFree(new int[]{4, 2}) && this.states[3] == 'A') {
+                    } else if (this.isAllFree(new int[]{4, 2}) && this.states[3] == 'A' && this.states[15] == 'A' && this.states[16] == 'A') {
                         newStates.add(2);
                     }
                 }else {
@@ -433,9 +514,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(18);
                     } else if (this.isAllFree(new int[]{5, 6, 17}) && this.states[18] == 'B') {
                         newStates.add(17);
-                    } else if (this.isAllFree(new int[]{5, 6}) && this.states[17] == 'B') {
+                    } else if (this.isAllFree(new int[]{5, 6}) && this.states[17] == 'B'  && this.states[18] == 'B') {
                         newStates.add(6);
-                    } else if (this.isAllFree(new int[]{5}) && this.states[6] == 'B') {
+                    } else if (this.isAllFree(new int[]{5}) && this.states[6] == 'B' && this.states[17] == 'B'  && this.states[18] == 'B') {
                         newStates.add(5);
                     }
                 }else {
@@ -451,9 +532,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(20);
                     } else if (this.isAllFree(new int[]{8, 9, 19}) && this.states[20] == 'C') {
                         newStates.add(19);
-                    } else if (this.isAllFree(new int[]{8, 9}) && this.states[19] == 'C') {
+                    } else if (this.isAllFree(new int[]{8, 9}) && this.states[19] == 'C' && this.states[20] == 'C') {
                         newStates.add(9);
-                    } else if (this.isAllFree(new int[]{8}) && this.states[9] == 'C') {
+                    } else if (this.isAllFree(new int[]{8}) && this.states[9] == 'C' && this.states[19] == 'C' && this.states[20] == 'C') {
                         newStates.add(8);
                     }
                 }else {
@@ -470,9 +551,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(22);
                     } else if (this.isAllFree(new int[]{10, 11, 12, 21}) && this.states[22] == 'D') {
                         newStates.add(21);
-                    } else if (this.isAllFree(new int[]{10, 11, 12}) && this.states[21] == 'D') {
+                    } else if (this.isAllFree(new int[]{10, 11, 12}) && this.states[21] == 'D'  && this.states[22] == 'D') {
                         newStates.add(12);
-                    } else if (this.isAllFree(new int[]{10, 11}) && this.states[12] == 'D') {
+                    } else if (this.isAllFree(new int[]{10, 11}) && this.states[12] == 'D' && this.states[21] == 'D'  && this.states[22] == 'D') {
                         newStates.add(11);
                     }
                 }else {
@@ -494,9 +575,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(16);
                     } else if (this.isAllFree(new int[]{7, 4, 2, 3, 15}) && this.states[16] == 'A') {
                         newStates.add(15);
-                    } else if (this.isAllFree(new int[]{7, 4, 2, 3}) && this.states[15] == 'A') {
+                    } else if (this.isAllFree(new int[]{7, 4, 2, 3}) && this.states[15] == 'A' && this.states[16] == 'A') {
                         newStates.add(3);
-                    } else if (this.isAllFree(new int[]{7, 4, 2}) && this.states[3] == 'A') {
+                    } else if (this.isAllFree(new int[]{7, 4, 2}) && this.states[3] == 'A' && this.states[15] == 'A' && this.states[16] == 'A') {
                         newStates.add(2);
                     }
                 }else {
@@ -512,9 +593,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(18);
                     } else if (this.isAllFree(new int[]{7, 5, 6, 17}) && this.states[18] == 'B') {
                         newStates.add(17);
-                    } else if (this.isAllFree(new int[]{7, 5, 6}) && this.states[17] == 'B') {
+                    } else if (this.isAllFree(new int[]{7, 5, 6}) && this.states[17] == 'B' && this.states[18] == 'B') {
                         newStates.add(6);
-                    } else if (this.isAllFree(new int[]{7, 5}) && this.states[6] == 'B') {
+                    } else if (this.isAllFree(new int[]{7, 5}) && this.states[6] == 'B' && this.states[17] == 'B' && this.states[18] == 'B') {
                         newStates.add(5);
                     }
                 }else {
@@ -530,9 +611,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(20);
                     } else if (this.isAllFree(new int[]{8, 9, 19}) && this.states[20] == 'C') {
                         newStates.add(19);
-                    } else if (this.isAllFree(new int[]{8, 9}) && this.states[19] == 'C') {
+                    } else if (this.isAllFree(new int[]{8, 9}) && this.states[19] == 'C' && this.states[20] == 'C') {
                         newStates.add(9);
-                    } else if (this.isAllFree(new int[]{8}) && this.states[9] == 'C') {
+                    } else if (this.isAllFree(new int[]{8}) && this.states[9] == 'C' && this.states[19] == 'C' && this.states[20] == 'C') {
                         newStates.add(8);
                     }
                 }else {
@@ -548,9 +629,9 @@ public class Day23State implements Comparable<Day23State> {
                         newStates.add(22);
                     } else if (this.isAllFree(new int[]{11,12, 21}) && this.states[22] == 'D') {
                         newStates.add(21);
-                    } else if (this.isAllFree(new int[]{11,12}) && this.states[21] == 'D') {
+                    } else if (this.isAllFree(new int[]{11,12}) && this.states[21] == 'D' && this.states[22] == 'D') {
                         newStates.add(12);
-                    } else if (this.isAllFree(new int[]{11}) && this.states[12] == 'D') {
+                    } else if (this.isAllFree(new int[]{11}) && this.states[12] == 'D' && this.states[21] == 'D' && this.states[22] == 'D') {
                         newStates.add(11);
                     }
                 }else {
@@ -573,9 +654,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(16);
                         } else if (this.isAllFree(new int[]{10, 7, 4, 2, 3, 15}) && this.states[16] == 'A') {
                             newStates.add(15);
-                        } else if (this.isAllFree(new int[]{10, 7, 4, 2, 3}) && this.states[15] == 'A') {
+                        } else if (this.isAllFree(new int[]{10, 7, 4, 2, 3}) && this.states[15] == 'A' && this.states[16] == 'A') {
                             newStates.add(3);
-                        } else if (this.isAllFree(new int[]{10, 7, 4, 2}) && this.states[3] == 'A') {
+                        } else if (this.isAllFree(new int[]{10, 7, 4, 2}) && this.states[3] == 'A' && this.states[15] == 'A' && this.states[16] == 'A') {
                             newStates.add(2);
                         }
                     }else {
@@ -591,9 +672,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(18);
                         } else if (this.isAllFree(new int[]{10, 7, 5, 6, 17}) && this.states[18] == 'B') {
                             newStates.add(17);
-                        } else if (this.isAllFree(new int[]{10, 7, 5, 6}) && this.states[17] == 'B') {
+                        } else if (this.isAllFree(new int[]{10, 7, 5, 6}) && this.states[17] == 'B' && this.states[18] == 'B') {
                             newStates.add(6);
-                        } else if (this.isAllFree(new int[]{10, 7, 5}) && this.states[6] == 'B') {
+                        } else if (this.isAllFree(new int[]{10, 7, 5}) && this.states[6] == 'B' && this.states[17] == 'B' && this.states[18] == 'B') {
                             newStates.add(5);
                         }
                     }else {
@@ -609,9 +690,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(20);
                         } else if (this.isAllFree(new int[]{10, 8, 9, 19}) && this.states[20] == 'C') {
                             newStates.add(19);
-                        } else if (this.isAllFree(new int[]{10, 8, 9}) && this.states[19] == 'C') {
+                        } else if (this.isAllFree(new int[]{10, 8, 9}) && this.states[19] == 'C' && this.states[20] == 'C') {
                             newStates.add(9);
-                        } else if (this.isAllFree(new int[]{10, 8}) && this.states[9] == 'C') {
+                        } else if (this.isAllFree(new int[]{10, 8}) && this.states[9] == 'C' && this.states[19] == 'C' && this.states[20] == 'C') {
                             newStates.add(8);
                         }
                     }else {
@@ -628,9 +709,9 @@ public class Day23State implements Comparable<Day23State> {
                             newStates.add(22);
                         } else if (this.isAllFree(new int[]{11,12, 21}) && this.states[22] == 'D') {
                             newStates.add(21);
-                        } else if (this.isAllFree(new int[]{11,12}) && this.states[21] == 'D') {
+                        } else if (this.isAllFree(new int[]{11,12}) && this.states[21] == 'D'&& this.states[22] == 'D') {
                             newStates.add(12);
-                        } else if (this.isAllFree(new int[]{11}) && this.states[12] == 'D') {
+                        } else if (this.isAllFree(new int[]{11}) && this.states[12] == 'D' && this.states[21] == 'D' && this.states[22] == 'D') {
                             newStates.add(11);
                         }
                     }else {
@@ -649,7 +730,7 @@ public class Day23State implements Comparable<Day23State> {
 
         //Moving from column to hallway
         }else if(currentState == 2 || currentState == 3 || currentState == 15 || currentState == 16) {
-            if(this.isLeavingHallwayFree(currentState)) {
+            if(this.canWeMoveIntoTheHallway(currentState)) {
 
                 if (this.isAllFree(new int[]{1, 0})) {
                     newStates.add(0);
@@ -675,7 +756,7 @@ public class Day23State implements Comparable<Day23State> {
             }
 
         }else if(currentState == 5 || currentState == 6 || currentState == 17 || currentState == 18) {
-            if(this.isLeavingHallwayFree(currentState)) {
+            if(this.canWeMoveIntoTheHallway(currentState)) {
 
                 if (this.isAllFree(new int[]{4, 1, 0})) {
                     newStates.add(0);
@@ -701,7 +782,7 @@ public class Day23State implements Comparable<Day23State> {
             }
 
         }else if(currentState == 8 || currentState == 9 || currentState == 19 || currentState == 20) {
-            if(this.isLeavingHallwayFree(currentState)) {
+            if(this.canWeMoveIntoTheHallway(currentState)) {
                 if (this.isAllFree(new int[]{7, 4, 1, 0})) {
                     newStates.add(0);
                 }
@@ -726,7 +807,7 @@ public class Day23State implements Comparable<Day23State> {
             }
 
         }else if(currentState == 11 || currentState == 12 || currentState == 21 || currentState == 22) {
-            if(this.isLeavingHallwayFree(currentState)) {
+            if(this.canWeMoveIntoTheHallway(currentState)) {
                 if (this.isAllFree(new int[]{10, 7, 4, 1, 0})) {
                     newStates.add(0);
                 }
@@ -757,6 +838,12 @@ public class Day23State implements Comparable<Day23State> {
         return newStates;
     }
 
+    /**
+     * Helper function to get the energy from moving from start to the end
+     * @param start Start position
+     * @param end End position
+     * @return Energy to move between those two locations
+     */
     public int getEnergyForMove(int start, int end) {
         int additionalVal = 0;
 
