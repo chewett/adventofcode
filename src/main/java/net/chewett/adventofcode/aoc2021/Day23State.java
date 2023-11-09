@@ -506,297 +506,238 @@ public class Day23State implements Comparable<Day23State> {
     }
 
     public int getEnergyForMove(int start, int end) {
+        int additionalVal = 0;
+
+        if(start == 3) {
+            start = 2;
+            additionalVal += 1;
+        }
+        if(start == 6) {
+            start = 5;
+            additionalVal += 1;
+        }
+        if(start == 9) {
+            start = 8;
+            additionalVal += 1;
+        }
+        if(start == 12) {
+            start = 11;
+            additionalVal += 1;
+        }
+
         if(start == 0) {
             if(end == 2) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 3) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 5) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 6) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 8) {
-                return 7;
+                return additionalVal + 7;
             }else if(end == 9) {
-                return 8;
+                return additionalVal + 8;
             }else if(end == 11) {
-                return 9;
+                return additionalVal + 9;
             }else if(end == 12) {
-                return 10;
+                return additionalVal + 10;
 
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 1) {
             if(end == 2) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 3) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 5) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 6) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 8) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 9) {
-                return 7;
+                return additionalVal + 7;
             }else if(end == 11) {
-                return 8;
+                return additionalVal + 8;
             }else if(end == 12) {
-                return 9;
+                return additionalVal + 9;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 4) {
             if(end == 2) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 3) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 5) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 6) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 8) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 9) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 11) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 12) {
-                return 7;
+                return additionalVal + 7;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 7) {
             if(end == 2) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 3) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 5) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 6) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 8) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 9) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 11) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 12) {
-                return 5;
+                return additionalVal + 5;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 10) {
             if(end == 2) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 3) {
-                return 7;
+                return additionalVal + 7;
             }else if(end == 5) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 6) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 8) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 9) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 11) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 12) {
-                return 3;
+                return additionalVal + 3;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 13) {
             if(end == 2) {
-                return 8;
+                return additionalVal + 8;
             }else if(end == 3) {
-                return 9;
+                return additionalVal + 9;
             }else if(end == 5) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 6) {
-                return 7;
+                return additionalVal + 7;
             }else if(end == 8) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 9) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 11) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 12) {
-                return 3;
+                return additionalVal + 3;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 14) {
             if(end == 2) {
-                return 9;
+                return additionalVal + 9;
             }else if(end == 3) {
-                return 10;
+                return additionalVal + 10;
             }else if(end == 5) {
-                return 7;
+                return additionalVal + 7;
             }else if(end == 6) {
-                return 8;
+                return additionalVal + 8;
             }else if(end == 8) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 9) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 11) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 12) {
-                return 4;
+                return additionalVal + 4;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
         }else if(start == 2) {
             if(end == 0) {
-                return 3;
+                return additionalVal + 3;
             }else if(end == 1) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 4) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 7) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 10) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 13) {
-                return 8;
+                return additionalVal + 8;
             }else if(end == 14) {
-                return 9;
-            }else{
-                throw new RuntimeException("Found a bad state...");
-            }
-
-
-        }else if(start == 3) {
-            if(end == 0) {
-                return 4;
-            }else if(end == 1) {
-                return 3;
-            }else if(end == 4) {
-                return 3;
-            }else if(end == 7) {
-                return 5;
-            }else if(end == 10) {
-                return 7;
-            }else if(end == 13) {
-                return 9;
-            }else if(end == 14) {
-                return 10;
+                return additionalVal + 9;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
 
         }else if(start == 5) {
             if(end == 0) {
-                return 5;
+                return additionalVal + 5;
             }else if(end == 1) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 4) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 7) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 10) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 13) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 14) {
-                return 7;
-            }else{
-                throw new RuntimeException("Found a bad state...");
-            }
-
-        }else if(start == 6) {
-            if(end == 0) {
-                return 6;
-            }else if(end == 1) {
-                return 5;
-            }else if(end == 4) {
-                return 3;
-            }else if(end == 7) {
-                return 3;
-            }else if(end == 10) {
-                return 5;
-            }else if(end == 13) {
-                return 7;
-            }else if(end == 14) {
-                return 8;
+                return additionalVal + 7;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
 
         }else if(start == 8) {
             if(end == 0) {
-                return 7;
+                return additionalVal + 7;
             }else if(end == 1) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 4) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 7) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 10) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 13) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 14) {
-                return 5;
-            }else{
-                throw new RuntimeException("Found a bad state...");
-            }
-
-
-        }else if(start == 9) {
-            if(end == 0) {
-                return 8;
-            }else if(end == 1) {
-                return 7;
-            }else if(end == 4) {
-                return 5;
-            }else if(end == 7) {
-                return 3;
-            }else if(end == 10) {
-                return 3;
-            }else if(end == 13) {
-                return 5;
-            }else if(end == 14) {
-                return 6;
+                return additionalVal + 5;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
 
         }else if(start == 11) {
             if(end == 0) {
-                return 9;
+                return additionalVal + 9;
             }else if(end == 1) {
-                return 8;
+                return additionalVal + 8;
             }else if(end == 4) {
-                return 6;
+                return additionalVal + 6;
             }else if(end == 7) {
-                return 4;
+                return additionalVal + 4;
             }else if(end == 10) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 13) {
-                return 2;
+                return additionalVal + 2;
             }else if(end == 14) {
-                return 3;
-            }else{
-                throw new RuntimeException("Found a bad state...");
-            }
-
-        }else if(start == 12) {
-            if(end == 0) {
-                return 10;
-            }else if(end == 1) {
-                return 9;
-            }else if(end == 4) {
-                return 7;
-            }else if(end == 7) {
-                return 5;
-            }else if(end == 10) {
-                return 3;
-            }else if(end == 13) {
-                return 3;
-            }else if(end == 14) {
-                return 4;
+                return additionalVal + 3;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
