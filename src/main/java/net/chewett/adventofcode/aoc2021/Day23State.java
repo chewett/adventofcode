@@ -1,10 +1,6 @@
 package net.chewett.adventofcode.aoc2021;
 
-import net.chewett.adventofcode.aoc2020.problems.Day23;
-
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Day23State implements Comparable<Day23State> {
@@ -115,12 +111,74 @@ public class Day23State implements Comparable<Day23State> {
 
     public boolean isLeavingHallwayFree(int curPos) {
         boolean allFree = true;
-        if(curPos == 2 || curPos == 5 || curPos == 8 || curPos == 11) {
-            return true;
+        char curChar = this.states[curPos];
+
+        //Handle not moving out of the good place
+        if(curChar == 'A') {
+            if(this.extended) {
+                if (curPos == 16) {
+                    allFree = false;
+                }
+                if (curPos == 15 && this.states[16] == 'A') {
+                    allFree = false;
+                }
+            }
+            if(curPos == 3 && (!this.extended || (this.states[16] == 'A' && this.states[15] == 'A'))) {
+                allFree = false;
+            }
+            if(curPos == 2 && (!this.extended || (this.states[16] == 'A' && this.states[15] == 'A')) && this.states[3] == 'A') {
+                allFree = false;
+            }
+        }else if(curChar == 'B') {
+            if(this.extended) {
+                if (curPos == 18) {
+                    allFree = false;
+                }
+                if (curPos == 17 && this.states[18] == 'B') {
+                    allFree = false;
+                }
+            }
+            if(curPos == 6 && (!this.extended || (this.states[18] == 'B' && this.states[17] == 'B'))) {
+                allFree = false;
+            }
+            if(curPos == 5 && (!this.extended || (this.states[18] == 'B' && this.states[17] == 'B')) && this.states[6] == 'B') {
+                allFree = false;
+            }
+        }else if(curChar == 'C') {
+            if(this.extended) {
+                if (curPos == 20) {
+                    allFree = false;
+                }
+                if (curPos == 19 && this.states[20] == 'C') {
+                    allFree = false;
+                }
+            }
+            if(curPos == 9 && (!this.extended || (this.states[20] == 'C' && this.states[19] == 'C'))) {
+                allFree = false;
+            }
+            if(curPos == 8 && (!this.extended || (this.states[20] == 'C' && this.states[19] == 'C')) && this.states[9] == 'C') {
+                allFree = false;
+            }
+        }else if(curChar == 'D') {
+            if(this.extended) {
+                if (curPos == 22) {
+                    allFree = false;
+                }
+                if (curPos == 21 && this.states[22] == 'D') {
+                    allFree = false;
+                }
+            }
+            if(curPos == 12 && (!this.extended || (this.states[22] == 'D' && this.states[21] == 'D'))) {
+                allFree = false;
+            }
+            if(curPos == 11 && (!this.extended || (this.states[22] == 'D' && this.states[21] == 'D')) && this.states[12] == 'D') {
+                allFree = false;
+            }
         }
 
+
         if(curPos == 3 || curPos == 15 || curPos == 16) {
-            allFree = this.states[2] == '0';
+            allFree = allFree && this.states[2] == '0';
             if(curPos > 3) {
                 allFree = allFree && this.states[3] == '0';
             }
@@ -130,7 +188,7 @@ public class Day23State implements Comparable<Day23State> {
         }
 
         if(curPos == 6 || curPos == 17 || curPos == 18) {
-            allFree = this.states[5] == '0';
+            allFree = allFree && this.states[5] == '0';
             if(curPos > 6) {
                 allFree = allFree && this.states[6] == '0';
             }
@@ -140,7 +198,7 @@ public class Day23State implements Comparable<Day23State> {
         }
 
         if(curPos == 9 || curPos == 19 || curPos == 20) {
-            allFree = this.states[8] == '0';
+            allFree = allFree && this.states[8] == '0';
             if(curPos > 9) {
                 allFree = allFree && this.states[9] == '0';
             }
@@ -150,7 +208,7 @@ public class Day23State implements Comparable<Day23State> {
         }
 
         if(curPos == 12 || curPos == 21 || curPos == 22) {
-            allFree = this.states[11] == '0';
+            allFree = allFree && this.states[11] == '0';
             if(curPos > 12) {
                 allFree = allFree && this.states[12] == '0';
             }
@@ -358,9 +416,9 @@ public class Day23State implements Comparable<Day23State> {
                     } else if (this.isAllFree(new int[]{4, 2, 3, 15}) && this.states[16] == 'A') {
                         newStates.add(15);
                     } else if (this.isAllFree(new int[]{4, 2, 3}) && this.states[15] == 'A') {
-                        newStates.add(15);
+                        newStates.add(3);
                     } else if (this.isAllFree(new int[]{4, 2}) && this.states[3] == 'A') {
-                        newStates.add(15);
+                        newStates.add(2);
                     }
                 }else {
                     if (this.isAllFree(new int[]{4, 2, 3})) {
@@ -437,9 +495,9 @@ public class Day23State implements Comparable<Day23State> {
                     } else if (this.isAllFree(new int[]{7, 4, 2, 3, 15}) && this.states[16] == 'A') {
                         newStates.add(15);
                     } else if (this.isAllFree(new int[]{7, 4, 2, 3}) && this.states[15] == 'A') {
-                        newStates.add(15);
+                        newStates.add(3);
                     } else if (this.isAllFree(new int[]{7, 4, 2}) && this.states[3] == 'A') {
-                        newStates.add(15);
+                        newStates.add(2);
                     }
                 }else {
                     if (this.isAllFree(new int[]{7, 4, 2, 3})) {
@@ -516,9 +574,9 @@ public class Day23State implements Comparable<Day23State> {
                         } else if (this.isAllFree(new int[]{10, 7, 4, 2, 3, 15}) && this.states[16] == 'A') {
                             newStates.add(15);
                         } else if (this.isAllFree(new int[]{10, 7, 4, 2, 3}) && this.states[15] == 'A') {
-                            newStates.add(15);
+                            newStates.add(3);
                         } else if (this.isAllFree(new int[]{10, 7, 4, 2}) && this.states[3] == 'A') {
-                            newStates.add(15);
+                            newStates.add(2);
                         }
                     }else {
                         if (this.isAllFree(new int[]{10, 7, 4, 2, 3})) {
@@ -647,7 +705,7 @@ public class Day23State implements Comparable<Day23State> {
                 if (this.isAllFree(new int[]{7, 4, 1, 0})) {
                     newStates.add(0);
                 }
-                if (this.isAllFree(new int[]{7, 5, 4, 1})) {
+                if (this.isAllFree(new int[]{7, 4, 1})) {
                     newStates.add(1);
                 }
                 if (this.isAllFree(new int[]{7, 4})) {
@@ -672,7 +730,7 @@ public class Day23State implements Comparable<Day23State> {
                 if (this.isAllFree(new int[]{10, 7, 4, 1, 0})) {
                     newStates.add(0);
                 }
-                if (this.isAllFree(new int[]{10, 7, 5, 4, 1})) {
+                if (this.isAllFree(new int[]{10, 7, 4, 1})) {
                     newStates.add(1);
                 }
                 if (this.isAllFree(new int[]{10, 7, 4})) {
