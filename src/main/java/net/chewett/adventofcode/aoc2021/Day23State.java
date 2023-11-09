@@ -508,6 +508,10 @@ public class Day23State implements Comparable<Day23State> {
     public int getEnergyForMove(int start, int end) {
         int additionalVal = 0;
 
+        if(start == 0) {
+            start = 1;
+            additionalVal++;
+        }
         if(start == 3) {
             start = 2;
             additionalVal++;
@@ -522,6 +526,15 @@ public class Day23State implements Comparable<Day23State> {
         }
         if(start == 12) {
             start = 11;
+            additionalVal++;
+        }
+        if(start == 14) {
+            start = 13;
+            additionalVal++;
+        }
+
+        if(end == 0) {
+            end = 1;
             additionalVal++;
         }
         if(end == 3) {
@@ -540,22 +553,13 @@ public class Day23State implements Comparable<Day23State> {
             end = 11;
             additionalVal++;
         }
+        if(end == 14) {
+            end = 13;
+            additionalVal++;
+        }
 
 
-        if(start == 0) {
-            if(end == 2) {
-                return additionalVal + 3;
-            }else if(end == 5) {
-                return additionalVal + 5;
-            }else if(end == 8) {
-                return additionalVal + 7;
-            }else if(end == 11) {
-                return additionalVal + 9;
-
-            }else{
-                throw new RuntimeException("Found a bad state...");
-            }
-        }else if(start == 1) {
+        if(start == 1) {
             if(end == 2) {
                 return additionalVal + 2;
             }else if(end == 5) {
@@ -615,22 +619,8 @@ public class Day23State implements Comparable<Day23State> {
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
-        }else if(start == 14) {
-            if(end == 2) {
-                return additionalVal + 9;
-            }else if(end == 5) {
-                return additionalVal + 7;
-            }else if(end == 8) {
-                return additionalVal + 5;
-            }else if(end == 11) {
-                return additionalVal + 3;
-            }else{
-                throw new RuntimeException("Found a bad state...");
-            }
         }else if(start == 2) {
-            if(end == 0) {
-                return additionalVal + 3;
-            }else if(end == 1) {
+            if(end == 1) {
                 return additionalVal + 2;
             }else if(end == 4) {
                 return additionalVal + 2;
@@ -640,16 +630,12 @@ public class Day23State implements Comparable<Day23State> {
                 return additionalVal + 6;
             }else if(end == 13) {
                 return additionalVal + 8;
-            }else if(end == 14) {
-                return additionalVal + 9;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
 
         }else if(start == 5) {
-            if(end == 0) {
-                return additionalVal + 5;
-            }else if(end == 1) {
+            if(end == 1) {
                 return additionalVal + 4;
             }else if(end == 4) {
                 return additionalVal + 2;
@@ -659,16 +645,12 @@ public class Day23State implements Comparable<Day23State> {
                 return additionalVal + 4;
             }else if(end == 13) {
                 return additionalVal + 6;
-            }else if(end == 14) {
-                return additionalVal + 7;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
 
         }else if(start == 8) {
-            if(end == 0) {
-                return additionalVal + 7;
-            }else if(end == 1) {
+            if(end == 1) {
                 return additionalVal + 6;
             }else if(end == 4) {
                 return additionalVal + 4;
@@ -678,16 +660,12 @@ public class Day23State implements Comparable<Day23State> {
                 return additionalVal + 2;
             }else if(end == 13) {
                 return additionalVal + 4;
-            }else if(end == 14) {
-                return additionalVal + 5;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
 
         }else if(start == 11) {
-            if(end == 0) {
-                return additionalVal + 9;
-            }else if(end == 1) {
+            if(end == 1) {
                 return additionalVal + 8;
             }else if(end == 4) {
                 return additionalVal + 6;
@@ -697,8 +675,6 @@ public class Day23State implements Comparable<Day23State> {
                 return additionalVal + 2;
             }else if(end == 13) {
                 return additionalVal + 2;
-            }else if(end == 14) {
-                return additionalVal + 3;
             }else{
                 throw new RuntimeException("Found a bad state...");
             }
