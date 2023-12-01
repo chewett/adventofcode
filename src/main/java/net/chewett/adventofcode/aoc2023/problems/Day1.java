@@ -94,29 +94,46 @@ public class Day1 {
         return this.findCalibration(lines);
     }
 
-    private String transformWordsToNumbers(String calibrationLine) {
+    private String transformWordsToNumbers(String calibrationLine, boolean reverse) {
 
         Map<String, String> replacements = new HashMap<>();
-        replacements.put("one", "1");
-        replacements.put("two", "2");
-        replacements.put("three", "3");
-        replacements.put("four", "4");
-        replacements.put("five", "5");
-        replacements.put("six", "6");
-        replacements.put("seven", "7");
-        replacements.put("eight", "8");
-        replacements.put("nine", "9");
+        if(reverse) {
+            replacements.put("eno", "1");
+            replacements.put("owt", "2");
+            replacements.put("eerht", "3");
+            replacements.put("ruof", "4");
+            replacements.put("evif", "5");
+            replacements.put("xis", "6");
+            replacements.put("neves", "7");
+            replacements.put("thgie", "8");
+            replacements.put("enin", "9");
+        }else {
+            replacements.put("one", "1");
+            replacements.put("two", "2");
+            replacements.put("three", "3");
+            replacements.put("four", "4");
+            replacements.put("five", "5");
+            replacements.put("six", "6");
+            replacements.put("seven", "7");
+            replacements.put("eight", "8");
+            replacements.put("nine", "9");
+        }
+
+        String realCalibrationLine = calibrationLine;
+        if(reverse) {
+            realCalibrationLine = new StringBuilder(calibrationLine).reverse().toString();
+        }
 
         StringBuilder trueString = new StringBuilder();
 
         //Loop over the position one by one
-        for(int pos = 0; pos < calibrationLine.length(); pos++) {
-            int strLeft = calibrationLine.length() - pos;
+        for(int pos = 0; pos < realCalibrationLine.length(); pos++) {
+            int strLeft = realCalibrationLine.length() - pos;
 
             //And then see if any of the replacements are at the position, if so replace it and move foward
             boolean foundReplacement = false;
             for(Map.Entry<String, String> replacement : replacements.entrySet()) {
-                if(strLeft >= replacement.getKey().length() && calibrationLine.startsWith(replacement.getKey(), pos)) {
+                if(strLeft >= replacement.getKey().length() && realCalibrationLine.startsWith(replacement.getKey(), pos)) {
                     foundReplacement = true;
                     trueString.append(replacement.getValue());
                     //Need to move forward length -1 as we always move forward +1 each time
@@ -126,7 +143,7 @@ public class Day1 {
             }
 
             if(!foundReplacement) {
-                trueString.append(calibrationLine.charAt(pos));
+                trueString.append(realCalibrationLine.charAt(pos));
             }
         }
         return trueString.toString();
@@ -135,44 +152,8 @@ public class Day1 {
     public long solvePartTwo(List<String> lines) {
         long total = 0;
         for(String line : lines) {
-            String forwardString = this.transformWordsToNumbers(line);
-
-            String backwardString = "";
-
-            for(int pos = line.length()-1; pos >= 0; pos--) {
-                int strLeft = 100;
-
-                if (strLeft >= 3 && line.startsWith("one", pos)) {
-                    backwardString = "1" + backwardString;
-                    pos -= 2;
-                } else if (strLeft >= 3 && line.startsWith("two", pos)) {
-                    backwardString = "2"+ backwardString;
-                    pos -= 2;
-                } else if (strLeft >= 5 && line.startsWith("three", pos)) {
-                    backwardString = "3"+ backwardString;
-                    pos -= 4;
-                } else if (strLeft >= 4 && line.startsWith("four", pos)) {
-                    backwardString = "4"+ backwardString;
-                    pos -= 3;
-                } else if (strLeft >= 4 && line.startsWith("five", pos)) {
-                    backwardString = "5"+ backwardString;
-                    pos -= 3;
-                } else if (strLeft >= 3 && line.startsWith("six", pos)) {
-                    backwardString = "6"+ backwardString;
-                    pos -= 2;
-                } else if (strLeft >= 5 && line.startsWith("seven", pos)) {
-                    backwardString = "7"+ backwardString;
-                    pos -= 4;
-                } else if (strLeft >= 5 && line.startsWith("eight", pos)) {
-                    backwardString = "8"+ backwardString;
-                    pos -= 4;
-                } else if (strLeft >= 4 && line.startsWith("nine", pos)) {
-                    backwardString = "9"+ backwardString;
-                    pos -= 3;
-                } else {
-                    backwardString = line.charAt(pos) + backwardString;
-                }
-            }
+            String forwardString = this.transformWordsToNumbers(line, false);
+            String backwardString = this.transformWordsToNumbers(line, true);
 
             String val = "";
             for(int i = 0; i < forwardString.length(); i++) {
@@ -182,7 +163,7 @@ public class Day1 {
                 }
             }
 
-            for(int i = backwardString.length() -1; i >= 0; i--) {
+            for(int i = 0; i < backwardString.length(); i++) {
                 if(Character.isDigit(backwardString.charAt(i))) {
                     val += backwardString.charAt(i);
                     break;
