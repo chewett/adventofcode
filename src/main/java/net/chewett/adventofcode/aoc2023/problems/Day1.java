@@ -157,11 +157,14 @@ public class Day1 {
     public long solvePartTwo(List<String> lines) {
         long total = 0;
         for(String line : lines) {
+            //Convert the strings backward and forward into all digits
+            //This is pretty heavyweight because actually you only need first and last but meh!
             String[] forwardBackwardStrings = {
                 this.transformWordsToNumbers(line, false),
                 this.transformWordsToNumbers(line, true)
             };
 
+            //Then loop over both of the forward and backward strings and find the first char
             StringBuilder val = new StringBuilder();
             for(String str : forwardBackwardStrings) {
                 for(int i = 0; i < str.length(); i++) {
