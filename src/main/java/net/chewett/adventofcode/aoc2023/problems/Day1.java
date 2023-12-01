@@ -183,10 +183,10 @@ public class Day1 {
 
         Day1 d = new Day1();
         long partOne = d.solvePartOne(lines);
-        System.out.println("" + partOne);
+        System.out.println("The calibration code for this is " + partOne);
 
         long partTwo = d.solvePartTwo(lines);
-        System.out.println("" + partTwo);
+        System.out.println("The real calibration code total is " + partTwo);
     }
 }
 
