@@ -2,9 +2,7 @@ package net.chewett.adventofcode.aoc2023.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -97,43 +95,41 @@ public class Day1 {
     }
 
     private String transformWordsToNumbers(String calibrationLine) {
-         String trueString = "";
 
+        Map<String, String> replacements = new HashMap<>();
+        replacements.put("one", "1");
+        replacements.put("two", "2");
+        replacements.put("three", "3");
+        replacements.put("four", "4");
+        replacements.put("five", "5");
+        replacements.put("six", "6");
+        replacements.put("seven", "7");
+        replacements.put("eight", "8");
+        replacements.put("nine", "9");
+
+        StringBuilder trueString = new StringBuilder();
+
+        //Loop over the position one by one
         for(int pos = 0; pos < calibrationLine.length(); pos++) {
             int strLeft = calibrationLine.length() - pos;
 
-            if(strLeft >= 3 && calibrationLine.startsWith("one", pos)) {
-                trueString += "1";
-                pos += 2;
-            }else if(strLeft >= 3 && calibrationLine.startsWith("two", pos)) {
-                trueString += "2";
-                pos += 2;
-            }else if(strLeft >= 5 && calibrationLine.startsWith("three", pos)) {
-                trueString += "3";
-                pos += 4;
-            }else if(strLeft >= 4 && calibrationLine.startsWith("four", pos)) {
-                trueString += "4";
-                pos += 3;
-            }else if(strLeft >= 4 && calibrationLine.startsWith("five", pos)) {
-                trueString += "5";
-                pos += 3;
-            }else if(strLeft >= 3 && calibrationLine.startsWith("six", pos)) {
-                trueString += "6";
-                pos += 2;
-            }else if(strLeft >= 5 && calibrationLine.startsWith("seven", pos)) {
-                trueString += "7";
-                pos += 4;
-            }else if(strLeft >= 5 && calibrationLine.startsWith("eight", pos)) {
-                trueString += "8";
-                pos += 4;
-            }else if(strLeft >= 4 && calibrationLine.startsWith("nine", pos)) {
-                trueString += "9";
-                pos += 3;
-            }else{
-                trueString += calibrationLine.charAt(pos);
+            //And then see if any of the replacements are at the position, if so replace it and move foward
+            boolean foundReplacement = false;
+            for(Map.Entry<String, String> replacement : replacements.entrySet()) {
+                if(strLeft >= replacement.getKey().length() && calibrationLine.startsWith(replacement.getKey(), pos)) {
+                    foundReplacement = true;
+                    trueString.append(replacement.getValue());
+                    //Need to move forward length -1 as we always move forward +1 each time
+                    pos += replacement.getKey().length() - 1;
+                    break;
+                }
+            }
+
+            if(!foundReplacement) {
+                trueString.append(calibrationLine.charAt(pos));
             }
         }
-        return trueString;
+        return trueString.toString();
     }
 
     public long solvePartTwo(List<String> lines) {
