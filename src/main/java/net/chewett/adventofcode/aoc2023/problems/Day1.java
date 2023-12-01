@@ -149,30 +149,30 @@ public class Day1 {
         return trueString.toString();
     }
 
+    /**
+     * Solves part two where strings are also considered rather than just numbers
+     * @param lines Lines of calibration numbers
+     * @return The sum total of all calibration numbers
+     */
     public long solvePartTwo(List<String> lines) {
         long total = 0;
         for(String line : lines) {
-            String forwardString = this.transformWordsToNumbers(line, false);
-            String backwardString = this.transformWordsToNumbers(line, true);
+            String[] forwardBackwardStrings = {
+                this.transformWordsToNumbers(line, false),
+                this.transformWordsToNumbers(line, true)
+            };
 
-            String val = "";
-            for(int i = 0; i < forwardString.length(); i++) {
-                if(Character.isDigit(forwardString.charAt(i))) {
-                    val += forwardString.charAt(i);
-                    break;
+            StringBuilder val = new StringBuilder();
+            for(String str : forwardBackwardStrings) {
+                for(int i = 0; i < str.length(); i++) {
+                    if(Character.isDigit(str.charAt(i))) {
+                        val.append(str.charAt(i));
+                        break;
+                    }
                 }
             }
 
-            for(int i = 0; i < backwardString.length(); i++) {
-                if(Character.isDigit(backwardString.charAt(i))) {
-                    val += backwardString.charAt(i);
-                    break;
-                }
-            }
-
-            total += Integer.parseInt(val);
-
-
+            total += Integer.parseInt(val.toString());
         }
 
         return total;
