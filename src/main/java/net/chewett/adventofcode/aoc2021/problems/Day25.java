@@ -361,7 +361,7 @@ public class Day25 {
     }
 
     public static void main(String[] args) {
-        Discrete2DPositionGrid<Character> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionGridCharacter(2021, 25);
+        Discrete2DPositionGrid<Character> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionCharacterGrid(2021, 25);
 
         Day25 d = new Day25();
         System.out.println("The number of steps to wait for the sea cucumbers to finish is " + d.solvePartOne(grid));

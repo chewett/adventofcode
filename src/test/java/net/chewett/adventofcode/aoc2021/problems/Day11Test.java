@@ -49,7 +49,7 @@ public class Day11Test {
      */
     @Test
     public void testRealPartOne() {
-        Discrete2DPositionGrid<Integer> octopi = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 11);
+        Discrete2DPositionGrid<Integer> octopi = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 11);
         Day11 d = new Day11();
         Assertions.assertEquals(1725, d.solvePartOne(octopi));
     }
@@ -69,7 +69,7 @@ public class Day11Test {
      */
     @Test
     public void testRealPartTwo() {
-        Discrete2DPositionGrid<Integer> octopi = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 11);
+        Discrete2DPositionGrid<Integer> octopi = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 11);
         Day11 d = new Day11();
         Assertions.assertEquals(308, d.solvePartTwo(octopi));
     }

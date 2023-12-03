@@ -47,7 +47,7 @@ public class Day24Test {
      */
     @Test
     public void testRealPartOne() {
-        Discrete2DPositionGrid<Character> input = ProblemLoader.loadProblemIntoDiscrete2DPositionGridCharacter(2022, 24);
+        Discrete2DPositionGrid<Character> input = ProblemLoader.loadProblemIntoDiscrete2DPositionCharacterGrid(2022, 24);
         Day24 d = new Day24();
         Assertions.assertEquals(301, d.solvePartOne(input));
     }
@@ -67,7 +67,7 @@ public class Day24Test {
      */
     @Test
     public void testRealPartTwo() {
-        Discrete2DPositionGrid<Character> input = ProblemLoader.loadProblemIntoDiscrete2DPositionGridCharacter(2022, 24);
+        Discrete2DPositionGrid<Character> input = ProblemLoader.loadProblemIntoDiscrete2DPositionCharacterGrid(2022, 24);
         Day24 d = new Day24();
         Assertions.assertEquals(859, d.solvePartTwo(input));
     }

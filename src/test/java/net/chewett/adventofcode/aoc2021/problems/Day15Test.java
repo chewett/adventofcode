@@ -50,7 +50,7 @@ public class Day15Test {
      */
     @Test
     public void testRealPartOne() {
-        Discrete2DPositionGrid<Integer> roofMap = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 15);
+        Discrete2DPositionGrid<Integer> roofMap = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 15);
         Day15 d = new Day15();
         Assertions.assertEquals(748, d.solvePartOne(roofMap));
     }
@@ -70,7 +70,7 @@ public class Day15Test {
      */
     @Test
     public void testRealPartTwo() {
-        Discrete2DPositionGrid<Integer> roofMap = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 15);
+        Discrete2DPositionGrid<Integer> roofMap = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 15);
         Day15 d = new Day15();
         Assertions.assertEquals(3045, d.solvePartTwo(roofMap));
     }

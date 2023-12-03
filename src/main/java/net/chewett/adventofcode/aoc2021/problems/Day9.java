@@ -192,7 +192,7 @@ public class Day9 {
     }
 
     public static void main(String[] args) {
-        Discrete2DPositionGrid<Integer> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 9);
+        Discrete2DPositionGrid<Integer> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 9);
 
         Day9 d = new Day9();
         long partOne = d.solvePartOne(grid);

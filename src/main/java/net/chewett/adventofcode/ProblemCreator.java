@@ -63,10 +63,11 @@ public class ProblemCreator {
         int year = 2023;
         int day = 4;
         //String type = "StringList";
-        //String type = "CharacterGrid";
         //String type = "IntList";
         //String type = "String";
-        String type = "LongList";
+        //String type = "LongList";
+        //String type = "CharacterGrid";
+        String type = "IntGrid";
 
         String curDir = System.getProperty("user.dir");
 
@@ -108,12 +109,21 @@ public class ProblemCreator {
 
         }else if(type.equals("CharacterGrid")) {
             replacements.put("type", "Discrete2DPositionGrid<Character>");
-            replacements.put("problemLoaderFunc", "loadProblemIntoDiscrete2DPositionGridCharacter");
+            replacements.put("problemLoaderFunc", "loadProblemIntoDiscrete2DPositionCharacterGrid");
             replacements.put("imports", "import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;\n" +
                     "import net.chewett.adventofcode.helpers.FormatConversion;");
             replacements.put("exampleInputStart", "List<String> input = new ArrayList<>();");
             replacements.put("exampleInputEnd", "List<List<Character>> engineSchematicArray = FormatConversion.convertStringArrayToCharListList(input);\n" +
                     "        return FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(engineSchematicArray);");
+
+        }else if(type.equals("IntGrid")) {
+            replacements.put("type", "Discrete2DPositionGrid<Integer>");
+            replacements.put("problemLoaderFunc", "loadProblemIntoDiscrete2DPositionIntegerGrid");
+            replacements.put("imports", "import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;\n" +
+                    "import net.chewett.adventofcode.helpers.FormatConversion;");
+            replacements.put("exampleInputStart", "List<String> input = new ArrayList<>();");
+            replacements.put("exampleInputEnd", "List<List<Character>> inputArr = FormatConversion.convertStringArrayToCharListList(input);\n" +
+                    "        return FormatConversion.convertCharArrayIntoDiscrete2DPositionGrid(inputArr);");
         }
 
 

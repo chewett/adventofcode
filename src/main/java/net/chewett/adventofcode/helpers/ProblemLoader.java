@@ -123,7 +123,7 @@ public class ProblemLoader {
      * @param day Day to load the problem for
      * @return Discrete2DPositionGrid representing the problem input
      */
-    public static Discrete2DPositionGrid<Integer> loadProblemIntoDiscrete2DPositionGrid(int year, int day) {
+    public static Discrete2DPositionGrid<Integer> loadProblemIntoDiscrete2DPositionIntegerGrid(int year, int day) {
         List<List<Character>> gridData = ProblemLoader.loadProblemIntoXYCharList(year, day);
         return FormatConversion.convertCharArrayIntoDiscrete2DPositionGrid(gridData);
     }
@@ -135,7 +135,7 @@ public class ProblemLoader {
      * @param day Day to load the problem for
      * @return Discrete2DPositionGrid representing the problem input
      */
-    public static Discrete2DPositionGrid<Character> loadProblemIntoDiscrete2DPositionGridCharacter(int year, int day) {
+    public static Discrete2DPositionGrid<Character> loadProblemIntoDiscrete2DPositionCharacterGrid(int year, int day) {
         List<List<Character>> gridData = ProblemLoader.loadProblemIntoXYCharList(year, day);
         return FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(gridData);
     }

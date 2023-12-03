@@ -4,7 +4,6 @@ import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -476,8 +475,8 @@ public class Day11 {
 
     public static void main(String[] args) {
         //We mutate this so we load it twice so that Part 1 doesn't affect part 2
-        Discrete2DPositionGrid<Integer> locations = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 11);
-        Discrete2DPositionGrid<Integer> locations2 = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 11);
+        Discrete2DPositionGrid<Integer> locations = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 11);
+        Discrete2DPositionGrid<Integer> locations2 = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 11);
 
         Day11 d = new Day11();
         long partOne = d.solvePartOne(locations);

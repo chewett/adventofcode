@@ -227,7 +227,7 @@ public class Day8 {
     }
 
     public static void main(String[] args) {
-        Discrete2DPositionGrid<Integer> trees = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid (2022, 8);
+        Discrete2DPositionGrid<Integer> trees = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2022, 8);
 
         Day8 d = new Day8();
         long partOne = d.solvePartOne(trees);

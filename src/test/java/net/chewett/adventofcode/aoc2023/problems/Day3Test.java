@@ -49,7 +49,7 @@ public class Day3Test {
      */
     @Test
     public void testRealPartOne() {
-        Discrete2DPositionGrid<Character> engineSchematic = ProblemLoader.loadProblemIntoDiscrete2DPositionGridCharacter(2023, 3);
+        Discrete2DPositionGrid<Character> engineSchematic = ProblemLoader.loadProblemIntoDiscrete2DPositionCharacterGrid(2023, 3);
         Day3 d = new Day3();
         Assertions.assertEquals(539637, d.solvePartOne(engineSchematic));
     }
@@ -69,7 +69,7 @@ public class Day3Test {
      */
     @Test
     public void testRealPartTwo() {
-        Discrete2DPositionGrid<Character> engineSchematic = ProblemLoader.loadProblemIntoDiscrete2DPositionGridCharacter(2023, 3);
+        Discrete2DPositionGrid<Character> engineSchematic = ProblemLoader.loadProblemIntoDiscrete2DPositionCharacterGrid(2023, 3);
         Day3 d = new Day3();
         Assertions.assertEquals(82818007, d.solvePartTwo(engineSchematic));
     }

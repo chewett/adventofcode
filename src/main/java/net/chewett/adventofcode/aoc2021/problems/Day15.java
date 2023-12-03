@@ -4,7 +4,6 @@ import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -261,7 +260,7 @@ public class Day15 {
     }
 
     public static void main(String[] args) {
-        Discrete2DPositionGrid<Integer> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionGrid(2021, 15);
+        Discrete2DPositionGrid<Integer> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionIntegerGrid(2021, 15);
 
         Day15 d = new Day15();
         long partOne = d.solvePartOne(grid);

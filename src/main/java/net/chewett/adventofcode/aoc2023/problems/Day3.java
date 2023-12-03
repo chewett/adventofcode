@@ -183,7 +183,7 @@ public class Day3 {
     }
 
     public static void main(String[] args) {
-        Discrete2DPositionGrid<Character> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionGridCharacter(2023, 3);
+        Discrete2DPositionGrid<Character> grid = ProblemLoader.loadProblemIntoDiscrete2DPositionCharacterGrid(2023, 3);
 
         Day3 d = new Day3();
         long partOne = d.solvePartOne(grid);
