@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.aoc{{year}}.problems;
 
+{{imports}}
 import net.chewett.adventofcode.helpers.ProblemLoader;
 import java.util.*;
 
@@ -8,26 +9,26 @@ import java.util.*;
  */
 public class Day{{day}} {
 
-    public long solvePartOne(List<String> lines) {
+    public long solvePartOne({{type}} input) {
 
 
         return -1;
     }
 
-    public long solvePartTwo(List<String> lines) {
+    public long solvePartTwo({{type}} input) {
 
 
         return -1;
     }
 
     public static void main(String[] args) {
-        List<String> lines = ProblemLoader.loadProblemIntoStringArray({{year}}, {{day}});
+        {{type}} input = ProblemLoader.{{problemLoaderFunc}}({{year}}, {{day}});
 
         Day{{day}} d = new Day{{day}}();
-        long partOne = d.solvePartOne(lines);
+        long partOne = d.solvePartOne(input);
         System.out.println("" + partOne);
 
-        long partTwo = d.solvePartTwo(lines);
+        long partTwo = d.solvePartTwo(input);
         System.out.println("" + partTwo);
     }
 }

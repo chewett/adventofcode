@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProblemCreator {
 
@@ -40,11 +42,16 @@ public class ProblemCreator {
         return lines;
     }
 
-    public static List<String> runReplacement(List<String> curFile, String template, String replacement) {
+    public static List<String> runReplacements(List<String> curFile, Map<String, String> replacements) {
         List<String> newLines = new ArrayList<>();
 
         for(String str : curFile) {
-            newLines.add(str.replaceAll(template.replace("{", "\\{"), replacement));
+            String stringToReplace = str;
+
+            for(Map.Entry<String, String> e : replacements.entrySet()) {
+                stringToReplace = stringToReplace.replaceAll("\\{\\{" + e.getKey() + "\\}\\}", e.getValue());
+            }
+            newLines.add(stringToReplace);
         }
 
         return newLines;
@@ -56,6 +63,7 @@ public class ProblemCreator {
         int year = 2023;
         int day = 4;
         String type = "StringList";
+       // String type = "CharacterGrid";
 
         String curDir = System.getProperty("user.dir");
 
@@ -63,19 +71,37 @@ public class ProblemCreator {
         String testPath = curDir + "\\src\\test\\java\\net\\chewett\\adventofcode\\aoc" + year + "\\problems\\Day" + day + "Test.java";
         String inputPath = curDir + "\\src\\main\\resources\\aoc" + year + "\\" + year + "_day_" + day + "_input.txt";
 
+        Map<String, String> replacements = new HashMap<>();
+        replacements.put("year", ""+year);
+        replacements.put("day", ""+day);
+
+        if(type.equals("StringList")) {
+            replacements.put("type", "List<String>");
+            replacements.put("problemLoaderFunc", "loadProblemIntoStringArray");
+            replacements.put("imports", "");
+            replacements.put("exampleInputStart", "List<String> input = new ArrayList<>();");
+            replacements.put("exampleInputEnd", "return input;");
+        }else if(type.equals("CharacterGrid")) {
+            replacements.put("type", "Discrete2DPositionGrid<Character>");
+            replacements.put("problemLoaderFunc", "loadProblemIntoDiscrete2DPositionGridCharacter");
+            replacements.put("imports", "import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;\n" +
+                    "import net.chewett.adventofcode.helpers.FormatConversion;");
+            replacements.put("exampleInputStart", "List<String> input = new ArrayList<>();");
+            replacements.put("exampleInputEnd", "List<List<Character>> engineSchematicArray = FormatConversion.convertStringArrayToCharListList(input);\n" +
+                    "        return FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(engineSchematicArray);");
+        }
+
 
         //Write the class file
         System.out.println("Writing: " + classPath);
         List<String> classFile = ProblemCreator.loadClassTemplateFile();
-        classFile = ProblemCreator.runReplacement(classFile, "{{year}}", ""+year);
-        classFile = ProblemCreator.runReplacement(classFile, "{{day}}", ""+day);
+        classFile = ProblemCreator.runReplacements(classFile, replacements);
         Files.write(Paths.get(classPath), classFile);
 
         //Write the test file
         System.out.println("Writing: " + testPath);
         List<String> testFile = ProblemCreator.loadTestTemplateFile();
-        testFile = ProblemCreator.runReplacement(testFile, "{{year}}", ""+year);
-        testFile = ProblemCreator.runReplacement(testFile, "{{day}}", ""+day);
+        testFile = ProblemCreator.runReplacements(testFile, replacements);
         Files.write(Paths.get(testPath), testFile);
 
         //Write the input file

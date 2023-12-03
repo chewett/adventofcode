@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.aoc{{year}}.problems;
 
+{{imports}}
 import net.chewett.adventofcode.helpers.ProblemLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,12 +13,12 @@ public class Day{{day}}Test {
      * Function to get the example inputs
      * @return The example input
      */
-    public List<String> getExampleInput() {
-        List<String> input = new ArrayList<>();
+    public {{type}} getExampleInput() {
+        {{exampleInputStart}}
 
         //Add inputs
 
-        return input;
+        {{exampleInputEnd}}
     }
 
     /**
@@ -25,7 +26,7 @@ public class Day{{day}}Test {
      */
     @Test
     public void testExampleInputPartOne() {
-        List<String> input = this.getExampleInput();
+        {{type}} input = this.getExampleInput();
         Day{{day}} d = new Day{{day}}();
         Assertions.assertEquals(0, d.solvePartOne(input));
     }
@@ -36,7 +37,7 @@ public class Day{{day}}Test {
      */
     @Test
     public void testRealPartOne() {
-        List<String> input = ProblemLoader.loadProblemIntoStringArray({{year}}, {{day}});
+        {{type}} input = ProblemLoader.{{problemLoaderFunc}}({{year}}, {{day}});
         Day{{day}} d = new Day{{day}}();
         Assertions.assertEquals(0, d.solvePartOne(input));
     }
@@ -46,7 +47,7 @@ public class Day{{day}}Test {
      */
     @Test
     public void testExampleInputPartTwo() {
-        List<String> input = this.getExampleInput();
+        {{type}} input = this.getExampleInput();
         Day{{day}} d = new Day{{day}}();
         Assertions.assertEquals(0, d.solvePartTwo(input));
     }
@@ -56,7 +57,7 @@ public class Day{{day}}Test {
      */
     @Test
     public void testRealPartTwo() {
-        List<String> input = ProblemLoader.loadProblemIntoStringArray({{year}}, {{day}});
+        {{type}} input = ProblemLoader.{{problemLoaderFunc}}({{year}}, {{day}});
         Day{{day}} d = new Day{{day}}();
         Assertions.assertEquals(0, d.solvePartTwo(input));
     }
