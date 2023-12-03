@@ -62,8 +62,11 @@ public class ProblemCreator {
 
         int year = 2023;
         int day = 4;
-        String type = "StringList";
-       // String type = "CharacterGrid";
+        //String type = "StringList";
+        //String type = "CharacterGrid";
+        //String type = "IntList";
+        //String type = "String";
+        String type = "LongList";
 
         String curDir = System.getProperty("user.dir");
 
@@ -81,6 +84,28 @@ public class ProblemCreator {
             replacements.put("imports", "");
             replacements.put("exampleInputStart", "List<String> input = new ArrayList<>();");
             replacements.put("exampleInputEnd", "return input;");
+
+        }else if(type.equals("IntList")) {
+            replacements.put("type", "List<Integer>");
+            replacements.put("problemLoaderFunc", "loadProblemIntoIntegerList");
+            replacements.put("imports", "");
+            replacements.put("exampleInputStart", "List<Integer> input = new ArrayList<>();");
+            replacements.put("exampleInputEnd", "return input;");
+
+        }else if(type.equals("LongList")) {
+            replacements.put("type", "List<Long>");
+            replacements.put("problemLoaderFunc", "loadProblemIntoLongList");
+            replacements.put("imports", "");
+            replacements.put("exampleInputStart", "List<Long> input = new ArrayList<>();");
+            replacements.put("exampleInputEnd", "return input;");
+
+        }else if(type.equals("String")) {
+            replacements.put("type", "String");
+            replacements.put("problemLoaderFunc", "loadProblemIntoString");
+            replacements.put("imports", "");
+            replacements.put("exampleInputStart", "String input = \"\";");
+            replacements.put("exampleInputEnd", "return input;");
+
         }else if(type.equals("CharacterGrid")) {
             replacements.put("type", "Discrete2DPositionGrid<Character>");
             replacements.put("problemLoaderFunc", "loadProblemIntoDiscrete2DPositionGridCharacter");
