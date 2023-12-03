@@ -1,0 +1,35 @@
+package net.chewett.adventofcode.aoc{{year}}.problems;
+
+import net.chewett.adventofcode.helpers.ProblemLoader;
+import java.util.*;
+
+/**
+ *
+ */
+public class Day{{day}} {
+
+    public long solvePartOne(List<String> lines) {
+
+
+        return -1;
+    }
+
+    public long solvePartTwo(List<String> lines) {
+
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        List<String> lines = ProblemLoader.loadProblemIntoStringArray({{year}}, {{day}});
+
+        Day{{day}} d = new Day{{day}}();
+        long partOne = d.solvePartOne(lines);
+        System.out.println("" + partOne);
+
+        long partTwo = d.solvePartTwo(lines);
+        System.out.println("" + partTwo);
+    }
+}
+
+
