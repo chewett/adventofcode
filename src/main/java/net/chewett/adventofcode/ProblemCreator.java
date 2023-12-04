@@ -62,12 +62,12 @@ public class ProblemCreator {
 
         int year = 2023;
         int day = 4;
-        //String type = "StringList";
+        String type = "StringList";
         //String type = "IntList";
         //String type = "String";
         //String type = "LongList";
         //String type = "CharacterGrid";
-        String type = "IntGrid";
+        //String type = "IntGrid";
 
         String curDir = System.getProperty("user.dir");
 
