@@ -1,12 +1,9 @@
 package net.chewett.adventofcode.aoc2023.problems;
 
 
-import net.chewett.adventofcode.datastructures.Pair;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
