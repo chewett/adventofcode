@@ -378,7 +378,7 @@ public class Day5 {
             }
         }
 
-
+        //Run the translations each time
         seeds = this.runMaths(seeds, seedToSoil);
         seeds = this.runMaths(seeds, soilToFertiliser);
         seeds = this.runMaths(seeds, fertiliserToWater);
@@ -387,6 +387,7 @@ public class Day5 {
         seeds = this.runMaths(seeds, tempToHumidity);
         seeds = this.runMaths(seeds, humidityToLocation);
 
+        //And then find the result!
         long minSeed = Long.MAX_VALUE;
         for(Seed s : seeds) {
             minSeed = Math.min(s.getStart(), minSeed);
@@ -395,8 +396,14 @@ public class Day5 {
         return minSeed;
     }
 
+    /**
+     * Do the replacement maths for each of the range mappings
+     * @param seeds List of initial starting positions
+     * @param translations Translation data to move the starting positions
+     * @return New locations after the translations
+     */
     public List<Seed> runMaths(List<Seed> seeds, List<Translation> translations) {
-
+        //Copy the data, not sure I need to but Java is a right pain sometimes
         List<Seed> currentSeeds = new ArrayList<>();
         for(Seed s : seeds) {
             currentSeeds.add(s.copy());
@@ -406,6 +413,9 @@ public class Day5 {
             currentTranslations.add(t.copy());
         }
 
+        //This loops through the seeds and then translation indexes until it finds a split it needs to perform
+        //Then it splits the seeds + translations, breaks out of the loops, and starts again
+        //This will eventually end up with no more splits needed and makes the next checks easy
         boolean hasSplit = true;
         while(hasSplit) {
             hasSplit = false;
@@ -413,16 +423,20 @@ public class Day5 {
             List<Seed> foundNewSeeds = null;
             List<Translation> foundNewTranslations = null;
 
+            //Loop over the seeds
             int seedIndex;
             int translationIndex = 0;
             for(seedIndex = 0; seedIndex < currentSeeds.size(); seedIndex++) {
                 Seed curSeed = currentSeeds.get(seedIndex);
 
+                //And the translations
                 for(translationIndex = 0; translationIndex < currentTranslations.size(); translationIndex++) {
                     Translation curTranslation = currentTranslations.get(translationIndex);
 
+                    //If there is an overlap then we split
                     if(curSeed.doesTranslationOverlap(curTranslation)) {
                         hasSplit = true;
+                        //Perform the split here
                         foundNewSeeds = curSeed.getNewSeeds(curTranslation);
                         foundNewTranslations = curTranslation.getNewTranslations(curSeed);
                         break;
@@ -434,6 +448,7 @@ public class Day5 {
                 }
             }
 
+            //If then it has split, we create the new arrays by adding everything "current" and then the split data
             if(hasSplit) {
                 List<Seed> newSeedsToReplace = new ArrayList<>(foundNewSeeds);
                 for(int seedIndexToAdd = 0; seedIndexToAdd < currentSeeds.size(); seedIndexToAdd++) {
@@ -455,24 +470,26 @@ public class Day5 {
 
         }
 
+        //Once we get here, everything has been split into matching regions between seeds and translations
 
         List<Seed> finalSeeds = new ArrayList<>();
         for(Seed seed : currentSeeds) {
             boolean foundTranslation = false;
             for (Translation t : currentTranslations) {
+                //If there is a matching "start" region then we just perform the translation
                 if(t.getSourceStart() == seed.getStart()) {
                     finalSeeds.add(new Seed(t.getDestination(), seed.getRange()));
                     foundTranslation = true;
                 }
             }
 
+            //If we didn't find the translation then we just continue as normal
             if(!foundTranslation) {
                 finalSeeds.add(seed);
             }
         }
 
         return finalSeeds;
-
     }
 
     public static void main(String[] args) {
