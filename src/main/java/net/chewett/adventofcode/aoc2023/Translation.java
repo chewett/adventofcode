@@ -1,7 +1,7 @@
-package net.chewett.adventofcode.aoc2023.problems;
+package net.chewett.adventofcode.aoc2023;
 
 import net.chewett.adventofcode.datastructures.Pair;
-
+import net.chewett.adventofcode.helpers.RangeFunctions;
 import java.util.ArrayList;
 import java.util.List;
 
