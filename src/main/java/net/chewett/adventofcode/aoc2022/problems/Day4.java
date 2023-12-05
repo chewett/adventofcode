@@ -1,6 +1,8 @@
 package net.chewett.adventofcode.aoc2022.problems;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
+import net.chewett.adventofcode.helpers.RangeFunctions;
+
 import java.util.List;
 
 /**
@@ -99,35 +101,6 @@ public class Day4 {
     }
 
     /**
-     * Returns true or false in the event the range of overlapping or not
-     * @param startOne Starting point of the first range
-     * @param endOne Ending point of the first range
-     * @param startTwo Starting point of the second range
-     * @param endTwo Ending point of the second range
-     * @return True if one range overlaps the other
-     */
-    public boolean isRangeOverlapping(int startOne, int endOne, int startTwo, int endTwo) {
-        //Two starts after or the same as the start of one, but starts before or the same as the end of one
-        if(startTwo >= startOne && startTwo <= endOne) {
-            return true;
-
-        //One starts after or the same as the start of two, but starts before or the same as the end of two
-        }else if(startOne >= startTwo && startOne <= endTwo) {
-            return true;
-
-        //Two starts after one but ends before the end of one so its fully contained
-        }else if(startTwo >= startOne && endTwo <= endOne) {
-            return true;
-
-        //One starts after two but ends before the end of two so its fully contained
-        }else if(startOne >= startTwo && endOne <= endTwo) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
      * Loop over the assignments and work out if one overlaps the other
      * @param assignments List of assignments to process
      * @return The number of regions which overlap each other
@@ -141,7 +114,7 @@ public class Day4 {
             int assignmentTwoStart = Integer.parseInt(assignmentParts[2]);
             int assignmentTwoEnd = Integer.parseInt(assignmentParts[3]);
 
-            if(this.isRangeOverlapping(assignmentOneStart, assignmentOneEnd, assignmentTwoStart, assignmentTwoEnd)) {
+            if(RangeFunctions.isRangeOverlapping(assignmentOneStart, assignmentOneEnd, assignmentTwoStart, assignmentTwoEnd)) {
                 overlappingPairs++;
             }
         }

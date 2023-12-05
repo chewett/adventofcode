@@ -1,10 +1,12 @@
-package net.chewett.adventofcode.aoc2023.problems;
+package net.chewett.adventofcode.helpers;
 
 import net.chewett.adventofcode.datastructures.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Various helper functions to handle ranges and the maths around it
+ */
 public class RangeFunctions {
 
     /**
@@ -36,18 +38,30 @@ public class RangeFunctions {
         return false;
     }
 
-    public static List<Pair<Long>> getNewRanges(long sourceMin, long sourceMax, long rangeMin, long rangeMax) {
+    /**
+     * Given two ranges this works the intersection of the two and splits up the first passed in range
+     * @param rangeToSplitMin Min of the range to be split up
+     * @param rangeToSplitMax Max of the range to be split up
+     * @param intersectionRangeMin Intersection min to be used for splitting
+     * @param intersectionRangeMax Intersection max to be used for splitting
+     * @return Returns a list of pairs representing the ways we have split up the first range
+     */
+    public static List<Pair<Long>> getNewRanges(long rangeToSplitMin, long rangeToSplitMax, long intersectionRangeMin, long intersectionRangeMax) {
         List<Pair<Long>> finalRanges = new ArrayList<>();
 
-        long intersectionA = Math.max(sourceMin, rangeMin);
-        long intersectionB = Math.min(sourceMax, rangeMax);
+        //Find the intersection points between the two ranges
+        long intersectionA = Math.max(rangeToSplitMin, intersectionRangeMin);
+        long intersectionB = Math.min(rangeToSplitMax, intersectionRangeMax);
 
-        if(sourceMin < intersectionA) {
-            finalRanges.add(new Pair<>(sourceMin, intersectionA - 1));
+        //This handles the left hand side
+        if(rangeToSplitMin < intersectionA) {
+            finalRanges.add(new Pair<>(rangeToSplitMin, intersectionA - 1));
         }
+        //There will always be a middle (if you called isRangeOverlapping before)
         finalRanges.add(new Pair<>(intersectionA, intersectionB));
-        if(intersectionB < sourceMax) {
-            finalRanges.add(new Pair<>(intersectionB + 1, sourceMax));
+        //Handles the right hand side
+        if(intersectionB < rangeToSplitMax) {
+            finalRanges.add(new Pair<>(intersectionB + 1, rangeToSplitMax));
         }
 
         return finalRanges;

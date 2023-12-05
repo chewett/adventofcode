@@ -11,42 +11,6 @@ import java.util.List;
 public class Day4Test {
 
     /**
-     * Tests to make sure that the two ranges that are next to each other but not overlapping are marked as non-overlapping
-     */
-    @Test
-    public void testNonOverlapping() {
-        Day4 d = new Day4();
-        Assertions.assertFalse(d.isRangeOverlapping(10, 14, 15, 20));
-    }
-
-    /**
-     * Tests to make sure that the two ranges that overlap on the left are reported as overlapping
-     */
-    @Test
-    public void testLeftOverlap() {
-        Day4 d = new Day4();
-        Assertions.assertTrue(d.isRangeOverlapping(10, 20, 15, 20));
-    }
-
-    /**
-     * Tests to make sure a slightly different left overlap is reported as overlapping
-     */
-    @Test
-    public void testLeftOverlap2() {
-        Day4 d = new Day4();
-        Assertions.assertTrue(d.isRangeOverlapping(10, 16, 15, 20));
-    }
-
-    /**
-     * Tests to make sure that one range containing another properly reports the ranges as overlapping
-     */
-    @Test
-    public void testLeftContains() {
-        Day4 d = new Day4();
-        Assertions.assertTrue(d.isRangeOverlapping(16, 16, 15, 20));
-    }
-
-    /**
      * Function to get the example inputs
      * @return The example input
      */
