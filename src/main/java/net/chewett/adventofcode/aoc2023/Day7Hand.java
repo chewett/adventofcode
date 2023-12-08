@@ -179,6 +179,10 @@ public class Day7Hand implements Comparable<Day7Hand> {
 
     }
 
+    public long getBid() {
+        return this.bid;
+    }
+
     public String toString() {
         return this.hand + " " + this.getValueOfHandType() + " " + this.getOrderValue() + " Bid: " + this.bid;
     }
