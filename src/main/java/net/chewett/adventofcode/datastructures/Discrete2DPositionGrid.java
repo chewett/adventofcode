@@ -172,6 +172,79 @@ public class Discrete2DPositionGrid<T> {
         return points;
     }
 
+    /**
+     * Gets the directly adjacent points to this point regardless if this goes outside the well-defined grid
+     * @param p Point to find the directly adjacent points of
+     * @return List of points directly adjacent to this regardless of the size
+     */
+    public List<Point> getDirectlyAdjacentRegardlessOfSize(Point p) {
+        return this.getDirectlyAdjacentRegardlessOfSize(p.x, p.y);
+    }
+
+    /**
+     * Gets the directly adjacent points to this point regardless if this goes outside the well-defined grid
+     * @param x X position to get the adjacent points from
+     * @param y Y position to get the adjacent points from
+     * @return List of points directly adjacent to this regardless of the size
+     */
+    public List<Point> getDirectlyAdjacentRegardlessOfSize(int x, int y) {
+        List<Point> points = new ArrayList<>();
+        points.add(new Point(x-1, y));
+        points.add(new Point(x, y-1));
+        points.add(new Point(x+1, y));
+
+        points.add(new Point(x, y+1));
+
+        return points;
+    }
+
+    /**
+     * Helper to get the point north of this point if it is inside the currently defined grid
+     * @param p Point to find the value north of
+     * @return Null if there is no point or a point representing the value north of this point
+     */
+    public Point getNorth(Point p) {
+        if(p.y > 0) {
+            return new Point(p.x, p.y-1);
+        }
+        return null;
+    }
+
+    /**
+     * Helper to get the point south of this point if it is inside the currently defined grid
+     * @param p Point to find the value south of
+     * @return Null if there is no point or a point representing the value south of this point
+     */
+    public Point getSouth(Point p) {
+        if(p.y < this.getMaxY()) {
+            return new Point(p.x, p.y+1);
+        }
+        return null;
+    }
+
+    /**
+     * Helper to get the point west of this point if it is inside the currently defined grid
+     * @param p Point to find the value west of
+     * @return Null if there is no point or a point representing the value west of this point
+     */
+    public Point getWest(Point p) {
+        if(p.x > 0) {
+            return new Point(p.x-1, p.y);
+        }
+        return null;
+    }
+
+    /**
+     * Helper to get the point east of this point if it is inside the currently defined grid
+     * @param p Point to find the value east of
+     * @return Null if there is no point or a point representing the value east of this point
+     */
+    public Point getEast(Point p) {
+        if(p.x < this.getMaxX()) {
+            return new Point(p.x+1, p.y);
+        }
+        return null;
+    }
 
     /**
      * Given an X and Y position generate a list of all adjacent points
