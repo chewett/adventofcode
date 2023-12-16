@@ -131,21 +131,6 @@ import java.util.List;
 public class Day14 {
 
     /**
-     * Gets the state of the grid so that we can track how it changes
-     * @param grid The grid to calculate the state for
-     * @return A string representing the state of the grid
-     */
-    public String getState(Discrete2DPositionGrid<Character> grid) {
-        StringBuilder totalString = new StringBuilder();
-        for(int y = 0; y <= grid.getMaxY(); y++) {
-            for(int x = 0; x <= grid.getMaxX(); x++) {
-                totalString.append(grid.getValueAtPosition(x, y));
-            }
-        }
-        return totalString.toString();
-    }
-
-    /**
      * Move all the moving rocks to the north
      * @param toMoveNorth Grid to move north
      */
@@ -279,7 +264,7 @@ public class Day14 {
         Discrete2DPositionGrid<Character> movedNorth = input.clone();
         Map<String, Long> cycleMap = new HashMap<>();
 
-        cycleMap.put(this.getState(movedNorth), 0L);
+        cycleMap.put(movedNorth.getGridState(), 0L);
 
         //What we are going to do is keep track of the state and stop when we work out when we have found a cycle
         long cyclePeriod = 0;
@@ -292,7 +277,7 @@ public class Day14 {
             this.moveEast(movedNorth);
             cycleNo++;
 
-            String thisLoad = this.getState(movedNorth);
+            String thisLoad = movedNorth.getGridState();
             if(cycleMap.containsKey(thisLoad)) {
                 //Awesome stuff! We have found a cycle, now we can use that to cheat :D
                 cyclePeriod = cycleNo - cycleMap.get(thisLoad);

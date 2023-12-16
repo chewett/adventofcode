@@ -422,4 +422,20 @@ public class Discrete2DPositionGrid<T> {
 
         return maxVal;
     }
+
+    /**
+     * Gets a string representing the state of the grid
+     * TODO: Consider if this gets very long we could just return a sha/md5 of the string
+     * @return A string representing the state of the grid
+     */
+    public String getGridState() {
+        StringBuilder totalString = new StringBuilder();
+        for(int y = 0; y <= this.getMaxY(); y++) {
+            for(int x = 0; x <= this.getMaxX(); x++) {
+                totalString.append(this.getValueAtPosition(x, y));
+            }
+        }
+        return totalString.toString();
+    }
+
 }
