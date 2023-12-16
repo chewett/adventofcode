@@ -1,6 +1,7 @@
 package net.chewett.adventofcode.aoc2023.problems;
 
 
+import net.chewett.adventofcode.helpers.CombinationGenerator;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 import net.chewett.adventofcode.helpers.StringConversion;
 
@@ -139,37 +140,6 @@ public class Day12 {
     private int[] currentReportInts;
 
     /**
-     * Naive way to generate all the possibilities of the current string
-     * @param input String to generate all possibilities of
-     * @return All possibilities to represent the string
-     */
-    public List<String> generateAllPossibilities(String input) {
-        List<String> possibilities = new ArrayList<>();
-        possibilities.add("");
-
-        //Loop over the strings one by one
-        for(int i = 0; i < input.length(); i++) {
-            List<String> newPossibilities = new ArrayList<>();
-            //Keep adding the next string to all of the possibilities
-            if(input.charAt(i) == '?') {
-                //If its a ? then we add both possibilities
-                for(String pos : possibilities) {
-                    newPossibilities.add(pos + '.');
-                    newPossibilities.add(pos + '#');
-                }
-            }else{
-                //If not then just add the character to each possibility
-                for(String pos : possibilities) {
-                    newPossibilities.add(pos + input.charAt(i));
-                }
-            }
-            possibilities = newPossibilities;
-        }
-
-        return possibilities;
-    }
-
-    /**
      * Returns a report representing the damaged strings
      * @param springs List of springs in string format
      * @return Report detailing the damage status
@@ -214,7 +184,7 @@ public class Day12 {
         for(String str : input) {
             String[] numberString = str.split(" ");
             //Work out all possibilities
-            List<String> possibilities = generateAllPossibilities(numberString[0]);
+            List<String> possibilities = CombinationGenerator.createPossibilitiesOfStrings(numberString[0], '?', new char[]{'.', '#'});
             for(String pos : possibilities) {
                 //Work out the damage report for the possibility
                 String damageReport = this.getDamageReport(pos);

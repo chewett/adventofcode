@@ -30,4 +30,39 @@ public class CombinationGenerator {
 
         return currentListOfCombinations;
     }
+
+    /**
+     * Given a string, a replacement character, and possible characters this should be this will generate all possibilities
+     * @param possibleString String to replace items
+     * @param characterToReplace Character to replace inside the initial string
+     * @param possibilites All the possibilities
+     * @return A list of strings representing all the possibilities
+     */
+    public static List<String> createPossibilitiesOfStrings(String possibleString, char characterToReplace, char[] possibilites) {
+        List<String> possibilities = new ArrayList<>();
+        possibilities.add("");
+
+        //Loop over the strings one by one
+        for(int i = 0; i < possibleString.length(); i++) {
+            List<String> newPossibilities = new ArrayList<>();
+            //Keep adding the next string to all of the possibilities
+            if(possibleString.charAt(i) == characterToReplace) {
+                //If its a ? then we add both possibilities
+                for(String pos : possibilities) {
+                    for(char newC : possibilites) {
+                        newPossibilities.add(pos + newC);
+                    }
+                }
+            }else{
+                //If not then just add the character to each possibility
+                for(String pos : possibilities) {
+                    newPossibilities.add(pos + possibleString.charAt(i));
+                }
+            }
+            possibilities = newPossibilities;
+        }
+
+        return possibilities;
+    }
+
 }
