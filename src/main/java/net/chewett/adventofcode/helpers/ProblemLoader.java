@@ -140,5 +140,15 @@ public class ProblemLoader {
         return FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(gridData);
     }
 
+    /**
+     * Given a list of strings this will parse it into a series of character grids
+     * @param year Year to load the problem for
+     * @param day Day to load the problem for
+     * @return List of Discrete2DPositionGrid's representing the problem input
+     */
+    public static List<Discrete2DPositionGrid<Character>> loadProblemIntoListOfDiscrete2DPositionCharacterGrids(int year, int day) {
+        List<String> strings = ProblemLoader.loadProblemIntoStringArray(year, day);
+        return FormatConversion.convertListOfStringsToListOfDiscrete2DPositionCharacterGrids(strings);
+    }
 
 }

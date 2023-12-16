@@ -164,4 +164,30 @@ public class FormatConversion {
         return grid;
     }
 
+    /**
+     * Given a list of strings this will parse it into a series of character grids
+     * @param input List of strings representing a set of character grids
+     * @return List of character grids parsed from the input
+     */
+    public static List<Discrete2DPositionGrid<Character>> convertListOfStringsToListOfDiscrete2DPositionCharacterGrids(List<String> input) {
+        List<String> curCharGrid = new ArrayList<>();
+        List<Discrete2DPositionGrid<Character>> grids = new ArrayList<>();
+
+        for(String str : input) {
+            if(str.isEmpty()) {
+                List<List<Character>> newCharArr = FormatConversion.convertStringArrayToCharListList(curCharGrid);
+                grids.add(FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(newCharArr));
+                curCharGrid = new ArrayList<>();
+            }else{
+                curCharGrid.add(str);
+            }
+        }
+
+        //Handle the final graph
+        List<List<Character>> newCharArr = FormatConversion.convertStringArrayToCharListList(curCharGrid);
+        grids.add(FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(newCharArr));
+
+        return grids;
+    }
+
 }

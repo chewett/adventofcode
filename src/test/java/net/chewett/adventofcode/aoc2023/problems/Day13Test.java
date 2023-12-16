@@ -1,6 +1,8 @@
 package net.chewett.adventofcode.aoc2023.problems;
 
 
+import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
+import net.chewett.adventofcode.helpers.FormatConversion;
 import net.chewett.adventofcode.helpers.ProblemLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +15,7 @@ public class Day13Test {
      * Function to get the example inputs
      * @return The example input
      */
-    public List<String> getExampleInput() {
+    public List<Discrete2DPositionGrid<Character>> getExampleInput() {
         List<String> input = new ArrayList<>();
 
         input.add("#.##..##.");
@@ -32,7 +34,7 @@ public class Day13Test {
         input.add("..##..###");
         input.add("#....#..#");
 
-        return input;
+        return FormatConversion.convertListOfStringsToListOfDiscrete2DPositionCharacterGrids(input);
     }
 
     /**
@@ -40,7 +42,7 @@ public class Day13Test {
      */
     @Test
     public void testExampleInputPartOne() {
-        List<String> input = this.getExampleInput();
+        List<Discrete2DPositionGrid<Character>> input = this.getExampleInput();
         Day13 d = new Day13();
         Assertions.assertEquals(405, d.solvePartOne(input));
     }
@@ -51,7 +53,7 @@ public class Day13Test {
      */
     @Test
     public void testRealPartOne() {
-        List<String> input = ProblemLoader.loadProblemIntoStringArray(2023, 13);
+        List<Discrete2DPositionGrid<Character>> input = ProblemLoader.loadProblemIntoListOfDiscrete2DPositionCharacterGrids(2023, 13);
         Day13 d = new Day13();
         Assertions.assertEquals(27202, d.solvePartOne(input));
     }
@@ -61,7 +63,7 @@ public class Day13Test {
      */
     @Test
     public void testExampleInputPartTwo() {
-        List<String> input = this.getExampleInput();
+        List<Discrete2DPositionGrid<Character>> input = this.getExampleInput();
         Day13 d = new Day13();
         Assertions.assertEquals(400, d.solvePartTwo(input));
     }
@@ -71,7 +73,7 @@ public class Day13Test {
      */
     @Test
     public void testRealPartTwo() {
-        List<String> input = ProblemLoader.loadProblemIntoStringArray(2023, 13);
+        List<Discrete2DPositionGrid<Character>> input = ProblemLoader.loadProblemIntoListOfDiscrete2DPositionCharacterGrids(2023, 13);
         Day13 d = new Day13();
         Assertions.assertEquals(41566, d.solvePartTwo(input));
     }

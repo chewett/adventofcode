@@ -147,32 +147,6 @@ import java.util.*;
 public class Day13 {
 
     /**
-     * Helper function to parse the input and get the list of grids to parse
-     * @param input Strings that I need to turn into a grid
-     * @return List of grids to determine the reflections of
-     */
-    private List<Discrete2DPositionGrid<Character>> getGridsFromInput(List<String> input) {
-        List<String> curCharGrid = new ArrayList<>();
-        List<Discrete2DPositionGrid<Character>> grids = new ArrayList<>();
-
-        for(String str : input) {
-            if(str.isEmpty()) {
-                List<List<Character>> newCharArr = FormatConversion.convertStringArrayToCharListList(curCharGrid);
-                grids.add(FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(newCharArr));
-                curCharGrid = new ArrayList<>();
-            }else{
-                curCharGrid.add(str);
-            }
-        }
-
-        //Handle the final graph
-        List<List<Character>> newCharArr = FormatConversion.convertStringArrayToCharListList(curCharGrid);
-        grids.add(FormatConversion.convertCharArrayIntoDiscrete2DPositionGridCharacter(newCharArr));
-
-        return grids;
-    }
-
-    /**
      * Given a grid and a value to ignore this attempts to find a horizontal reflection
      * @param grid Grid to check
      * @param ignoreVal Horizontal reflection to ignore
@@ -241,12 +215,10 @@ public class Day13 {
 
     /**
      * Looks to find the reflection point of every grid
-     * @param input Grids to find the reflection points of
+     * @param grids Grids to find the reflection points of
      * @return Sum of the reflection point values
      */
-    public long solvePartOne(List<String> input) {
-        List<Discrete2DPositionGrid<Character>> grids = this.getGridsFromInput(input);
-
+    public long solvePartOne(List<Discrete2DPositionGrid<Character>> grids) {
         //Loop over every graph and find the horizontal or vertical reflection
         long total = 0;
         for(Discrete2DPositionGrid<Character> grid : grids) {
@@ -268,12 +240,10 @@ public class Day13 {
 
     /**
      * Attempts to find the "smudge value" and then the new reflection point
-     * @param input Grids to find the new reflection points of
+     * @param grids Grids to find the new reflection points of
      * @return Sum of the new reflection point values
      */
-    public long solvePartTwo(List<String> input) {
-        List<Discrete2DPositionGrid<Character>> grids = this.getGridsFromInput(input);
-
+    public long solvePartTwo(List<Discrete2DPositionGrid<Character>> grids) {
         long total = 0;
         for(Discrete2DPositionGrid<Character> grid : grids) {
             //Find the "original" reflection values
@@ -319,7 +289,7 @@ public class Day13 {
     }
 
     public static void main(String[] args) {
-        List<String> input = ProblemLoader.loadProblemIntoStringArray(2023, 13);
+        List<Discrete2DPositionGrid<Character>> input = ProblemLoader.loadProblemIntoListOfDiscrete2DPositionCharacterGrids(2023, 13);
 
         Day13 d = new Day13();
         long partOne = d.solvePartOne(input);
