@@ -235,7 +235,7 @@ public class Day15 {
      */
     public long solvePartTwo(String input) {
         //Store the boxes and the lens details
-        //We store the lenss as two strings, the label of the lens and then the lens value after it
+        //We store the lenses as two strings, the label of the lens and then the lens value after it
         //So things are always added as pairs.
         HashMap<Integer, List<String>> boxes = new HashMap<>();
 
