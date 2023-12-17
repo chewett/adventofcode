@@ -438,4 +438,14 @@ public class Discrete2DPositionGrid<T> {
         return totalString.toString();
     }
 
+    /**
+     * Helper to determine if a point is inside or outside the chart
+     * @param x X position to check
+     * @param y Y position to check
+     * @return True if the point is inside the grid otherwise false
+     */
+    public boolean pointInsideGraph(int x, int y) {
+        return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY;
+    }
+
 }
