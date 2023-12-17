@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.aoc2023.problems;
 
+import net.chewett.adventofcode.Directions;
 import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
 import net.chewett.adventofcode.datastructures.Point3D;
 import net.chewett.adventofcode.helpers.ListHelpers;
@@ -123,12 +124,6 @@ import java.util.List;
  */
 public class Day16 {
 
-    //Define a set of directional values to make it easier to use
-    static int down = 0;
-    static int left = 1;
-    static int up = 2;
-    static int right = 3;
-
     /**
      * Given a map and a starting point (and direction) trace the light sources to see what locations get energized
      * @param input Grid of mirrors
@@ -149,44 +144,44 @@ public class Day16 {
         //The starting position might be a mirror so we need to change the direction in the event it is
         //If it's a splitter we might then have two directions to start from!
         char startingVal = input.getValueAtPosition(startLoc);
-        if(startingDir == Day16.right) {
+        if(startingDir == Directions.EAST) {
             if(startingVal == '|') {
-                startingDir = Day16.down;
-                otherStartingDir = Day16.up;
+                startingDir = Directions.SOUTH;
+                otherStartingDir = Directions.NORTH;
             }else if(startingVal == '\\') {
-                startingDir = Day16.down;
+                startingDir = Directions.SOUTH;
             }else if(startingVal == '/') {
-                startingDir = Day16.up;
+                startingDir = Directions.NORTH;
             }
 
-        }else if(startingDir == Day16.down) {
+        }else if(startingDir == Directions.SOUTH) {
             if(startingVal == '-') {
-                startingDir = Day16.left;
-                otherStartingDir = Day16.right;
+                startingDir = Directions.WEST;
+                otherStartingDir = Directions.EAST;
             }else if(startingVal == '\\') {
-                startingDir = Day16.right;
+                startingDir = Directions.EAST;
             }else if(startingVal == '/') {
-                startingDir = Day16.left;
+                startingDir = Directions.WEST;
             }
 
-        }else if(startingDir == Day16.up) {
+        }else if(startingDir == Directions.NORTH) {
             if(startingVal == '-') {
-                startingDir = Day16.left;
-                otherStartingDir = Day16.right;
+                startingDir = Directions.WEST;
+                otherStartingDir = Directions.EAST;
             }else if(startingVal == '\\') {
-                startingDir = Day16.left;
+                startingDir = Directions.WEST;
             }else if(startingVal == '/') {
-                startingDir = Day16.right;
+                startingDir = Directions.EAST;
             }
 
-        }else if(startingDir == Day16.left) {
+        }else if(startingDir == Directions.WEST) {
             if(startingVal == '|') {
-                startingDir = Day16.down;
-                otherStartingDir = Day16.up;
+                startingDir = Directions.SOUTH;
+                otherStartingDir = Directions.NORTH;
             }else if(startingVal == '\\') {
-                startingDir = Day16.up;
+                startingDir = Directions.NORTH;
             }else if(startingVal == '/') {
-                startingDir = Day16.down;
+                startingDir = Directions.SOUTH;
             }
         }
 
@@ -210,7 +205,7 @@ public class Day16 {
             energised.setValueAtPosition(curLoc.getX(), curLoc.getY(), '#');
 
             //Handle each direction and work out where we move to
-            if(direction == Day16.down) {
+            if(direction == Directions.SOUTH) {
                 Point nextPoint = input.getSouth(curLocPoint);
                 if(nextPoint != null) {
                     char nextPointChar = input.getValueAtPosition(nextPoint);
@@ -219,15 +214,15 @@ public class Day16 {
                     }else if(nextPointChar == '|') {
                         beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, direction));
                     }else if(nextPointChar == '-') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.left));
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.right));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.WEST));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.EAST));
                     }else if(nextPointChar == '/') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.left));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.WEST));
                     }else if(nextPointChar == '\\') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.right));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.EAST));
                     }
                 }
-            }else if(direction == Day16.up) {
+            }else if(direction == Directions.NORTH) {
                 Point nextPoint = input.getNorth(curLocPoint);
                 if(nextPoint != null) {
                     char nextPointChar = input.getValueAtPosition(nextPoint);
@@ -236,46 +231,46 @@ public class Day16 {
                     }else if(nextPointChar == '|') {
                         beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, direction));
                     }else if(nextPointChar == '-') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.left));
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.right));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.WEST));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.EAST));
                     }else if(nextPointChar == '/') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.right));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.EAST));
                     }else if(nextPointChar == '\\') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.left));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.WEST));
                     }
                 }
-            }else if(direction == Day16.left) {
+            }else if(direction == Directions.WEST) {
                 Point nextPoint = input.getWest(curLocPoint);
                 if(nextPoint != null) {
                     char nextPointChar = input.getValueAtPosition(nextPoint);
                     if(nextPointChar == '.') {
                         beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, direction));
                     }else if(nextPointChar == '|') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.up));
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.down));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.NORTH));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.SOUTH));
                     }else if(nextPointChar == '-') {
                         beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, direction));
                     }else if(nextPointChar == '/') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.down));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.SOUTH));
                     }else if(nextPointChar == '\\') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.up));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.NORTH));
                     }
                 }
-            }else if(direction == Day16.right) {
+            }else if(direction == Directions.EAST) {
                 Point nextPoint = input.getEast(curLocPoint);
                 if(nextPoint != null) {
                     char nextPointChar = input.getValueAtPosition(nextPoint);
                     if(nextPointChar == '.') {
                         beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, direction));
                     }else if(nextPointChar == '|') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.up));
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.down));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.NORTH));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.SOUTH));
                     }else if(nextPointChar == '-') {
                         beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, direction));
                     }else if(nextPointChar == '/') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.up));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.NORTH));
                     }else if(nextPointChar == '\\') {
-                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Day16.down));
+                        beamLocationsToExpand.add(new Point3D(nextPoint.x, nextPoint.y, Directions.SOUTH));
                     }
                 }
             }else{
@@ -294,7 +289,7 @@ public class Day16 {
      * @return Number of energised locations
      */
     public long solvePartOne(Discrete2DPositionGrid<Character> input) {
-        return this.energize(input, new Point3D(0, 0, Day16.right));
+        return this.energize(input, new Point3D(0, 0, Directions.EAST));
     }
 
     /**
@@ -307,12 +302,12 @@ public class Day16 {
         //Go over each possible location finding the energised value
         List<Integer> energisedVals = new ArrayList<>();
         for(int x = 0; x <= input.getMaxX(); x++) {
-            energisedVals.add(this.energize(input, new Point3D(x, 0, Day16.down)));
-            energisedVals.add(this.energize(input, new Point3D(x, input.getMaxY(), Day16.up)));
+            energisedVals.add(this.energize(input, new Point3D(x, 0, Directions.SOUTH)));
+            energisedVals.add(this.energize(input, new Point3D(x, input.getMaxY(), Directions.NORTH)));
         }
         for(int y = 0; y <= input.getMaxY(); y++) {
-            energisedVals.add(this.energize(input, new Point3D(0, y, Day16.right)));
-            energisedVals.add(this.energize(input, new Point3D(input.getMaxX(), y, Day16.left)));
+            energisedVals.add(this.energize(input, new Point3D(0, y, Directions.EAST)));
+            energisedVals.add(this.energize(input, new Point3D(input.getMaxX(), y, Directions.WEST)));
         }
 
         //And then return the highest number
