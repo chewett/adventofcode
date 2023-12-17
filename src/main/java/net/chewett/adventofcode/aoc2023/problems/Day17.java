@@ -142,35 +142,21 @@ public class Day17 {
         //move left
 
         //Work out the next direction from this direction
-        int newLeftDir = 0;
-        int nextXMod = 0;
-        int nextYMod = 0;
-        if(cur.direction == Directions.SOUTH) {
-            newLeftDir = Directions.EAST;
-            nextXMod = 1;
-        }else if(cur.direction == Directions.NORTH) {
-            newLeftDir = Directions.WEST;
-            nextXMod = -1;
-        }else if(cur.direction == Directions.WEST) {
-            newLeftDir = Directions.SOUTH;
-            nextYMod = 1;
-        }else if(cur.direction == Directions.EAST) {
-            newLeftDir = Directions.NORTH;
-            nextYMod = -1;
-        }
+        int newLeftDir = Directions.getDirectionLeftOfThis(cur.direction);
+        Point leftXYMod = Directions.getDirectionModifier(newLeftDir);
 
         int nextX = cur.p.x;
         int nextY = cur.p.y;
         int accDistance = cur.distance;
         //Part two there is a set of locations that we can't move so we jump past these
         for(int i = 1; i < this.minMove; i++) {
-            nextX += nextXMod;
-            nextY += nextYMod;
+            nextX += leftXYMod.x;
+            nextY += leftXYMod.y;
             accDistance += input.getValueAtPosition(nextX, nextY);
         }
         for(int i = this.minMove; i <= this.maxMove; i++) {
-            nextX += nextXMod;
-            nextY += nextYMod;
+            nextX += leftXYMod.x;
+            nextY += leftXYMod.y;
             if(input.pointInsideGraph(nextX, nextY)) {
                 accDistance += input.getValueAtPosition(nextX, nextY);
                 nextMoves.add(new Day17Pos(accDistance, new Point(nextX, nextY), newLeftDir));
@@ -181,35 +167,21 @@ public class Day17 {
         //move right
 
         //Work out the next direction from this direction
-        int newRightDir = 0;
-        nextXMod = 0;
-        nextYMod = 0;
-        if(cur.direction == Directions.SOUTH) {
-            newRightDir = Directions.WEST;
-            nextXMod = -1;
-        }else if(cur.direction == Directions.NORTH) {
-            newRightDir = Directions.EAST;
-            nextXMod = 1;
-        }else if(cur.direction == Directions.WEST) {
-            newRightDir = Directions.NORTH;
-            nextYMod = -1;
-        }else if(cur.direction == Directions.EAST) {
-            newRightDir = Directions.SOUTH;
-            nextYMod = 1;
-        }
+        int newRightDir = Directions.getDirectionRightOfThis(cur.direction);
+        Point rightXYMod = Directions.getDirectionModifier(newRightDir);
 
         nextX = cur.p.x;
         nextY = cur.p.y;
         accDistance = cur.distance;
         //Part two there is a set of locations that we can't move so we jump past these
         for(int i = 1; i < this.minMove; i++) {
-            nextX += nextXMod;
-            nextY += nextYMod;
+            nextX += rightXYMod.x;
+            nextY += rightXYMod.y;
             accDistance += input.getValueAtPosition(nextX, nextY);
         }
         for(int i = this.minMove; i <= this.maxMove; i++) {
-            nextX += nextXMod;
-            nextY += nextYMod;
+            nextX += rightXYMod.x;
+            nextY += rightXYMod.y;
             if(input.pointInsideGraph(nextX, nextY)) {
                 accDistance += input.getValueAtPosition(nextX, nextY);
                 nextMoves.add(new Day17Pos(accDistance, new Point(nextX, nextY), newRightDir));
