@@ -261,26 +261,9 @@ public class Day22 {
 
         }else {
             throw new RuntimeException("Unknown coordinates");
-
         }
 
         return new Point3D(newX, newY, newDirection);
-    }
-
-    private Point getMovementVector(int movementId) {
-        int moveY = 0;
-        int moveX = 0;
-        if(movementId == Directions.EAST) {
-            moveX = 1;
-        }else if(movementId == Directions.SOUTH) {
-            moveY = 1;
-        }else if(movementId == Directions.WEST) {
-            moveX = -1;
-        }else if(movementId == Directions.NORTH) {
-            moveY = -1;
-        }
-
-        return new Point(moveX, moveY);
     }
 
     /**
@@ -296,7 +279,7 @@ public class Day22 {
 
         //Move one by one, each time performing the full movement checks
         for(int moveIndex = 0; moveIndex < moveDistance; moveIndex++) {
-            Point movementVector = this.getMovementVector(direction);
+            Point movementVector = Directions.getDirectionModifier(direction);
             int newX = position.x + movementVector.x;
             int newY = position.y + movementVector.y;
             int newDirection = direction;
@@ -342,7 +325,7 @@ public class Day22 {
      */
     private Point moveOnGrid(Discrete2DPositionGrid<Character> mapGrid, Point position, int direction, String moveVal) {
         int moveDistance = Integer.parseInt(moveVal);
-        Point movementVector = this.getMovementVector(direction);
+        Point movementVector = Directions.getDirectionModifier(direction);
 
         for(int moveIndex = 0; moveIndex < moveDistance; moveIndex++) {
             int newX = position.x + movementVector.x;
