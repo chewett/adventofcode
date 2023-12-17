@@ -8,11 +8,6 @@ import java.awt.*;
 public class Day17Pos implements Comparable<Day17Pos> {
 
     //Define a set of directional values to make it easier to use
-    public static int down = 1;
-    public static int left = 2;
-    public static int right = 3;
-    public static int up = 4;
-
 
     public int distance;
     public Point p;

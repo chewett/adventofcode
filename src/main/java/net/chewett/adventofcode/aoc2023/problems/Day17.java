@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.aoc2023.problems;
 
+import net.chewett.adventofcode.Directions;
 import net.chewett.adventofcode.aoc2023.Day17Pos;
 import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
 import net.chewett.adventofcode.helpers.ProblemLoader;
@@ -144,17 +145,17 @@ public class Day17 {
         int newLeftDir = 0;
         int nextXMod = 0;
         int nextYMod = 0;
-        if(cur.direction == Day17Pos.down) {
-            newLeftDir = Day17Pos.right;
+        if(cur.direction == Directions.SOUTH) {
+            newLeftDir = Directions.EAST;
             nextXMod = 1;
-        }else if(cur.direction == Day17Pos.up) {
-            newLeftDir = Day17Pos.left;
+        }else if(cur.direction == Directions.NORTH) {
+            newLeftDir = Directions.WEST;
             nextXMod = -1;
-        }else if(cur.direction == Day17Pos.left) {
-            newLeftDir = Day17Pos.down;
+        }else if(cur.direction == Directions.WEST) {
+            newLeftDir = Directions.SOUTH;
             nextYMod = 1;
-        }else if(cur.direction == Day17Pos.right) {
-            newLeftDir = Day17Pos.up;
+        }else if(cur.direction == Directions.EAST) {
+            newLeftDir = Directions.NORTH;
             nextYMod = -1;
         }
 
@@ -183,17 +184,17 @@ public class Day17 {
         int newRightDir = 0;
         nextXMod = 0;
         nextYMod = 0;
-        if(cur.direction == Day17Pos.down) {
-            newRightDir = Day17Pos.left;
+        if(cur.direction == Directions.SOUTH) {
+            newRightDir = Directions.WEST;
             nextXMod = -1;
-        }else if(cur.direction == Day17Pos.up) {
-            newRightDir = Day17Pos.right;
+        }else if(cur.direction == Directions.NORTH) {
+            newRightDir = Directions.EAST;
             nextXMod = 1;
-        }else if(cur.direction == Day17Pos.left) {
-            newRightDir = Day17Pos.up;
+        }else if(cur.direction == Directions.WEST) {
+            newRightDir = Directions.NORTH;
             nextYMod = -1;
-        }else if(cur.direction == Day17Pos.right) {
-            newRightDir = Day17Pos.down;
+        }else if(cur.direction == Directions.EAST) {
+            newRightDir = Directions.SOUTH;
             nextYMod = 1;
         }
 
@@ -227,8 +228,8 @@ public class Day17 {
         PriorityQueue<Day17Pos> processQueue = new PriorityQueue<>();
 
         //Init the values
-        processQueue.add(new Day17Pos(0, new Point(0, 0), Day17Pos.down));
-        processQueue.add(new Day17Pos(0, new Point(0, 0), Day17Pos.right));
+        processQueue.add(new Day17Pos(0, new Point(0, 0), Directions.SOUTH));
+        processQueue.add(new Day17Pos(0, new Point(0, 0), Directions.EAST));
 
         Set<String> seenPoints = new HashSet<>();
         Map<String, Integer> seenPointDistances = new HashMap<>();
