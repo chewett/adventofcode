@@ -7,14 +7,14 @@ import java.awt.Point;
  */
 public class Directions {
 
-    public static int NORTH = 1;
-    public static int UP = 1;
-    public static int EAST = 2;
-    public static int RIGHT = 2;
-    public static int SOUTH = 3;
-    public static int DOWN =3;
-    public static int WEST = 4;
-    public static int LEFT = 4;
+    public static final int NORTH = 1;
+    public static final int UP = 1;
+    public static final int EAST = 2;
+    public static final int RIGHT = 2;
+    public static final int SOUTH = 3;
+    public static final int DOWN =3;
+    public static final int WEST = 4;
+    public static final int LEFT = 4;
 
 
     /**
