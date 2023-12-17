@@ -1,5 +1,6 @@
 package net.chewett.adventofcode.aoc2022.problems;
 
+import net.chewett.adventofcode.Directions;
 import net.chewett.adventofcode.datastructures.Discrete2DPositionGrid;
 import net.chewett.adventofcode.datastructures.Point3D;
 import net.chewett.adventofcode.helpers.FormatConversion;
@@ -172,12 +173,6 @@ import java.util.List;
  */
 public class Day22 {
 
-    public static final int RIGHT = 0;
-    public static final int DOWN = 1;
-    public static final int LEFT = 2;
-    public static final int UP = 3;
-
-
     /**
      * Given the current position this will determine the new position for part two (if it needs changing)
      * @param newX New X position
@@ -191,78 +186,78 @@ public class Day22 {
         if(newX == 49 && (newY >= 0 && newY <= 49)) {
             newY = 149 - newY;
             newX = 0;
-            newDirection = Day22.RIGHT;
+            newDirection = Directions.EAST;
 
         }else if(newX == -1 && (newY >= 100 && newY <= 149)) {
             newY = 149 - newY;
             newX = 50;
-            newDirection = Day22.RIGHT;
+            newDirection = Directions.EAST;
 
         }else if(newY == 99 && (newX >= 0 && newX <= 49)) {
             newY = newX + 50;
             newX = 50;
-            newDirection = Day22.RIGHT;
+            newDirection = Directions.EAST;
         }else if(newX == 100 && (newY >= 50 && newY <= 99)) {
 
             newX = newY + 50;
             newY = 49;
-            newDirection = Day22.UP;
+            newDirection = Directions.NORTH;
 
         }else if(newY == 50 && (newX >= 100 && newX <= 149)) {
 
             newY = newX - 50;
             newX = 99;
-            newDirection = Day22.LEFT;
+            newDirection = Directions.WEST;
 
         }else if(newY == -1 && (newX >= 100 && newX <= 149)) {
 
             newX = newX - 100;
             newY = 199;
-            newDirection = Day22.UP;
+            newDirection = Directions.NORTH;
 
         }else if(newX == -1 && (newY >= 150 && newY <= 199)) {
             newX = newY -100;
             newY = 0;
-            newDirection = Day22.DOWN;
+            newDirection = Directions.SOUTH;
 
         }else if(newY == -1 && (newX >= 50 && newX <= 99)) {
             newY = newX + 100;
             newX = 0;
-            newDirection = Day22.RIGHT;
+            newDirection = Directions.EAST;
 
         }else if(newX == 100 && (newY >= 100 && newY <= 149)) {
 
             newY = 149 - newY;
             newX = 149;
-            newDirection = Day22.LEFT;
+            newDirection = Directions.WEST;
 
         }else if(newX == 150 && (newY >= 0 && newY <= 49)) {
 
             newY = 100 + (49 - newY);
             newX = 99;
-            newDirection = Day22.LEFT;
+            newDirection = Directions.WEST;
 
         }else if(newY == 150 && (newX >= 50 && newX <= 99)) {
             newY = newX + 100;
             newX = 49;
-            newDirection = Day22.LEFT;
+            newDirection = Directions.WEST;
 
         }else if(newX == 49 && (newY >= 50 && newY <= 99)) {
 
             newX = newY - 50;
             newY = 100;
-            newDirection = Day22.DOWN;
+            newDirection = Directions.SOUTH;
 
         }else if(newX == 50 && (newY >= 150 && newY <= 199)) {
 
             newX = newY - 100;
             newY = 149;
-            newDirection = Day22.UP;
+            newDirection = Directions.NORTH;
 
         }else if(newY == 200 && (newX >= 0 && newX <= 49)) {
             newX = newX + 100;
             newY = 0;
-            newDirection = Day22.DOWN;
+            newDirection = Directions.SOUTH;
 
         }else {
             throw new RuntimeException("Unknown coordinates");
@@ -275,13 +270,13 @@ public class Day22 {
     private Point getMovementVector(int movementId) {
         int moveY = 0;
         int moveX = 0;
-        if(movementId == Day22.RIGHT) {
+        if(movementId == Directions.EAST) {
             moveX = 1;
-        }else if(movementId == Day22.DOWN) {
+        }else if(movementId == Directions.SOUTH) {
             moveY = 1;
-        }else if(movementId == Day22.LEFT) {
+        }else if(movementId == Directions.WEST) {
             moveX = -1;
-        }else if(movementId == Day22.UP) {
+        }else if(movementId == Directions.NORTH) {
             moveY = -1;
         }
 
@@ -356,7 +351,7 @@ public class Day22 {
             char nextMovementLocation = mapGrid.getValueAtPosition(newX, newY);
             //If its a space then we need to work out where the next "real" space is located
             if(nextMovementLocation == ' ') {
-                if(direction == Day22.RIGHT) {
+                if(direction == Directions.EAST) {
                     for(int x = mapGrid.getMinX(); x <= mapGrid.getMaxX(); x++) {
                         char charToCheck = mapGrid.getValueAtPosition(x, newY);
                         if(charToCheck != ' ') {
@@ -366,7 +361,7 @@ public class Day22 {
                         }
                     }
 
-                }else if(direction == Day22.DOWN) {
+                }else if(direction == Directions.SOUTH) {
                     for(int y = mapGrid.getMinY(); y <= mapGrid.getMaxY(); y++) {
                         char charToCheck = mapGrid.getValueAtPosition(newX, y);
                         if(charToCheck != ' ') {
@@ -376,7 +371,7 @@ public class Day22 {
                         }
                     }
 
-                }else if(direction == Day22.LEFT) {
+                }else if(direction == Directions.WEST) {
                     for(int x = mapGrid.getMaxX(); x >= mapGrid.getMinX(); x--) {
                         char charToCheck = mapGrid.getValueAtPosition(x, newY);
                         if(charToCheck != ' ') {
@@ -385,7 +380,7 @@ public class Day22 {
                             break;
                         }
                     }
-                }else if(direction == Day22.UP) {
+                }else if(direction == Directions.NORTH) {
                     for(int y = mapGrid.getMaxY(); y >= mapGrid.getMinY(); y--) {
                         char charToCheck = mapGrid.getValueAtPosition(newX, y);
                         if(charToCheck != ' ') {
@@ -438,7 +433,7 @@ public class Day22 {
             }
         }
 
-        int direction = Day22.RIGHT;
+        int direction = Directions.EAST;
 
         String currentMove = "";
         for(int inputIndex = 0; inputIndex < moves.length(); inputIndex++) {
@@ -448,12 +443,12 @@ public class Day22 {
 
                 if(thisChar == 'R') {
                     direction++;
-                    if(direction > 3) {
+                    if(direction > 4) {
                         direction -= 4;
                     }
                 }else if(thisChar == 'L') {
                     direction--;
-                    if(direction < 0) {
+                    if(direction < 1) {
                         direction += 4;
                     }
                 }
@@ -465,8 +460,22 @@ public class Day22 {
 
         position = this.moveOnGrid(mapGrid, position, direction, currentMove);
 
+        int directionVal;
+        if(direction == Directions.EAST) {
+            directionVal = 0;
+        }else if(direction == Directions.SOUTH) {
+            directionVal = 1;
+        }else if(direction == Directions.WEST) {
+            directionVal = 2;
+        }else if(direction == Directions.NORTH) {
+            directionVal = 3;
+        }else{
+            throw new RuntimeException("Invalid direction found");
+        }
+
+
         //Zero index so add one to position of X and Y
-        return (1000 * (position.y + 1)) + (4 * (position.x + 1)) + direction;
+        return (1000 * (position.y + 1)) + (4 * (position.x + 1)) + directionVal;
     }
 
     /**
@@ -496,7 +505,7 @@ public class Day22 {
             }
         }
 
-        int direction = Day22.RIGHT;
+        int direction = Directions.EAST;
 
         String currentMove = "";
         for(int inputIndex = 0; inputIndex < moves.length(); inputIndex++) {
@@ -506,12 +515,12 @@ public class Day22 {
 
                 if(thisChar == 'R') {
                     direction++;
-                    if(direction > 3) {
+                    if(direction > 4) {
                         direction -= 4;
                     }
                 }else if(thisChar == 'L') {
                     direction--;
-                    if(direction < 0) {
+                    if(direction < 1) {
                         direction += 4;
                     }
                 }
@@ -523,8 +532,21 @@ public class Day22 {
 
         direction = this.moveOnGridPartTwo(mapGrid, position, direction, currentMove);
 
+        int directionVal;
+        if(direction == Directions.EAST) {
+            directionVal = 0;
+        }else if(direction == Directions.SOUTH) {
+            directionVal = 1;
+        }else if(direction == Directions.WEST) {
+            directionVal = 2;
+        }else if(direction == Directions.NORTH) {
+            directionVal = 3;
+        }else{
+            throw new RuntimeException("Invalid direction found");
+        }
+
         //Zero index so add one to position of X and Y
-        return (1000 * (position.y + 1)) + (4 * (position.x + 1)) + direction;
+        return (1000 * (position.y + 1)) + (4 * (position.x + 1)) + directionVal;
     }
 
     public static void main(String[] args) {
