@@ -1,10 +1,7 @@
 package net.chewett.adventofcode.datastructures;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Simple discrete grid of x/y points that allows getting/putting values at any position with a default value
@@ -446,6 +443,51 @@ public class Discrete2DPositionGrid<T> {
      */
     public boolean pointInsideGraph(int x, int y) {
         return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY;
+    }
+
+    /**
+     * Given a value this will flood fill the grid area with that value where every point is the value to flood
+     * Normally you tell it to flood the background character which is typically a .
+     *
+     * @param floodVal Value to flood the grid with
+     * @param valToFlood Value that should be flooded
+     */
+    public void floodFillTopLeft(T floodVal, T valToFlood) {
+        //Define a bounding box slightly larger so we can flood "around" the area
+        int minX = this.getMinX() - 1;
+        int maxX = this.getMaxX() + 1;
+        int minY = this.getMinY() - 1;
+        int maxY = this.getMaxY() + 1;
+
+        Set<Point> visited = new HashSet<>();
+        Stack<Point> pointsToFlood = new Stack<>();
+        //Always start top left and flood around the bounding box
+        pointsToFlood.add(new Point(minX, minY));
+
+        //Keep going until we are done!
+        while(!pointsToFlood.isEmpty()) {
+            Point newFlood = pointsToFlood.pop();
+            visited.add(newFlood);
+            this.setValueAtPosition(newFlood, floodVal);
+            List<Point> newFloods = this.getDirectlyAdjacentRegardlessOfSize(newFlood);
+            for (Point newFloodAttempt : newFloods) {
+                if (
+                    !visited.contains(newFloodAttempt) && //We haven't visited this (stops loops)
+                    this.getValueAtPosition(newFloodAttempt) == valToFlood && // This value we are visiting is the defined flood values
+                    (newFloodAttempt.x >= minX && newFloodAttempt.x <= maxX && newFloodAttempt.y >= minY && newFloodAttempt.y <= maxY) //inside bounding box
+                ) {
+                    pointsToFlood.add(newFloodAttempt);
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the total number of positions in the grid.
+     * @return Number of total positions on the grid
+     */
+    public int getTotalPositions() {
+        return (1 + this.maxX - this.minX) * (1 + this.maxY - this.minY);
     }
 
 }
