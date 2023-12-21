@@ -487,7 +487,23 @@ public class Discrete2DPositionGrid<T> {
      * @return Number of total positions on the grid
      */
     public int getTotalPositions() {
-        return (1 + this.maxX - this.minX) * (1 + this.maxY - this.minY);
+        return this.getWidth() * this.getHeight();
+    }
+
+    /**
+     * Helper function to get the width of the grid
+     * @return Width of the grid
+     */
+    public int getWidth() {
+        return (this.maxX - this.minX + 1);
+    }
+
+    /**
+     * Helper function to get the height of the grid
+     * @return Height of the grid
+     */
+    public int getHeight() {
+        return (this.maxY - this.minY + 1);
     }
 
 }
