@@ -182,7 +182,7 @@ public class Day22 {
         //Sort by z so we can move all of the ones down in order (speeds up the moving down)
         cubes.sort(Comparator.comparingInt(Cuboid::getZ));
 
-        //Tracking this makes it MUCH faster since we don't keep iterating over
+        //Tracking the blocks that can no longer be moved down makes it MUCH faster since we don't keep iterating over the same blocks
         Set<String> blocksThatHaveReachedFinalPosition = new HashSet<>();
 
         //Keep going until we can no longer move any of the cuboids
@@ -198,7 +198,7 @@ public class Day22 {
                     continue;
                 }
 
-                //If we know we have reached the "Final pos" for this cube them we just automatically add it
+                //If we know we have reached the "final pos" for this cube them we just automatically add it
                 if(blocksThatHaveReachedFinalPosition.contains(cubeToTryMoving.toString())) {
                     newCubes.add(cubeToTryMoving);
                     continue;
@@ -242,7 +242,6 @@ public class Day22 {
             }
             cubes = newCubes;
         }
-
         return cubes;
     }
 
