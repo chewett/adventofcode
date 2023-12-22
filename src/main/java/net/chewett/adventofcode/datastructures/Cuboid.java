@@ -3,6 +3,9 @@ package net.chewett.adventofcode.datastructures;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Nice helper class to hold information about a Cuboid and have useful intersection methods
+ */
 public class Cuboid {
 
     private int x;
@@ -21,6 +24,11 @@ public class Cuboid {
         this.z2 = z2;
     }
 
+    /**
+     * Returns true if the cuboid passed in intersects with this cuboid
+     * @param c Cuboid to test against
+     * @return True if this cuboid intersects with the passed in cuboid
+     */
     public boolean intersects(Cuboid c) {
         //Intersection is that
         //For every axis (X, Y, Z)
@@ -30,6 +38,10 @@ public class Cuboid {
         return (this.x <= c.x2 && c.x <= this.x2) && (this.y <= c.y2 && c.y <= this.y2) && (this.z <= c.z2 && c.z <= this.z2);
     }
 
+    /**
+     * Gets the contained area of the cuboid
+     * @return Contained area of the cuboid
+     */
     public long getContainedArea() {
         return (1L+ this.x2 - this.x) * (1L+ this.y2 - this.y) * (1L+ this.z2 - this.z);
     }
@@ -81,6 +93,38 @@ public class Cuboid {
         }
 
         return newSetOfCubes;
+    }
+
+    /**
+     * Returns the cuboid represented after moving this cuboid down by one
+     * @return This cuboid shifted by one Z downwards (less Z)
+     */
+    public Cuboid moveDown() {
+        return new Cuboid(x, x2, y, y2, z-1, z2-1);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getX2() {
+        return x2;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getY2() {
+        return y2;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    public int getZ2() {
+        return z2;
     }
 
     @Override

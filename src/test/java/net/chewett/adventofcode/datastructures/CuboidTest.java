@@ -25,6 +25,13 @@ public class CuboidTest {
     }
 
     @Test
+    public void testIntersectsTrueOneSize() {
+        Cuboid c = new Cuboid(0, 0, 1, 1, 2, 2);
+        Cuboid c2 = new Cuboid(0, 0, 1, 1, 2, 2);
+        Assertions.assertTrue(c.intersects(c2));
+    }
+
+    @Test
     public void testIntersectsTrueSimpleCase() {
         Cuboid c = new Cuboid(0, 10, 0, 10, 0, 10);
         Cuboid c2 = new Cuboid(0, 10, 0, 10, 0, 10);
