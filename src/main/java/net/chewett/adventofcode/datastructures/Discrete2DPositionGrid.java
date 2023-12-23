@@ -121,6 +121,10 @@ public class Discrete2DPositionGrid<T> {
      * @return All positions the value is found
      */
     public List<Point> getPositionsOfValue(T t) {
+        if(t == this.defaultValue) {
+            return this.getPositionsOfDefaultValue();
+        }
+
         List<Point> locations = new ArrayList<>();
         for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
             for(Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
@@ -134,12 +138,46 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
+     * Handle the slightly different logic to find the default point, as we typically don't store that!
+     * @return All positions the value is found
+     */
+    private List<Point> getPositionsOfDefaultValue() {
+        List<Point> allPoints = new ArrayList<>();
+        for(int y = this.minY; y <= this.maxY; y++) {
+            for (int x = this.minX; x <= this.maxX; x++) {
+                T foundVal = this.getValueAtPosition(x, y);
+                if(foundVal == this.defaultValue) {
+                    allPoints.add(new Point(x, y));
+                }
+            }
+        }
+        return allPoints;
+    }
+
+    /**
      * Given a point generate a list of all directly adjacent points
      * @param p Point to find the adjacent values for
      * @return List of all points directly adjacent to this one
      */
     public List<Point> getDirectlyAdjacentPoints(Point p) {
         return this.getDirectlyAdjacentPoints(p.x, p.y);
+    }
+
+    /**
+     * Given a point generate a list of all directly adjacent points
+     * @param p Point to find the adjacent values for
+     * @param typeToFind type to find
+     * @return List of all points directly adjacent to this one
+     */
+    public List<Point> getDirectlyAdjacentPoints(Point p, T typeToFind) {
+        List<Point> possiblePoints = this.getDirectlyAdjacentPoints(p.x, p.y);
+        List<Point> realPoints = new ArrayList<>();
+        for(Point possible : possiblePoints) {
+            if(this.getValueAtPosition(possible) == typeToFind) {
+                realPoints.add(possible);
+            }
+        }
+        return realPoints;
     }
 
     /**
