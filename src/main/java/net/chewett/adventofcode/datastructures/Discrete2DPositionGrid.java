@@ -116,7 +116,7 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
-     * Givne a value T this will find all the positions that this value is stored at
+     * Given a value T this will find all the positions that this value is stored at
      * @param t Value to find in the data structure
      * @return All positions the value is found
      */
@@ -131,6 +131,19 @@ public class Discrete2DPositionGrid<T> {
         }
 
         return locations;
+    }
+
+    /**
+     * Given a value T this will find the position this value is stored at
+     * @param t Value to find in the data structure
+     * @return The position this value is stored at
+     */
+    public Point getPositionOfValueAssumingOnlyOne(T t) {
+        List<Point> locations = getPositionsOfValue(t);
+        if(locations.size() != 1) {
+            throw new RuntimeException("Expected one position and found " + locations.size());
+        }
+        return locations.get(0);
     }
 
     /**
