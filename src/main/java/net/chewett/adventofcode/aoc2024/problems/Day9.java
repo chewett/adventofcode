@@ -182,12 +182,12 @@ public class Day9 {
         int currentBlockStartIndex = -1;
         for(int scanIndex = 0; scanIndex < blocks.size(); scanIndex++) {
             if(currentBlock == -1 && blocks.get(scanIndex) != -1L) {
-                currentBlock = blocks.get(scanIndex).intValue();
+                currentBlock = blocks.get(scanIndex);
 
                 currentBlockStartIndex = scanIndex;
             }else if(currentBlock != -1 && blocks.get(scanIndex) != currentBlock) {
                 blockLocations.put(currentBlock, new Pair<>(currentBlockStartIndex, scanIndex - currentBlockStartIndex));
-                currentBlock = blocks.get(scanIndex).intValue();
+                currentBlock = blocks.get(scanIndex);
                 currentBlockStartIndex = scanIndex;
             }
             //Not really a fan of this!
@@ -198,7 +198,7 @@ public class Day9 {
         //Find where all the space is
         int currentSpaceStart = -1;
         for(int scanIndex = 0; scanIndex < blocks.size(); scanIndex++) {
-            int thisBlock = blocks.get(scanIndex).intValue();
+            int thisBlock = blocks.get(scanIndex);
             if(currentSpaceStart == -1 && thisBlock == -1) {
                 currentSpaceStart = scanIndex;
             }else if(currentSpaceStart != -1 && thisBlock != -1) {
