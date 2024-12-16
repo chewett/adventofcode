@@ -162,7 +162,7 @@ public class Day16 {
         Point start = input.getPositionOfValueAssumingOnlyOne('S');
         Point end = input.getPositionOfValueAssumingOnlyOne('E');
 
-        Queue<DirectionPositionCost> explorePoints = new LinkedList<>();
+        PriorityQueue<DirectionPositionCost> explorePoints = new PriorityQueue<>((o1, o2) -> Long.compare(o1.cost, o2.cost));
         //This assumes the visit costs for the directions are the same which isn't actually true but it works for my input
         //Need to change this to make it more thorough as a technical exercise
         Discrete2DPositionGrid<Long> visitCosts = new Discrete2DPositionGrid<>(Long.MAX_VALUE);
@@ -209,8 +209,7 @@ public class Day16 {
         Point start = input.getPositionOfValueAssumingOnlyOne('S');
         Point end = input.getPositionOfValueAssumingOnlyOne('E');
 
-        //TODO: Convert this to a priority queue
-        Queue<DirectionPositionCost> explorePoints = new LinkedList<>();
+        PriorityQueue<DirectionPositionCost> explorePoints = new PriorityQueue<>((o1, o2) -> Long.compare(o1.cost, o2.cost));
         Discrete2DPositionGrid<Long> visitCostsNorth = new Discrete2DPositionGrid<>(Long.MAX_VALUE);
         Discrete2DPositionGrid<Long> visitCostsSouth = new Discrete2DPositionGrid<>(Long.MAX_VALUE);
         Discrete2DPositionGrid<Long> visitCostsEast = new Discrete2DPositionGrid<>(Long.MAX_VALUE);
