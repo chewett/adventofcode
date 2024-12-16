@@ -82,6 +82,18 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
+     * Removes the value from the given X and Y position. This can help other functions later
+     * @param x
+     * @param y
+     */
+    public void unsetValueAtPosition(int x, int y) {
+        if(!this.positionStore.containsKey(x)) {
+            return;
+        }
+        this.positionStore.get(x).remove(y);
+    }
+
+    /**
      * Counts the occurrences of the given value in the datastructure
      * @param value The value to search for
      * @return The number of times the value occurs in the datastructure
