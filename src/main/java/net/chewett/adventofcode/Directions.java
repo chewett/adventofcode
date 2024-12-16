@@ -74,5 +74,25 @@ public class Directions {
         throw new RuntimeException("Bad parameter passed to getDirectionModifier");
     }
 
+    /**
+     * Given a character representing a move (either > < ^ v ) return a point modifier
+     * @param c Character representing a move (must be one of > < ^ v )
+     * @return Direction modifier as a Point
+     */
+    public static Point getDirectionModifierFromChar(char c) {
+        if(c == '^') {
+            return Directions.getDirectionModifier(Directions.NORTH);
+        }else if(c == 'v') {
+            return Directions.getDirectionModifier(Directions.SOUTH);
+        }else if(c == '>') {
+            return Directions.getDirectionModifier(Directions.EAST);
+        }else if(c == '<') {
+            return Directions.getDirectionModifier(Directions.WEST);
+        }else{
+            throw new RuntimeException("Unknown direction character " + c);
+        }
+
+    }
+
 
 }
