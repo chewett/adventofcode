@@ -1,7 +1,8 @@
 package net.chewett.adventofcode.datastructures;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Simple discrete grid of x/y points that allows getting/putting values at any position with a default value
@@ -108,6 +109,16 @@ public class Discrete2DPositionGrid<T> {
             }
         }
         return count;
+    }
+
+    public List<Point> getAllPositionsAValueIsStoredAt() {
+        List<Point> allPositions = new ArrayList<>();
+        for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
+            for(Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
+                allPositions.add(new Point(xEntry.getKey(), yEntry.getKey()));
+            }
+        }
+        return allPositions;
     }
 
     /**
@@ -529,6 +540,28 @@ public class Discrete2DPositionGrid<T> {
      */
     public int getHeight() {
         return (this.maxY - this.minY + 1);
+    }
+
+    /**
+     * Get all the points within the manhattan distance of the current point, ignoring the central point
+     * @param p Point to get the values from
+     * @param r Radius to get the points
+     * @return All points within the manhattan distance not including this one
+     */
+    public List<Point> generateAllPointsInTheManhattenRegionOfThis(Point p, int r) {
+        List<Point> allPoints = new ArrayList<>();
+
+        for (int x = p.x - r; x <= p.x + r; x++) {
+            for (int y = p.y - r; y <= p.y + r; y++) {
+                //Make sure we ignore this one
+                if (Math.abs(x - p.x) + Math.abs(y - p.y) <= r && !(p.x == x && p.y == y )) {
+                    allPoints.add(new Point(x, y));
+                }
+            }
+        }
+
+
+        return allPoints;
     }
 
 }

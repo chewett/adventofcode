@@ -3,6 +3,9 @@ package net.chewett.adventofcode.datastructures;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.awt.Point;
+import java.util.List;
+
 public class Discrete2DPositionGridTest {
 
     @Test
@@ -46,6 +49,20 @@ public class Discrete2DPositionGridTest {
         Assertions.assertEquals(5, dpg.countInstancesOfValue(7));
     }
 
+
+    @Test
+    public void testGenerateAllPointsInTheManhattenRegionOfThisRadiusOne() {
+        Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
+        List<Point> allPoints = dpg.generateAllPointsInTheManhattenRegionOfThis(new Point(0, 0), 1);
+        Assertions.assertEquals(4, allPoints.size());
+    }
+
+    @Test
+    public void testGenerateAllPointsInTheManhattenRegionOfThisRadiusTwo() {
+        Discrete2DPositionGrid<Integer> dpg = new Discrete2DPositionGrid<>(0);
+        List<Point> allPoints = dpg.generateAllPointsInTheManhattenRegionOfThis(new Point(0, 0), 2);
+        Assertions.assertEquals(12, allPoints.size());
+    }
 
 
 }
