@@ -164,7 +164,7 @@ public class Discrete2DPositionGrid<T> {
     public Point getPositionOfValueAssumingOnlyOne(T t) {
         List<Point> locations = getPositionsOfValue(t);
         if(locations.size() != 1) {
-            throw new RuntimeException("Expected one position and found " + locations.size());
+            throw new RuntimeException("Expected one position and found " + locations.size() + " for element " + t);
         }
         return locations.get(0);
     }
