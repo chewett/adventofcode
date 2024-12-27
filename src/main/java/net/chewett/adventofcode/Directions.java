@@ -74,5 +74,70 @@ public class Directions {
         throw new RuntimeException("Bad parameter passed to getDirectionModifier");
     }
 
+    /**
+     * Given a character representing a move (either > < ^ v ) return a point modifier
+     * @param c Character representing a move (must be one of > < ^ v )
+     * @return Direction modifier as a Point
+     */
+    public static Point getDirectionModifierFromChar(char c) {
+        if(c == '^') {
+            return Directions.getDirectionModifier(Directions.NORTH);
+        }else if(c == 'v') {
+            return Directions.getDirectionModifier(Directions.SOUTH);
+        }else if(c == '>') {
+            return Directions.getDirectionModifier(Directions.EAST);
+        }else if(c == '<') {
+            return Directions.getDirectionModifier(Directions.WEST);
+        }else{
+            throw new RuntimeException("Unknown direction character " + c);
+        }
+    }
+
+    /**
+     * Starting from P2, work out which cardinal direction this is from
+     * Assumes the points are one cardinal direction from each other
+     * @param p
+     * @param p2
+     * @return
+     */
+    public static int getDirectionFromPointToPoint(Point p, Point p2) {
+        if(p.y < p2.y) {
+            return Directions.SOUTH;
+        }else if(p.y > p2.y) {
+            return Directions.NORTH;
+        }else if(p.x < p2.x) {
+            return Directions.EAST;
+        }else if(p.x > p2.x) {
+            return Directions.WEST;
+        }else{
+            throw new RuntimeException("Unexpected input of points...");
+        }
+    }
+
+    /**
+     * Helper function to work out how many turns you need to go from one direction to another
+     * @param direction1 Direction ID
+     * @param direction2 Direction ID
+     * @return Number of 90 degree turns needed to move from one direction to another
+     */
+    public static int getTurnsNeededToMoveFromDirectionToDirection(int direction1, int direction2) {
+        if(direction1 == direction2) {
+            return 0;
+        }
+
+        if(direction1 == Directions.NORTH) {
+            if(direction2 == Directions.SOUTH) { return 2; }else{ return 1; }
+        }else if(direction1 == Directions.SOUTH) {
+            if(direction2 == Directions.NORTH) { return 2; }else{ return 1; }
+        }else if(direction1 == Directions.EAST) {
+            if(direction2 == Directions.WEST) { return 2; }else{ return 1; }
+        }else if(direction1 == Directions.WEST) {
+            if(direction2 == Directions.EAST) { return 2; }else{ return 1; }
+        }else{
+            throw new RuntimeException("Unexpected input of direction...");
+        }
+    }
+
+
 
 }

@@ -1,7 +1,8 @@
 package net.chewett.adventofcode.datastructures;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Simple discrete grid of x/y points that allows getting/putting values at any position with a default value
@@ -82,6 +83,18 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
+     * Removes the value from the given X and Y position. This can help other functions later
+     * @param x
+     * @param y
+     */
+    public void unsetValueAtPosition(int x, int y) {
+        if(!this.positionStore.containsKey(x)) {
+            return;
+        }
+        this.positionStore.get(x).remove(y);
+    }
+
+    /**
      * Counts the occurrences of the given value in the datastructure
      * @param value The value to search for
      * @return The number of times the value occurs in the datastructure
@@ -96,6 +109,16 @@ public class Discrete2DPositionGrid<T> {
             }
         }
         return count;
+    }
+
+    public List<Point> getAllPositionsAValueIsStoredAt() {
+        List<Point> allPositions = new ArrayList<>();
+        for(Map.Entry<Integer, Map<Integer, T>> xEntry : this.positionStore.entrySet()) {
+            for(Map.Entry<Integer, T> yEntry : xEntry.getValue().entrySet()) {
+                allPositions.add(new Point(xEntry.getKey(), yEntry.getKey()));
+            }
+        }
+        return allPositions;
     }
 
     /**
@@ -116,7 +139,7 @@ public class Discrete2DPositionGrid<T> {
     }
 
     /**
-     * Givne a value T this will find all the positions that this value is stored at
+     * Given a value T this will find all the positions that this value is stored at
      * @param t Value to find in the data structure
      * @return All positions the value is found
      */
@@ -143,15 +166,28 @@ public class Discrete2DPositionGrid<T> {
      */
     private List<Point> getPositionsOfDefaultValue() {
         List<Point> allPoints = new ArrayList<>();
-        for(int y = this.minY; y <= this.maxY; y++) {
+        for (int y = this.minY; y <= this.maxY; y++) {
             for (int x = this.minX; x <= this.maxX; x++) {
                 T foundVal = this.getValueAtPosition(x, y);
-                if(foundVal == this.defaultValue) {
+                if (foundVal == this.defaultValue) {
                     allPoints.add(new Point(x, y));
                 }
             }
         }
         return allPoints;
+    }
+
+    /*
+     * Given a value T this will find the position this value is stored at
+     * @param t Value to find in the data structure
+     * @return The position this value is stored at
+     */
+    public Point getPositionOfValueAssumingOnlyOne(T t) {
+        List<Point> locations = getPositionsOfValue(t);
+        if(locations.size() != 1) {
+            throw new RuntimeException("Expected one position and found " + locations.size() + " for element " + t);
+        }
+        return locations.get(0);
     }
 
     /**
@@ -542,6 +578,28 @@ public class Discrete2DPositionGrid<T> {
      */
     public int getHeight() {
         return (this.maxY - this.minY + 1);
+    }
+
+    /**
+     * Get all the points within the manhattan distance of the current point, ignoring the central point
+     * @param p Point to get the values from
+     * @param r Radius to get the points
+     * @return All points within the manhattan distance not including this one
+     */
+    public List<Point> generateAllPointsInTheManhattenRegionOfThis(Point p, int r) {
+        List<Point> allPoints = new ArrayList<>();
+
+        for (int x = p.x - r; x <= p.x + r; x++) {
+            for (int y = p.y - r; y <= p.y + r; y++) {
+                //Make sure we ignore this one
+                if (Math.abs(x - p.x) + Math.abs(y - p.y) <= r && !(p.x == x && p.y == y )) {
+                    allPoints.add(new Point(x, y));
+                }
+            }
+        }
+
+
+        return allPoints;
     }
 
 }
