@@ -13,7 +13,7 @@ While doing this I have built up a library of helpers which allow me to solve th
 
 ## Completion progress
 
-* [2024] 42 Stars - Just casually doing these
+* [2024] 50 Stars - Just casually doing these
 * [2023] 50 Stars - Did most of these at 5am 
 * [2022] 50 Stars 
 * [2021] 50 Stars 
