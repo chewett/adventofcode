@@ -57,4 +57,12 @@ I was very pleased to get in the top 1000 some days. My leaderboard results are:
 | 2   | 00:12:28      | 2020          | 00:15:40      | 1691          |
 | 1   | 00:15:35      | 7015          | 00:42:07      | 4838          |
 
+## Getting Z3
+
+I used Z3 for one of the problems
+
+* Download it here: https://github.com/Z3Prover/z3/releases
+* Copy the com.microsoft.z3.jar to a libs folder in the root directory
+* Then it should all work
+
 
