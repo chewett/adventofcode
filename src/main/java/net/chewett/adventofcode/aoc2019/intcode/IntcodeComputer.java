@@ -102,6 +102,12 @@ public class IntcodeComputer {
         this.input.add(input);
     }
 
+    public void addAllToInput(String input) {
+        for(char c : input.toCharArray()) {
+            this.addToInput((int)c);
+        }
+    }
+
     public boolean hasInputToRead() {
         return this.input.size() > 0;
     }
