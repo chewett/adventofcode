@@ -1,6 +1,8 @@
 package net.chewett.adventofcode;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Simple helper class to handle directions generally
@@ -138,6 +140,68 @@ public class Directions {
         }
     }
 
+    //TODO Documentation
+    public static List<String> getDirectionsFromPointToPoint(int curDirection, int nextDirection) {
+        List<String> directionsToMove = new ArrayList<String>();
 
+        int directionMoveVal = Directions.getTurnsNeededToMoveFromDirectionToDirection(curDirection, nextDirection);
+
+        if(directionMoveVal == 0) {
+            return directionsToMove;
+        }else if(directionMoveVal == 2) {
+            directionsToMove.add("L");
+            directionsToMove.add("L");
+            return directionsToMove;
+        }
+
+        if(curDirection == Directions.NORTH) {
+            if(nextDirection == Directions.WEST) {
+                directionsToMove.add("L");
+            }else{
+                directionsToMove.add("R");
+            }
+        }else if(curDirection == Directions.SOUTH) {
+            if(nextDirection == Directions.EAST) {
+                directionsToMove.add("L");
+            }else{
+                directionsToMove.add("R");
+            }
+        }else if(curDirection == Directions.EAST) {
+            if(nextDirection == Directions.NORTH) {
+                directionsToMove.add("L");
+            }else{
+                directionsToMove.add("R");
+            }
+        }else if(curDirection == Directions.WEST) {
+            if(nextDirection == Directions.SOUTH) {
+                directionsToMove.add("L");
+            }else{
+                directionsToMove.add("R");
+            }
+        }else{
+            throw new RuntimeException("Unexpected input of direction...");
+        }
+
+        return directionsToMove;
+    }
+
+    //TODO Documentation
+    public static Point getPointInDirection(Point p, int direction) {
+        Point newPoint = new Point(p);
+
+        if(direction == Directions.NORTH) {
+            newPoint.y -= 1;
+        }else if(direction == Directions.SOUTH) {
+            newPoint.y += 1;
+        }else if(direction == Directions.EAST) {
+            newPoint.x += 1;
+        }else if(direction == Directions.WEST) {
+            newPoint.x -= 1;
+        }else{
+            throw new RuntimeException("Unexpected input of direction...");
+        }
+
+        return newPoint;
+    }
 
 }
