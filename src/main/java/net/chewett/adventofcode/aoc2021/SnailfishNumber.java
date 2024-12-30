@@ -145,7 +145,7 @@ public class SnailfishNumber {
     }
 
     /**
-     * Perform the explosion checking code, if its found then we start exploding it and handling that
+     * Perform the explosion checking code, if it's found then we start exploding it and handling that
      * @return Boolean representing whether an explosion was found or not
      */
     public boolean checkForExplosions() {

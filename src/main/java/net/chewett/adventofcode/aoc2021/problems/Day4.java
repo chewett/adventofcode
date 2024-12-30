@@ -115,7 +115,7 @@ public class Day4 {
     }
 
     /**
-     * Find out what board will win first and then calculate its score
+     * Find out what board will win first and then calculate it's score
      * @param bingo_instructions List of strings with the bingo data
      * @return Return the score of the winning bingo board
      */

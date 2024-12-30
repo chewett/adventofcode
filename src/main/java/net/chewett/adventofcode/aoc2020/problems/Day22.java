@@ -445,7 +445,7 @@ public class Day22 {
                 p2.add(p2Number);
                 p2.add(p1Number);
             }else{
-                throw new RuntimeException("Rules dont seem to state what happens when its equal");
+                throw new RuntimeException("Rules dont seem to state what happens when it's equal");
             }
         }
 

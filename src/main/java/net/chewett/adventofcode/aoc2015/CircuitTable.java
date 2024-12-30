@@ -93,7 +93,7 @@ public class CircuitTable {
                         outValue = leftSide >> rightSide;
                     }
 
-                    //NOT is handled differently as its a simple value
+                    //NOT is handled differently as it's a simple value
                 }else if(operation.contains("NOT ")) {
                     String thisWire = operation.replace("NOT ", "");
 
@@ -111,7 +111,7 @@ public class CircuitTable {
                     }
 
                 }else{
-                    //If it isn't an operation its a simple set
+                    //If it isn't an operation it's a simple set
                     try {
                         outValue = Long.parseLong(operation);
                     }catch(NumberFormatException e) {

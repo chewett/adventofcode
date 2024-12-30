@@ -240,7 +240,7 @@ public class Day21 {
     }
 
     /**
-     * This time we play the same game, except with the quantum die that splits the universes every time its rolled
+     * This time we play the same game, except with the quantum die that splits the universes every time it's rolled
      * @param p1Start Starting Position of player 1
      * @param p2Start Starting Position of player 2
      * @return The number of times, the player that wins the most, wins in all universes

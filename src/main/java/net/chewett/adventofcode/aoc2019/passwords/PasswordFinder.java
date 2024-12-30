@@ -13,7 +13,7 @@ public class PasswordFinder {
      * - Two adjacent digits are the same (like 22 in 122345).
      * - Going from left to right, the digits never decrease; they only ever increase or stay the same (like 111123 or 135679).
      *
-     * @param num Number to check to see if its a valid password
+     * @param num Number to check to see if it's a valid password
      * @return true if the password is valid, otherwise false
      */
     public static boolean isValidPassword(int num) {
@@ -50,7 +50,7 @@ public class PasswordFinder {
      *
      * The final rule is the new one compared to the above function isValidPassword
      *
-     * @param num Number to check to see if its a valid password
+     * @param num Number to check to see if it's a valid password
      * @return true if the password is valid, otherwise false
      */
     public static boolean isValidPasswordMoreComplex(int num) {

@@ -8,9 +8,9 @@ import java.util.List;
  * cost of movement.
  *
  * Now really the better way to solve this is code up a nice set of objects and programatically determine
- * the costs, distances, whether its possible to move.
+ * the costs, distances, whether it's possible to move.
  *
- * The upside of hardcoding it is that its super fast since everything is just lookups of if statements...
+ * The upside of hardcoding it is that it's super fast since everything is just lookups of if statements...
  *
  * But it took a while to encode...
  *
