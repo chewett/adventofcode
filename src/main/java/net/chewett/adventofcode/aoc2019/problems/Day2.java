@@ -7,12 +7,8 @@ import net.chewett.adventofcode.aoc2019.intcode.instructions.FinishInstruction;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.IntcodeInstruction;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.MultiplyInstruction;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import net.chewett.adventofcode.helpers.ProblemLoader;
+import java.util.*;
 
 /**
  * --- Day 2: 1202 Program Alarm ---
@@ -119,40 +115,76 @@ import java.util.List;
  */
 public class Day2 {
 
-    public void solve() {
-        try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_2_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+    /**
+     * Creates a new exciting "intcode" computer and then work out what the value of the program is once you have run
+     * the gravity assist program when we run it with the values 12 and 2
+     * @param input Intcode program
+     * @return Value after running the gravity assist program
+     */
+    public long solvePartOne(String input) {
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
 
-            //Day two input is a single line, so just load that
-            String st = br.readLine();
-
-            //Set up my Instruction set
-            List<IntcodeInstruction> instructions = new ArrayList<>();
-            instructions.add(new FinishInstruction());
-            instructions.add(new AddInstruction());
-            instructions.add(new MultiplyInstruction());
-
-            //Init the computer so its ready
-            IntcodeComputer icc = new IntcodeComputer(instructions);
-
-            //Load the intcode and then modify it for the starting problem
-            Intcode ic = new Intcode(st);
-            ic.setIntToAddress(1, 12);
-            ic.setIntToAddress(2, 2);
-            icc.initIntcode(ic);
-            icc.runIntcode();
-            long finalResult = icc.getResultOfComputation();
-
-            System.out.println("Finished processing the input, the result is: " + finalResult);
-
-        }catch(IOException e) {
-            e.printStackTrace();
-        }
+        //Init the computer so its ready
+        IntcodeComputer icc = new IntcodeComputer(instructions);
+        //Load the intcode and then modify it for the starting problem
+        Intcode ic = new Intcode(input);
+        ic.setIntToAddress(1, 12);
+        ic.setIntToAddress(2, 2);
+        icc.initIntcode(ic);
+        icc.runIntcode();
+        return icc.getResultOfComputation();
     }
 
-    public static void main(String[] argv) {
+    /**
+     * Attempts to work out what inputs of noun and verb will ensure that the gravity program returns the value
+     * of 19690720
+     * @param input Intcode program
+     * @return (noun * 100) + verb value
+     */
+    public long solvePartTwo(String input) {
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
+
+        //Pretty simple brute force
+        for(int nounVal = 0; nounVal < 100; nounVal++) {
+            for(int verbVal = 0; verbVal < 100; verbVal++) {
+                //Init the computer so its ready
+                IntcodeComputer icc = new IntcodeComputer(instructions);
+                //Load the intcode and then modify it for the new noun and verb pairing
+                Intcode ic = new Intcode(input);
+                ic.setIntToAddress(1, nounVal);
+                ic.setIntToAddress(2, verbVal);
+                icc.initIntcode(ic);
+                icc.runIntcode();
+                long returnVal = icc.getResultOfComputation();
+
+                if(returnVal == 19690720) {
+                    return (100 * nounVal) + verbVal;
+                }
+            }
+        }
+
+        //If we didn't find it then our code is wrong
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        String input = ProblemLoader.loadProblemIntoString(2019, 2);
+
         Day2 d = new Day2();
-        d.solve();
+        long partOne = d.solvePartOne(input);
+        System.out.println("The value left at position zero when finished is " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("The input of noun and verb to get to the wanted value is " + partTwo);
     }
 }
+
+
