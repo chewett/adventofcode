@@ -253,6 +253,94 @@ public class Day17 {
     }
 
     /**
+     * When we have found the list of instructions we need to compress it into macros A, B, C
+     * This does that, returning a list of valid triples for A/B/C
+     *
+     * This is a recursive solution to try all the variosu combinations and then return only the valid ones
+     *
+     * @param parts Parts of the string which still need compression
+     * @param a Value already set for A or null if not set
+     * @param b Value already set for B or null if not set
+     * @param c Value already set for C or null if not set
+     * @return List of triples which are valid macro values for A, B, and C
+     */
+    private List<List<String>> compress(List<String> parts, String a, String b, String c) {
+        List<List<String>> abcParts = new ArrayList<>();
+
+        //Base case where A, B, and C have all been set to a non-null value
+        if(a != null && b != null && c != null) {
+            //If we have finished emptying the part list, then we can just add these sets and remove it
+            if(parts.size() == 0) {
+                List<String> newParts = new ArrayList<>();
+                newParts.add(a);
+                newParts.add(b);
+                newParts.add(c);
+                abcParts.add(newParts);
+            }
+
+            //If the part list wasn't empty then this set of A, B, and C are not valid and therefore we just return
+            // An empty list here
+            return abcParts;
+        }
+
+        //Now the recursive step... Grab the first item in the list and split it by commas
+        String[] firstPartList = parts.get(0).split(",");
+
+        //Then we work out all the ways we can split it and define it as a new macro
+        for(int i = 1; i <= firstPartList.length; i++) {
+            //First we just take the first elemenet, then the first two, etc, until we try the full length of it
+            String newReplacement = String.join(",", Arrays.stream(firstPartList).toList().subList(0, i));
+            //The macro cannot be longer than 20 so we have to enforce this here and give up if that's the case
+            if(newReplacement.length() > 20) {
+                //We break here since any further checks will always return a longer macro which won't be valid
+                break;
+            }
+
+            //Now we have to create a new set of lists after removing the macro from it
+            List<String> newListsToProcess = new ArrayList<>();
+            for(String part : parts) {
+                //If this string contains the macro we need to split it
+                if(part.contains(newReplacement)) {
+                    String[] newSplitPart = part.split(newReplacement);
+                    for(String str : newSplitPart) {
+                        //For each split we have to remove leading and trailing comma's
+                        // TODO: Is there not a better way to do this in Java?
+                        if(str.length() > 0) {
+                            if(str.charAt(0) == ',') {
+                                str = str.substring(1);
+                            }
+                            if(str.length() > 0) {
+                                if (str.charAt(str.length() - 1) == ',') {
+                                    str = str.substring(0, str.length() - 1);
+                                }
+                            }
+                            //Assuming we don't end up with a zero length string we can add it
+                            if(str.length() > 0) {
+                                newListsToProcess.add(str);
+                            }
+                        }
+                    }
+
+                }else{
+                    //If it didn't contain the macro then we just add it again
+                    newListsToProcess.add(part);
+                }
+            }
+
+            //Then we recursively call this after setting the macro to A, B, or C depending on what has been set before
+            if(a == null) {
+                abcParts.addAll(this.compress(newListsToProcess, newReplacement, null, null));
+            }else if(b == null) {
+                abcParts.addAll(this.compress(newListsToProcess, a, newReplacement, null));
+            }else{
+                abcParts.addAll(this.compress(newListsToProcess, a, b, newReplacement));
+            }
+        }
+
+        return abcParts;
+    }
+
+    /**
      * Run the input and then sends the directions of the robot, which will then return the amount of space dust it cleaned
      * @param input Intcode computation
      * @return Sum of all the space dust it cleaned
@@ -337,8 +425,42 @@ public class Day17 {
                 directions.add(String.valueOf(numToMove));
             }
 
+            List<String> fullPart = new ArrayList<>();
+            fullPart.add(String.join(",", directions));
+
+            List<List<String>> compressed = this.compress(fullPart, null, null, null);
+            List<String> allMacroCalls = new ArrayList<>();
+            for(List<String> compressedParts : compressed) {
+                String a = compressedParts.get(0);
+                String b = compressedParts.get(1);
+                String c = compressedParts.get(2);
+
+                String tmp = String.join(",", directions);
+                List<String> macroCalls = new ArrayList<>();
+                while(tmp.length() > 0) {
+                    if(tmp.startsWith(a)) {
+                        macroCalls.add("A");
+                        tmp = tmp.substring(a.length());
+                    }else if(tmp.startsWith(b)) {
+                        macroCalls.add("B");
+                        tmp = tmp.substring(b.length());
+                    }else if(tmp.startsWith(c)) {
+                        macroCalls.add("C");
+                        tmp = tmp.substring(c.length());
+                    }else{
+                        throw new RuntimeException("Something went wrong with the solver if we hit here");
+                    }
+                    //It should always start with , until we get to the end
+                    if(tmp.startsWith(",")) {
+                        tmp = tmp.substring(1);
+                    }
+
+                }
+                allMacroCalls.add(String.join(",", macroCalls));
+            }
+
             //Now we have a list of directions to move in
-            // The full path is: String.join(",", directions)
+            // The full path is:
             // L,12,L,10,R,8,L,12,R,8,R,10,R,12,L,12,L,10,R,8,L,12,R,8,R,10,R,12,L,10,R,12,R,8,L,10,R,12,R,8,R,8,R,10,R,12,L,12,L,10,R,8,L,12,R,8,R,10,R,12,L,10,R,12,R,8
             //Now I manually split it into parts:
 
@@ -354,27 +476,27 @@ public class Day17 {
             // C: L,10,R,12,R,8
 
             //Which then has directions of:  A,B,A,B,C,C,B,A,B,C
-            //And it's manually plugged in below.
-            //TODO: Codify this up into sections
+            //Originally I then just put this in and got it working but then I worked out how to generate that automatically
+
+            //Assumes there is only one solution (there is)
+            List<String> com1 = compressed.get(0);
+            String macroCall = allMacroCalls.get(0);
 
             // A B and C series
-            icc.addAllToInput("A,B,A,B,C,C,B,A,B,C\n");
+            icc.addAllToInput(macroCall + "\n");
 
             // A
-            icc.addAllToInput("L,12,L,10,R,8,L,12\n");
+            icc.addAllToInput(com1.get(0) + "\n");
 
             // B
-            icc.addAllToInput("R,8,R,10,R,12\n");
+            icc.addAllToInput(com1.get(1) + "\n");
 
             // C
-            icc.addAllToInput("L,10,R,12,R,8\n");
+            icc.addAllToInput(com1.get(2) + "\n");
 
             // Continuous feed?
             icc.addToInput((int)'n');
             icc.addToInput((int)'\n');
-            icc.addToInput((int)'\n');
-            icc.addToInput((int)'\n');
-
 
             icc.runIntcode();
             List<String> finalOut = this.runAndCollectOutput(icc);
