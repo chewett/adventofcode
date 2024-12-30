@@ -35,7 +35,6 @@ public class Day2Test {
     public void testRealPartOne() {
         String input = ProblemLoader.loadProblemIntoString(2019, 2);
         Day2 d = new Day2();
-        //TODO: Verify these are right once I have internet
         Assertions.assertEquals(5305097, d.solvePartOne(input));
     }
 
@@ -46,7 +45,6 @@ public class Day2Test {
     public void testRealPartTwo() {
         String input = ProblemLoader.loadProblemIntoString(2019, 2);
         Day2 d = new Day2();
-        //TODO: Verify these are right once I have internet
         Assertions.assertEquals(4925, d.solvePartTwo(input));
     }
 
