@@ -2,12 +2,8 @@ package net.chewett.adventofcode.aoc2019.problems;
 
 import net.chewett.adventofcode.aoc2019.SpaceImageFormat;
 import net.chewett.adventofcode.aoc2019.SpaceImageLayer;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
+import net.chewett.adventofcode.helpers.ProblemLoader;
+import java.util.*;
 
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/8
@@ -84,30 +80,33 @@ import java.io.IOException;
  */
 public class Day8 {
 
-    public void solve() {
-        try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_8_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+    public long solvePartOne(String input) {
+        SpaceImageFormat img = new SpaceImageFormat(input, 25, 6);
+        SpaceImageLayer lowestZeros = img.findLayerWithFewestZeroDigits();
+        int ones = lowestZeros.getNumOfDigit(1);
+        int twos = lowestZeros.getNumOfDigit(2);
 
-            //Day two input is a single line, so just load that
-            String st = br.readLine();
-
-            SpaceImageFormat img = new SpaceImageFormat(st, 25, 6);
-            SpaceImageLayer lowestZeros = img.findLayerWithFewestZeroDigits();
-            int ones = lowestZeros.getNumOfDigit(1);
-            int twos = lowestZeros.getNumOfDigit(2);
-            System.out.println("Checksum digit: " + (ones * twos));
-
-            SpaceImageLayer finalLayer = img.generateFinalMergedLayer();
-            finalLayer.printImageOut();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return ones * twos;
     }
 
-    public static void main(String[] argv) {
-       Day8 d = new Day8();
-       d.solve();
+    public long solvePartTwo(String input) {
+        SpaceImageFormat img = new SpaceImageFormat(input, 25, 6);
+        SpaceImageLayer finalLayer = img.generateFinalMergedLayer();
+        finalLayer.printImageOut();
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        String input = ProblemLoader.loadProblemIntoString(2019, 8);
+
+        Day8 d = new Day8();
+        long partOne = d.solvePartOne(input);
+        System.out.println("Checksum digit: " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("" + partTwo);
     }
 }
+
+

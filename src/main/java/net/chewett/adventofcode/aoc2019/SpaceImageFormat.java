@@ -3,10 +3,12 @@ package net.chewett.adventofcode.aoc2019;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A "Space Image Format" for 2019 Day 8
+ */
 public class SpaceImageFormat {
 
     public static final int PIXEL_BLACK = 0;
-    public static final int PIXEL_WHITE = 1;
     public static final int PIXEL_TRANSPARENT = 2;
 
     private List<SpaceImageLayer> layers = new ArrayList<SpaceImageLayer>();
@@ -26,6 +28,10 @@ public class SpaceImageFormat {
         }
     }
 
+    /**
+     * Simple function to work out which layer has the least number of 0's
+     * @return Layer with the least number of 0's
+     */
     public SpaceImageLayer findLayerWithFewestZeroDigits() {
         int numOfZeroDigits = 999999999;
         SpaceImageLayer bestLayer = null;
@@ -40,14 +46,18 @@ public class SpaceImageFormat {
         return bestLayer;
     };
 
+    /**
+     * Go over the layers merging them together until you end up with the final picture
+     * @return A Space Image Layer representing the final image
+     */
     public SpaceImageLayer generateFinalMergedLayer() {
         int lengthOfString = this.width * this.height;
-        String mergeLayerText = "";
+        StringBuilder mergeLayerText = new StringBuilder();
         for(int i = 0; i < lengthOfString; i++) {
-            mergeLayerText += SpaceImageFormat.PIXEL_TRANSPARENT;
+            mergeLayerText.append(SpaceImageFormat.PIXEL_TRANSPARENT);
         }
 
-        SpaceImageLayer finalMergedLayer = new SpaceImageLayer(mergeLayerText, this.width, this.height);
+        SpaceImageLayer finalMergedLayer = new SpaceImageLayer(mergeLayerText.toString(), this.width, this.height);
 
         for(SpaceImageLayer layer : this.layers) {
             finalMergedLayer.mergeLayer(layer);
@@ -56,6 +66,10 @@ public class SpaceImageFormat {
         return finalMergedLayer;
     }
 
+    /**
+     * Returns the number of layers in the image
+     * @return Number of layers
+     */
     public int getNumOfLayers() {
         return this.layers.size();
     }

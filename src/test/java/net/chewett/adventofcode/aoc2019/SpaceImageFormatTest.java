@@ -1,13 +1,14 @@
 package net.chewett.adventofcode.aoc2019;
 
 
-import net.chewett.adventofcode.aoc2019.SpaceImageFormat;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SpaceImageFormatTest {
 
-
+    /**
+     * Quick test to verify that the layer function works fine with the example data with a smaller canvas
+     */
     @Test
     public void simpleImageTest() {
         String imageData = "123456789012";
