@@ -1,20 +1,12 @@
 package net.chewett.adventofcode.aoc2019.problems;
 
+import net.chewett.adventofcode.helpers.ProblemLoader;
 import net.chewett.adventofcode.aoc2019.Orbiter;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/6
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  * --- Day 6: Universal Orbit Map ---
  * You've landed at the Universal Orbit Map facility on Mercury. Because navigation in space often involves
@@ -127,88 +119,86 @@ import java.util.Map;
  */
 public class Day6 {
 
-    public void solve() {
-        try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_6_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+    /**
+     * Create a map of orbiters using the problem input
+     * @param input Problem input of things orbiting other things
+     * @return Map of orbiters
+     */
+    private Map<String, Orbiter> getOrbitMap(List<String> input) {
+        Map<String, Orbiter> orbitMap = new HashMap<>();
+        for(String s : input) {
+            String[] twoOrbitors = s.split("\\)");
+            Orbiter thingThatIsOrbitted;
+            Orbiter thingthatOrbits;
 
-
-            List<String> orbits = new ArrayList<>();
-            String st;
-            while ((st = br.readLine()) != null) {
-                orbits.add(st);
+            if (!orbitMap.containsKey(twoOrbitors[0])) {
+                thingThatIsOrbitted = new Orbiter(twoOrbitors[0]);
+                orbitMap.put(twoOrbitors[0], thingThatIsOrbitted);
+            } else {
+                thingThatIsOrbitted = orbitMap.get(twoOrbitors[0]);
             }
 
-
-            Map<String, Orbiter> orbitMap = new HashMap<>();
-            for(String s : orbits) {
-                String[] twoOrbitors = s.split("\\)");
-                Orbiter thingThatIsOrbitted;
-                Orbiter thingthatOrbits;
-
-                if(!orbitMap.containsKey(twoOrbitors[0])) {
-                    thingThatIsOrbitted = new Orbiter(twoOrbitors[0]);
-                    orbitMap.put(twoOrbitors[0], thingThatIsOrbitted);
-                }else {
-                    thingThatIsOrbitted = orbitMap.get(twoOrbitors[0]);
-                }
-
-                if(!orbitMap.containsKey(twoOrbitors[1])) {
-                    thingthatOrbits = new Orbiter(twoOrbitors[1]);
-                    orbitMap.put(twoOrbitors[1], thingthatOrbits);
-                }else {
-                    thingthatOrbits = orbitMap.get(twoOrbitors[1]);
-                }
-
-                thingThatIsOrbitted.addOrbit(thingthatOrbits);
-
+            if (!orbitMap.containsKey(twoOrbitors[1])) {
+                thingthatOrbits = new Orbiter(twoOrbitors[1]);
+                orbitMap.put(twoOrbitors[1], thingthatOrbits);
+            } else {
+                thingthatOrbits = orbitMap.get(twoOrbitors[1]);
             }
 
-            int numOrbits = orbitMap.get("COM").calculateOrbits();
-
-            System.out.println("Number of orbits COM has in total " + numOrbits);
-
-            //Start as YOU, try to find SAN
-            Orbiter you = orbitMap.get("YOU");
-            Orbiter san = orbitMap.get("SAN");
-
-            List<Orbiter> visited = new ArrayList<>();
-            List<Orbiter> toVisit = new ArrayList<>();
-            List<Orbiter> toVisitNext = new ArrayList<>();
-            int numVisits = -2; //Need to account that I count my "starting" point as 1, and my ending point as 1, to produce the right number.
-            boolean foundSanta = false;
-            toVisit.add(you.getParent());
-            while(!foundSanta && toVisit.size() > 0) {
-                numVisits++;
-                for(Orbiter o : toVisit) {
-                    if(o.equals(san)) {
-                        foundSanta = true;
-                        break;
-                    }
-
-                    if(!visited.contains(o)) {
-                        if(o.getParent() != null) {
-                            toVisitNext.add(o.getParent());
-                        }
-                        toVisitNext.addAll(o.getThingsThatOrbitThis());
-                        visited.add(o);
-                    }
-                }
-
-                toVisit = toVisitNext;
-                toVisitNext = new ArrayList<>();
-            }
-
-            System.out.println("Number of hops to Santa " + numVisits);
-        }catch(Exception e) {
-            e.printStackTrace();
+            thingThatIsOrbitted.addOrbit(thingthatOrbits);
         }
+        return orbitMap;
+    }
+
+    public long solvePartOne(List<String> input) {
+        Map<String, Orbiter> orbitMap = this.getOrbitMap(input);
+        return orbitMap.get("COM").calculateOrbits();
+    }
+
+    public long solvePartTwo(List<String> input) {
+        Map<String, Orbiter> orbitMap = this.getOrbitMap(input);
+
+        //Start as YOU, try to find SAN
+        Orbiter you = orbitMap.get("YOU");
+        Orbiter san = orbitMap.get("SAN");
+
+        List<Orbiter> visited = new ArrayList<>();
+        List<Orbiter> toVisit = new ArrayList<>();
+        List<Orbiter> toVisitNext = new ArrayList<>();
+        int numVisits = -2; //Need to account that I count my "starting" point as 1, and my ending point as 1, to produce the right number.
+        boolean foundSanta = false;
+        toVisit.add(you.getParent());
+        while(!foundSanta && toVisit.size() > 0) {
+            numVisits++;
+            for (Orbiter o : toVisit) {
+                if (o.equals(san)) {
+                    foundSanta = true;
+                    break;
+                }
+                if (!visited.contains(o)) {
+                    if (o.getParent() != null) {
+                        toVisitNext.add(o.getParent());
+                    }
+                    toVisitNext.addAll(o.getThingsThatOrbitThis());
+                    visited.add(o);
+                }
+            }
+            toVisit = toVisitNext;
+            toVisitNext = new ArrayList<>();
+        }
+        return numVisits;
     }
 
     public static void main(String[] args) {
+        List<String> input = ProblemLoader.loadProblemIntoStringArray(2019, 6);
+
         Day6 d = new Day6();
-        d.solve();
+        long partOne = d.solvePartOne(input);
+        System.out.println("Number of orbits COM has in total " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("Number of hops to Santa " + partTwo);
     }
-
-
 }
+
+
