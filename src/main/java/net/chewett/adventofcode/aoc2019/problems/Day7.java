@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Taken from: https://adventofcode.com/2019/day/7
+ * Awesome problem taken from: https://adventofcode.com/2019/day/7
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  * --- Day 7: Amplification Circuit ---
  * Based on the navigational maps, you're going to need to send more power to your ship's thrusters to reach Santa in

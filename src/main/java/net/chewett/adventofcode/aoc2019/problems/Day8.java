@@ -10,7 +10,9 @@ import java.io.IOException;
 
 
 /**
- * Taken from: https://adventofcode.com/2019/day/8
+ * Awesome problem taken from: https://adventofcode.com/2019/day/8
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  * --- Day 8: Space Image Format ---
  * The Elves' spirits are lifted when they realize you have an opportunity to reboot one of their Mars rovers, and so

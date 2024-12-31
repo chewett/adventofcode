@@ -5,7 +5,9 @@ import net.chewett.adventofcode.aoc2019.Asteroid;
 import java.util.*;
 
 /**
- * Taken from: https://adventofcode.com/2019/day/10
+ * Awesome problem taken from: https://adventofcode.com/2019/day/10
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  * --- Day 10: Monitoring Station ---
  * You fly into the asteroid belt and reach the Ceres monitoring station. The Elves here have an emergency: they're

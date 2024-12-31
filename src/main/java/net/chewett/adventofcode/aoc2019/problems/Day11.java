@@ -12,7 +12,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- *
+ * Awesome problem taken from: https://adventofcode.com/2019/day/11
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  */
 public class Day11 {

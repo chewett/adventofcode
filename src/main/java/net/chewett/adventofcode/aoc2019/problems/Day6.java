@@ -12,7 +12,9 @@ import java.util.Map;
 
 
 /**
- * Taken from: https://adventofcode.com/2019/day/6
+ * Awesome problem taken from: https://adventofcode.com/2019/day/6
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  * --- Day 6: Universal Orbit Map ---
  * You've landed at the Universal Orbit Map facility on Mercury. Because navigation in space often involves

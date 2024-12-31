@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Taken from: https://adventofcode.com/2019/day/9
+ * Awesome problem taken from: https://adventofcode.com/2019/day/9
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  * --- Day 9: Sensor Boost ---
  * You've just said goodbye to the rebooted rover and left Mars when you receive a faint distress signal coming from
