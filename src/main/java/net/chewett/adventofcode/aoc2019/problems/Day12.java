@@ -3,6 +3,8 @@ package net.chewett.adventofcode.aoc2019.problems;
 
 import net.chewett.adventofcode.aoc2019.Moon;
 import net.chewett.adventofcode.helpers.ProblemLoader;
+import org.apache.commons.math3.util.ArithmeticUtils;
+
 import java.util.*;
 
 /**
@@ -405,32 +407,14 @@ public class Day12 {
             }
         }
 
-        long x = xSteps;
-        long y = ySteps;
-        long z = zSteps;
-
-        //Now we just keep incrementing X, Y, and Z until they are all the same
-        while(!(x == y && y == z)) {
-            if(x < y && x < z) {
-                x += xSteps;
-            }else if(y < x && y < z) {
-                y += ySteps;
-            }else if(z < y && z < x) {
-                z += zSteps;
-            }else if(x == z) {
-                x += xSteps;
-                z += zSteps;
-            }else if(z == y) {
-                y += ySteps;
-                z += zSteps;
-            }else if(x == y) {
-                x += xSteps;
-                y += ySteps;
-            }
+        //Now find the lowest common multiple of these three steps and that's our answer :)
+        long commonLcm = 1;
+        long[] lcmsToMerge = new long[] {xSteps, ySteps, zSteps};
+        for(long lcmToMerge : lcmsToMerge) {
+            commonLcm = ArithmeticUtils.lcm(commonLcm, lcmToMerge);
         }
 
-        //Once we find they are the same, we can return the number of steps
-        return x;
+        return commonLcm;
     }
 
     public static void main(String[] args) {
