@@ -48,14 +48,14 @@ public class Day4 {
         int START_NUM = Integer.parseInt(parts[0]);
         int END_NUM = Integer.parseInt(parts[1]);
 
-        List<Integer> allPossiblePasswords = new ArrayList<>();
+        int validPasswords = 0;
         for(int i = START_NUM; i <= END_NUM; i++) {
             if(PasswordFinder.isValidPassword(i)) {
-                allPossiblePasswords.add(i);
+                validPasswords++;
             }
         }
 
-        return allPossiblePasswords.size();
+        return validPasswords;
     }
 
     public long solvePartTwo(String input) {
@@ -63,14 +63,14 @@ public class Day4 {
         int START_NUM = Integer.parseInt(parts[0]);
         int END_NUM = Integer.parseInt(parts[1]);
 
-        List<Integer> allPossibleComplexPasswords = new ArrayList<>();
+        int validPasswords = 0;
         for(int i = START_NUM; i <= END_NUM; i++) {
             if(PasswordFinder.isValidPasswordMoreComplex(i)) {
-                allPossibleComplexPasswords.add(i);
+                validPasswords++;
             }
         }
 
-        return allPossibleComplexPasswords.size();
+        return validPasswords;
     }
 
     public static void main(String[] args) {

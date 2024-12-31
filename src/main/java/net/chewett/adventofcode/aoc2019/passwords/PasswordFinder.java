@@ -3,10 +3,13 @@ package net.chewett.adventofcode.aoc2019.passwords;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Helper class for the 2019 Day 4 problem about password complexity
+ */
 public class PasswordFinder {
 
     /**
-     * Given a six digit number this will determine if it matches the Elves password requirements
+     * Given a six-digit number this will determine if it matches the Elves password requirements
      * Rules:
      * - It is a six-digit number.
      * - The value is within the range given in your puzzle input.
@@ -22,12 +25,12 @@ public class PasswordFinder {
         boolean doubleFound = false;
         for(int i = 1; i < pieces.length; i++) {
             int currentNumber = pieces[i];
-            //If prev num is same as current num, then there is a duplicate and its good!
+            //If prev num is same as current num, then there is a duplicate and it's good!
             if(currentNumber == prevNum) {
                 doubleFound = true;
             }
 
-            //If the current number is lower than the previous number, its not a valid password
+            //If the current number is lower than the previous number, it's not a valid password
             if(currentNumber < prevNum) {
                 return false;
             }else{
@@ -35,7 +38,7 @@ public class PasswordFinder {
             }
         }
 
-        //If it doesnt descend, then its valid if it found a double.
+        //If it doesn't descend, then it's valid if it found a double.
         return doubleFound;
     }
 
@@ -54,8 +57,8 @@ public class PasswordFinder {
      * @return true if the password is valid, otherwise false
      */
     public static boolean isValidPasswordMoreComplex(int num) {
-        //First check to make sure it matches the previous requirements, if it doesnt it wont match the stricter ones.
-        boolean doesItMatchBasic = isValidPassword(num);
+        //First check to make sure it matches the previous requirements, if it doesn't it won't match the stricter ones.
+        boolean doesItMatchBasic = PasswordFinder.isValidPassword(num);
         if(!doesItMatchBasic) {
             return false;
         }
@@ -81,8 +84,8 @@ public class PasswordFinder {
         numberOfConsecutive.add(countOfSameNum);
 
         //If there was two (and only two) consecutive numbers then it matches the requirements.
-        //If there isnt two, or are more/less than two then it won't match.
-        return (numberOfConsecutive.indexOf(2) != -1);
+        //If there isn't two, or are more/less than two then it won't match.
+        return (numberOfConsecutive.contains(2));
     }
 
 
