@@ -107,7 +107,7 @@ public class Day11 {
                         colourOfPanel = colour.get(curPoint);
                     }
 
-                    rowLine += (colourOfPanel.equals("white") ? "#" : "_");
+                    rowLine += (colourOfPanel.equals("white") ? "#" : " ");
                 }
                 System.out.println(rowLine);
             }
