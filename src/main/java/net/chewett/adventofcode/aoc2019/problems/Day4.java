@@ -3,8 +3,6 @@ package net.chewett.adventofcode.aoc2019.problems;
 import net.chewett.adventofcode.aoc2019.passwords.PasswordFinder;
 
 import net.chewett.adventofcode.helpers.ProblemLoader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/4
