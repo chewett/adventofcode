@@ -7,7 +7,6 @@ import java.util.*;
 /**
  * Awesome problem taken from: https://adventofcode.com/{{year}}/day/{{day}}
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  */
 public class Day{{day}} {
