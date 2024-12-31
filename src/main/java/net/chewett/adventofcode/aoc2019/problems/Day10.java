@@ -1,7 +1,7 @@
 package net.chewett.adventofcode.aoc2019.problems;
 
 import net.chewett.adventofcode.aoc2019.Asteroid;
-
+import net.chewett.adventofcode.helpers.ProblemLoader;
 import java.util.*;
 
 /**
@@ -190,36 +190,34 @@ import java.util.*;
  */
 public class Day10 {
 
-    public static void main(String[] args) {
+    public long solvePartOne(List<String> input) {
+        List<Asteroid> field = Asteroid.parseFromField(input);
 
-        //This is the actual problem.
-        String[] asteroidsOne = new String[] {
-            "##.##..#.####...#.#.####",
-            "##.###..##.#######..##..",
-            "..######.###.#.##.######",
-            ".#######.####.##.#.###.#",
-            "..#...##.#.....#####..##",
-            "#..###.#...#..###.#..#..",
-            "###..#.##.####.#..##..##",
-            ".##.##....###.#..#....#.",
-            "########..#####..#######",
-            "##..#..##.#..##.#.#.#..#",
-            "##.#.##.######.#####....",
-            "###.##...#.##...#.######",
-            "###...##.####..##..#####",
-            "##.#...#.#.....######.##",
-            ".#...####..####.##...##.",
-            "#.#########..###..#.####",
-            "#.##..###.#.######.#####",
-            "##..##.##...####.#...##.",
-            "###...###.##.####.#.##..",
-            "####.#.....###..#.####.#",
-            "##.####..##.#.##..##.#.#",
-            "#####..#...####..##..#.#",
-            ".##.##.##...###.##...###",
-            "..###.########.#.###..#."
-        };
-        List<Asteroid> field = Asteroid.parseFromField(asteroidsOne);
+        int maxAsteroidsFound = 0;
+        //Loop over every asteroid
+        for(Asteroid a :field) {
+            //I like this way of doing it. An asteroid is only blocking another one if the angle of each asteroid
+            //is identical. Therefore if we store all unique angles of every asteroid, we can find out how many unique
+            //different asteroids it can see. Therefore use a hash set of and just store all the angles!
+            Set<Double> seenAsteroids = new HashSet<>();
+            for(Asteroid a2: field) {
+                if(a.equals(a2)) { //Ignore itself when looping over the data.
+                    continue;
+                }
+                //Calculate the angle and store it (a set won't store the duplicates so don't bother checking)
+                seenAsteroids.add(a.getAngleToAsteroid(a2));
+            }
+            //If we have found more this time, store the new max
+            if(maxAsteroidsFound < seenAsteroids.size()) {
+                maxAsteroidsFound = seenAsteroids.size();
+            }
+        }
+
+        return maxAsteroidsFound;
+    }
+
+    public long solvePartTwo(List<String> input) {
+        List<Asteroid> field = Asteroid.parseFromField(input);
 
         int maxAsteroidsFound = 0;
         Asteroid bestOneForStation = field.get(0);
@@ -233,7 +231,7 @@ public class Day10 {
                 if(a.equals(a2)) { //Ignore itself when looping over the data.
                     continue;
                 }
-                //Calculcate the angle and store it (a set wont store the duplicates so dont bother checking)
+                //Calculate the angle and store it (a set won't store the duplicates so don't bother checking)
                 seenAsteroids.add(a.getAngleToAsteroid(a2));
             }
             //If we have found more this time, store the new max, and the best one for a station (to be used later!)
@@ -242,9 +240,6 @@ public class Day10 {
                 bestOneForStation = a;
             }
         }
-
-        //Answer for part 1.
-        System.out.println("The best station can see " + maxAsteroidsFound + " asteroids directly");
 
         //Store a queue of asteroid in a key which is the angle to the asteroid.
         //This lets me know every asteroid that is on each angle. The queue will be used later!
@@ -294,13 +289,25 @@ public class Day10 {
                     asteroidNo++;
                     Asteroid a = angleMapping.get(d).remove();
                     if(asteroidNo == 200) {
-                        System.out.println(a.getAsteroidNumber());
-
-                        return;
+                        return a.getAsteroidNumber();
                     }
                 }
             }
         }
+        //Something went wrong
+        return -1;
     }
 
+    public static void main(String[] args) {
+        List<String> input = ProblemLoader.loadProblemIntoStringArray(2019, 10);
+
+        Day10 d = new Day10();
+        long partOne = d.solvePartOne(input);
+        System.out.println("The best station can see " + partOne + " asteroids directly");
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("The 200th asteroid to be vapourised has a value of " + partTwo);
+    }
 }
+
+

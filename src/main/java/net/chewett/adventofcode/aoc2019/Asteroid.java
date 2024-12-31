@@ -54,15 +54,17 @@ public class Asteroid implements Comparable<Asteroid> {
      * Each string element represents a row of data. Each element in the string is the column data.
      *
      * This means that the second character in the first string is (1, 0) in (x, y) notation.
+     *
+     * TODO: Consider using the Discrete2DPositionGrid here
      * @param field Array of strings representing the asteroid field
      * @return A list of newly created asteroid objects.
      */
-    public static List<Asteroid> parseFromField(String[] field) {
+    public static List<Asteroid> parseFromField(List<String> field) {
         List<Asteroid> asteroidField = new ArrayList<>();
         int y = 0;
         for(String s : field) {
             for(int x = 0; x < s.length(); x++) {
-                if(s.substring(x, x+1).equals("#")) {
+                if(s.charAt(x) == '#') {
                     asteroidField.add(new Asteroid(x, y));
                 }
             }
