@@ -8,7 +8,6 @@ import java.util.*;
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/3
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  * The number of steps a wire takes is the total number of grid squares the wire has entered to get to that location,
  * including the intersection being considered. Again consider the example from above:

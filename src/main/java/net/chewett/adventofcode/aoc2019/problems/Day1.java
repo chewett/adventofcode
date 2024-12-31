@@ -8,7 +8,6 @@ import java.util.*;
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/1
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  * --- Day 1: The Tyranny of the Rocket Equation ---
  * Santa has become stranded at the edge of the Solar System while delivering presents to other planets! To accurately

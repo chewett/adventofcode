@@ -7,7 +7,6 @@ import net.chewett.adventofcode.helpers.ProblemLoader;
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/4
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  * --- Day 4: Secure Container ---
  *

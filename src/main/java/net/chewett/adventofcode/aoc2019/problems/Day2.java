@@ -13,7 +13,6 @@ import java.util.*;
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/1
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  * --- Day 2: 1202 Program Alarm ---
  * On the way to your gravity assist around the Moon, your ship computer beeps angrily about a "1202 program alarm".
