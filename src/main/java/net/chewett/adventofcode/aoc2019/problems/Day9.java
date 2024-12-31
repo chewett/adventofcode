@@ -3,12 +3,9 @@ package net.chewett.adventofcode.aoc2019.problems;
 import net.chewett.adventofcode.aoc2019.intcode.Intcode;
 import net.chewett.adventofcode.aoc2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
+import net.chewett.adventofcode.helpers.ProblemLoader;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/9
@@ -77,52 +74,75 @@ import java.util.List;
  */
 public class Day9 {
 
-    public void solve() {
+    public long solvePartOne(String input) {
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
+        instructions.add(new InputSaveInstruction());
+        instructions.add(new WriteOutputInstruction());
+        instructions.add(new JumpIfTrueInstruction());
+        instructions.add(new JumpIfFalseInstruction());
+        instructions.add(new LessThanInstruction());
+        instructions.add(new EqualsInstruction());
+        instructions.add(new AdjustRelativeBaseInstruction());
 
-        try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_9_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        IntcodeComputer icc = new IntcodeComputer(instructions);
 
-            //Day seven input is a single line, so just load that
-            String boostProgram = br.readLine();
+        Intcode ic = new Intcode(input);
+        icc.initIntcode(ic);
+        icc.addToInput(1);
+        icc.runIntcode();
 
-            //Set up my Instruction set
-            List<IntcodeInstruction> instructions = new ArrayList<>();
-            instructions.add(new FinishInstruction());
-            instructions.add(new AddInstruction());
-            instructions.add(new MultiplyInstruction());
-            instructions.add(new InputSaveInstruction());
-            instructions.add(new WriteOutputInstruction());
-            instructions.add(new JumpIfTrueInstruction());
-            instructions.add(new JumpIfFalseInstruction());
-            instructions.add(new LessThanInstruction());
-            instructions.add(new EqualsInstruction());
-            instructions.add(new AdjustRelativeBaseInstruction());
-
-            IntcodeComputer icc = new IntcodeComputer(instructions);
-            //This outputs itself
-            String intcodeString = "109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99";
-
-            Intcode ic = new Intcode(boostProgram);
-            icc.initIntcode(ic);
-            //icc.addToInput(1);
-            icc.addToInput(2);
-            icc.runIntcode();
-
-            System.out.println("Printing out all output");
-            while(icc.hasOutputToRead()) {
-                System.out.println(icc.getOutput());
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        StringBuilder output = new StringBuilder();
+        while(icc.hasOutputToRead()) {
+            output.append(icc.getOutput());
         }
+
+        return Long.parseLong(output.toString());
+    }
+
+    public long solvePartTwo(String input) {
+
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
+        instructions.add(new InputSaveInstruction());
+        instructions.add(new WriteOutputInstruction());
+        instructions.add(new JumpIfTrueInstruction());
+        instructions.add(new JumpIfFalseInstruction());
+        instructions.add(new LessThanInstruction());
+        instructions.add(new EqualsInstruction());
+        instructions.add(new AdjustRelativeBaseInstruction());
+
+        IntcodeComputer icc = new IntcodeComputer(instructions);
+
+        Intcode ic = new Intcode(input);
+        icc.initIntcode(ic);
+        icc.addToInput(2);
+        icc.runIntcode();
+
+        StringBuilder output = new StringBuilder();
+        while(icc.hasOutputToRead()) {
+            output.append(icc.getOutput());
+        }
+
+        return Long.parseLong(output.toString());
     }
 
     public static void main(String[] args) {
-        Day9 d = new Day9();
-        d.solve();
-    }
+        String input = ProblemLoader.loadProblemIntoString(2019, 9);
 
+        Day9 d = new Day9();
+        long partOne = d.solvePartOne(input);
+        System.out.println("The BOOST keycode is " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("The coordinates of the distress signal are " + partTwo);
+    }
 }
+
+
