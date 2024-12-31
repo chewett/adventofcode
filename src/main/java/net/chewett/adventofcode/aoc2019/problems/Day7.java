@@ -4,12 +4,8 @@ import net.chewett.adventofcode.helpers.PermutationGenerator;
 import net.chewett.adventofcode.aoc2019.intcode.Intcode;
 import net.chewett.adventofcode.aoc2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import net.chewett.adventofcode.helpers.ProblemLoader;
+import java.util.*;
 
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/7
@@ -76,69 +72,130 @@ import java.util.List;
  */
 public class Day7 {
 
-    public void solve() {
-        try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_7_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+    public long solvePartOne(String input) {
+        //Day seven input is a single line, so just load that
+        List<Integer> thrusterValues = new ArrayList<>();
+        thrusterValues.add(0);
+        thrusterValues.add(1);
+        thrusterValues.add(2);
+        thrusterValues.add(3);
+        thrusterValues.add(4);
 
-            //Day seven input is a single line, so just load that
-            String thrusterProgramExample = br.readLine();
-            List<Integer> thrusterValues = new ArrayList<>();
-            thrusterValues.add(0);
-            thrusterValues.add(1);
-            thrusterValues.add(2);
-            thrusterValues.add(3);
-            thrusterValues.add(4);
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> thrusterPhaseCombinations = pg.generatePermutations(thrusterValues);
 
-            PermutationGenerator<Integer> pg = new PermutationGenerator<>();
-            List<List<Integer>> thrusterPhaseCombinations = pg.generatePermutations(thrusterValues);
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
+        instructions.add(new InputSaveInstruction());
+        instructions.add(new WriteOutputInstruction());
+        instructions.add(new JumpIfTrueInstruction());
+        instructions.add(new JumpIfFalseInstruction());
+        instructions.add(new LessThanInstruction());
+        instructions.add(new EqualsInstruction());
 
-            //Set up my Instruction set
-            List<IntcodeInstruction> instructions = new ArrayList<>();
-            instructions.add(new FinishInstruction());
-            instructions.add(new AddInstruction());
-            instructions.add(new MultiplyInstruction());
-            instructions.add(new InputSaveInstruction());
-            instructions.add(new WriteOutputInstruction());
-            instructions.add(new JumpIfTrueInstruction());
-            instructions.add(new JumpIfFalseInstruction());
-            instructions.add(new LessThanInstruction());
-            instructions.add(new EqualsInstruction());
+        int maxThrustSignal = 0;
+        for (List<Integer> thrusterPhase : thrusterPhaseCombinations) {
 
-            int maxThrustSignal = 0;
-            for (List<Integer> thrusterPhase : thrusterPhaseCombinations) {
+            //Init the computer so its ready
+            IntcodeComputer[] amplifiers = new IntcodeComputer[]{
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+            };
 
-                //Init the computer so its ready
-                IntcodeComputer[] amplifiers = new IntcodeComputer[]{
-                        new IntcodeComputer(instructions),
-                        new IntcodeComputer(instructions),
-                        new IntcodeComputer(instructions),
-                        new IntcodeComputer(instructions),
-                        new IntcodeComputer(instructions),
-                };
-
-                Intcode ic = new Intcode(thrusterProgramExample);
-                long currentInput = 0;
-                for (int i = 0; i < amplifiers.length; i++) {
-                    amplifiers[i].addToInput(thrusterPhase.get(i));
-                    amplifiers[i].addToInput(currentInput);
-                    amplifiers[i].initIntcode(ic);
-                    amplifiers[i].runIntcode();
-                    currentInput = amplifiers[i].getOutput();
-                }
-
-                maxThrustSignal = Math.max((int)maxThrustSignal, (int)currentInput);
+            Intcode ic = new Intcode(input);
+            long currentInput = 0;
+            for (int i = 0; i < amplifiers.length; i++) {
+                amplifiers[i].addToInput(thrusterPhase.get(i));
+                amplifiers[i].addToInput(currentInput);
+                amplifiers[i].initIntcode(ic);
+                amplifiers[i].runIntcode();
+                currentInput = amplifiers[i].getOutput();
             }
 
-            System.out.println("Found max thrust: " + maxThrustSignal);
-        }catch(Exception e) {
-            e.printStackTrace();
+            maxThrustSignal = Math.max((int)maxThrustSignal, (int)currentInput);
         }
+
+        return maxThrustSignal;
+    }
+
+
+    public long solvePartTwo(String input) {
+        List<Integer> thrusterValues = new ArrayList<>();
+
+        thrusterValues.add(5);
+        thrusterValues.add(6);
+        thrusterValues.add(7);
+        thrusterValues.add(8);
+        thrusterValues.add(9);
+
+        PermutationGenerator<Integer> pg = new PermutationGenerator<>();
+        List<List<Integer>> thrusterPhaseCombinations = pg.generatePermutations(thrusterValues);
+
+        //Set up my Instruction set
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
+        instructions.add(new InputSaveInstruction());
+        instructions.add(new WriteOutputInstruction());
+        instructions.add(new JumpIfTrueInstruction());
+        instructions.add(new JumpIfFalseInstruction());
+        instructions.add(new LessThanInstruction());
+        instructions.add(new EqualsInstruction());
+
+        int maxThrustSignal = 0;
+        for (List<Integer> thrusterPhase : thrusterPhaseCombinations) {
+            //Init the computer so its ready
+            IntcodeComputer[] amplifiers = new IntcodeComputer[]{
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+                    new IntcodeComputer(instructions),
+            };
+
+            Intcode ic = new Intcode(input);
+            //Set up all the amplifiers
+            for (int i = 0; i < amplifiers.length; i++) {
+                amplifiers[i].addToInput(thrusterPhase.get(i));
+                amplifiers[i].initIntcode(ic);
+            }
+
+            boolean finalAmpIsFinished = false;
+            long currentInput = 0;
+            while (!finalAmpIsFinished) {
+                for (IntcodeComputer amplifier : amplifiers) {
+                    amplifier.addToInput(currentInput);
+                    amplifier.runIntcode();
+                    currentInput = amplifier.getOutput();
+                }
+
+                if (amplifiers[4].isComputationEntirelyFinished()) {
+                    finalAmpIsFinished = true;
+                }
+            }
+            maxThrustSignal = Math.max((int)maxThrustSignal, (int)currentInput);
+        }
+
+        return maxThrustSignal;
     }
 
     public static void main(String[] args) {
-        Day7 d = new Day7();
-        d.solve();
-    }
+        String input = ProblemLoader.loadProblemIntoString(2019, 7);
 
+        Day7 d = new Day7();
+        long partOne = d.solvePartOne(input);
+        System.out.println("Found max thrust: " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("Found max thrust: " + partTwo);
+    }
 }
+
+
