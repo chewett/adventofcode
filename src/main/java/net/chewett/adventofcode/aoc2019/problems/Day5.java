@@ -3,14 +3,12 @@ package net.chewett.adventofcode.aoc2019.problems;
 import net.chewett.adventofcode.aoc2019.intcode.Intcode;
 import net.chewett.adventofcode.aoc2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.chewett.adventofcode.helpers.ProblemLoader;
+import java.util.*;
 
 /**
  * Awesome problem taken from: https://adventofcode.com/2019/day/5
  * Go have a try yourself!
- * ----------------------------------------------------------
  *
  * --- Day 5: Sunny with a Chance of Asteroids ---
  * You're starting to sweat as the ship makes its way toward Mercury. The Elves suggest that you get the air
@@ -74,10 +72,10 @@ import java.util.List;
  * instruction - provide it 1, the ID for the ship's air conditioner unit.
  *
  * It will then perform a series of diagnostic tests confirming that various parts of the Intcode computer, like
- * parameter modes, function correctly. For each test, it will run an output instruction indicating how far the
- * result of the test was from the expected value, where 0 means the test was successful. Non-zero outputs mean
- * that a function is not working correctly; check the instructions that were run before the output instruction
- * to see which one failed.
+ * parameter modes, function correctly. For each test, it will run an output instruction indicating how far the result
+ * of the test was from the expected value, where 0 means the test was successful. Non-zero outputs mean that a
+ * function is not working correctly; check the instructions that were run before the output instruction to see which
+ * one failed.
  *
  * Finally, the program will output a diagnostic code and immediately halt. This final output isn't an error; an
  * output followed immediately by a halt means the program finished. If all outputs were zero except the diagnostic
@@ -91,13 +89,13 @@ import java.util.List;
  * Since the air conditioner can't vent its heat anywhere but back into the spacecraft, it's actually making the air
  * inside the ship warmer.
  *
- * Instead, you'll need to use the TEST to extend the thermal radiators. Fortunately, the diagnostic program (your
- * puzzle input) is already equipped for this. Unfortunately, your Intcode computer is not.
+ * Instead, you'll need to use the TEST to extend the thermal radiators. Fortunately, the diagnostic program
+ * (your puzzle input) is already equipped for this. Unfortunately, your Intcode computer is not.
  *
  * Your computer is only missing a few opcodes:
  *
- * Opcode 5 is jump-if-true: if the first parameter is non-zero, it sets the instruction pointer to the value from the
- * second parameter. Otherwise, it does nothing.
+ * Opcode 5 is jump-if-true: if the first parameter is non-zero, it sets the instruction pointer to the value from
+ * the second parameter. Otherwise, it does nothing.
  * Opcode 6 is jump-if-false: if the first parameter is zero, it sets the instruction pointer to the value from the
  * second parameter. Otherwise, it does nothing.
  * Opcode 7 is less than: if the first parameter is less than the second parameter, it stores 1 in the position given
@@ -133,19 +131,16 @@ import java.util.List;
  * if the input value is below 8, output 1000 if the input value is equal to 8, or output 1001 if the input value is
  * greater than 8.
  *
- * This time, when the TEST diagnostic program runs its input instruction to get the ID of the system to test, provide
- * it 5, the ID for the ship's thermal radiator controller. This diagnostic test suite only outputs one number, the
- * diagnostic code.
+ * This time, when the TEST diagnostic program runs its input instruction to get the ID of the system to test,
+ * provide it 5, the ID for the ship's thermal radiator controller. This diagnostic test suite only outputs one
+ * number, the diagnostic code.
  *
  * What is the diagnostic code for system ID 5?
+ *
  */
 public class Day5 {
 
-    public static void main(String[] args) {
-
-        //TODO: load the program from the file.
-        String diagProgram = "3,225,1,225,6,6,1100,1,238,225,104,0,1101,37,34,224,101,-71,224,224,4,224,1002,223,8,223,101,6,224,224,1,224,223,223,1002,113,50,224,1001,224,-2550,224,4,224,1002,223,8,223,101,2,224,224,1,223,224,223,1101,13,50,225,102,7,187,224,1001,224,-224,224,4,224,1002,223,8,223,1001,224,5,224,1,224,223,223,1101,79,72,225,1101,42,42,225,1102,46,76,224,101,-3496,224,224,4,224,102,8,223,223,101,5,224,224,1,223,224,223,1102,51,90,225,1101,11,91,225,1001,118,49,224,1001,224,-140,224,4,224,102,8,223,223,101,5,224,224,1,224,223,223,2,191,87,224,1001,224,-1218,224,4,224,1002,223,8,223,101,4,224,224,1,224,223,223,1,217,83,224,1001,224,-124,224,4,224,1002,223,8,223,101,5,224,224,1,223,224,223,1101,32,77,225,1101,29,80,225,101,93,58,224,1001,224,-143,224,4,224,102,8,223,223,1001,224,4,224,1,223,224,223,1101,45,69,225,4,223,99,0,0,0,677,0,0,0,0,0,0,0,0,0,0,0,1105,0,99999,1105,227,247,1105,1,99999,1005,227,99999,1005,0,256,1105,1,99999,1106,227,99999,1106,0,265,1105,1,99999,1006,0,99999,1006,227,274,1105,1,99999,1105,1,280,1105,1,99999,1,225,225,225,1101,294,0,0,105,1,0,1105,1,99999,1106,0,300,1105,1,99999,1,225,225,225,1101,314,0,0,106,0,0,1105,1,99999,7,226,226,224,102,2,223,223,1005,224,329,101,1,223,223,108,677,226,224,102,2,223,223,1005,224,344,1001,223,1,223,1108,226,677,224,102,2,223,223,1005,224,359,1001,223,1,223,8,677,226,224,102,2,223,223,1006,224,374,1001,223,1,223,107,226,226,224,102,2,223,223,1006,224,389,101,1,223,223,1108,677,226,224,1002,223,2,223,1005,224,404,1001,223,1,223,108,677,677,224,102,2,223,223,1005,224,419,101,1,223,223,7,226,677,224,1002,223,2,223,1006,224,434,1001,223,1,223,107,226,677,224,102,2,223,223,1005,224,449,101,1,223,223,1108,677,677,224,1002,223,2,223,1006,224,464,101,1,223,223,7,677,226,224,102,2,223,223,1006,224,479,101,1,223,223,1007,677,677,224,1002,223,2,223,1005,224,494,101,1,223,223,1008,226,226,224,102,2,223,223,1006,224,509,1001,223,1,223,107,677,677,224,102,2,223,223,1006,224,524,1001,223,1,223,8,226,226,224,1002,223,2,223,1005,224,539,1001,223,1,223,1007,677,226,224,102,2,223,223,1006,224,554,1001,223,1,223,1007,226,226,224,1002,223,2,223,1005,224,569,1001,223,1,223,8,226,677,224,1002,223,2,223,1006,224,584,101,1,223,223,108,226,226,224,1002,223,2,223,1006,224,599,101,1,223,223,1107,677,226,224,1002,223,2,223,1005,224,614,1001,223,1,223,1107,226,677,224,102,2,223,223,1006,224,629,1001,223,1,223,1008,226,677,224,102,2,223,223,1005,224,644,101,1,223,223,1107,226,226,224,102,2,223,223,1006,224,659,1001,223,1,223,1008,677,677,224,102,2,223,223,1006,224,674,1001,223,1,223,4,223,99,226";
-
+    public long solvePartOne(String input) {
         //Set up my Instruction set
         List<IntcodeInstruction> instructions = new ArrayList<>();
         instructions.add(new FinishInstruction());
@@ -154,12 +149,12 @@ public class Day5 {
         instructions.add(new InputSaveInstruction());
         instructions.add(new WriteOutputInstruction());
 
-        //Init the computer so its ready
+        //Init the computer so it's ready
         IntcodeComputer icc = new IntcodeComputer(instructions);
         icc.addToInput(1);
 
         //Load the intcode and then modify it for the starting problem
-        Intcode ic = new Intcode(diagProgram);
+        Intcode ic = new Intcode(input);
         icc.initIntcode(ic);
         icc.runIntcode();
 
@@ -168,10 +163,10 @@ public class Day5 {
             finalOutput = icc.getOutput();
         }
 
-        System.out.println("Finished processing the input, the result is: " + finalOutput);
+        return finalOutput;
+    }
 
-        //Part two
-
+    public long solvePartTwo(String input) {
         //Set up my Instruction set
         List<IntcodeInstruction> instructionsTwo = new ArrayList<>();
         instructionsTwo.add(new FinishInstruction());
@@ -184,24 +179,32 @@ public class Day5 {
         instructionsTwo.add(new LessThanInstruction());
         instructionsTwo.add(new EqualsInstruction());
 
-
-        //Init the computer so its ready
+        //Init the computer so it's ready
         IntcodeComputer icc2 = new IntcodeComputer(instructionsTwo);
         icc2.addToInput(5);
 
         //Load the intcode and then modify it for the starting problem
-        Intcode ic2 = new Intcode(diagProgram);
+        Intcode ic2 = new Intcode(input);
         icc2.initIntcode(ic2);
         icc2.runIntcode();
-        long finalOutput2 = 0;
+        long finalOutput = 0;
         while(icc2.hasOutputToRead()) {
-            finalOutput2 = icc2.getOutput();
+            finalOutput = icc2.getOutput();
         }
 
-        System.out.println("Finished processing the input, the result is: " + finalOutput2);
-
-
-
+        return finalOutput;
     }
 
+    public static void main(String[] args) {
+        String input = ProblemLoader.loadProblemIntoString(2019, 5);
+
+        Day5 d = new Day5();
+        long partOne = d.solvePartOne(input);
+        System.out.println("Finished processing the input, the result is: " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("Finished processing the input, the new result is: " + partTwo);
+    }
 }
+
+
