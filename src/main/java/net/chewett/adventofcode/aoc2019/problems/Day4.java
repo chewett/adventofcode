@@ -2,11 +2,14 @@ package net.chewett.adventofcode.aoc2019.problems;
 
 import net.chewett.adventofcode.aoc2019.passwords.PasswordFinder;
 
+import net.chewett.adventofcode.helpers.ProblemLoader;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Taken from: https://adventofcode.com/2019/day/4
+ * Awesome problem taken from: https://adventofcode.com/2019/day/4
+ * Go have a try yourself!
+ * ----------------------------------------------------------
  *
  * --- Day 4: Secure Container ---
  *
@@ -40,24 +43,46 @@ import java.util.List;
  */
 public class Day4 {
 
-    public static void main(String[] args) {
-        //TODO: Load the start and end from the file.
-        int START_NUM = 153517;
-        int END_NUM = 630395;
+    public long solvePartOne(String input) {
+        String[] parts = input.split("-");
+        int START_NUM = Integer.parseInt(parts[0]);
+        int END_NUM = Integer.parseInt(parts[1]);
 
         List<Integer> allPossiblePasswords = new ArrayList<>();
-        List<Integer> allPossibleComplexPasswords = new ArrayList<>();
         for(int i = START_NUM; i <= END_NUM; i++) {
             if(PasswordFinder.isValidPassword(i)) {
                 allPossiblePasswords.add(i);
-                //Only passwords matching the first will match the second
-                if(PasswordFinder.isValidPasswordMoreComplex(i)) {
-                    allPossibleComplexPasswords.add(i);
-                }
             }
         }
 
-        System.out.println("Number of possible passwords: " + allPossiblePasswords.size());
-        System.out.println("Number of possible passwords with more complex requirements: " + allPossibleComplexPasswords.size());
+        return allPossiblePasswords.size();
+    }
+
+    public long solvePartTwo(String input) {
+        String[] parts = input.split("-");
+        int START_NUM = Integer.parseInt(parts[0]);
+        int END_NUM = Integer.parseInt(parts[1]);
+
+        List<Integer> allPossibleComplexPasswords = new ArrayList<>();
+        for(int i = START_NUM; i <= END_NUM; i++) {
+            if(PasswordFinder.isValidPasswordMoreComplex(i)) {
+                allPossibleComplexPasswords.add(i);
+            }
+        }
+
+        return allPossibleComplexPasswords.size();
+    }
+
+    public static void main(String[] args) {
+        String input = ProblemLoader.loadProblemIntoString(2019, 4);
+
+        Day4 d = new Day4();
+        long partOne = d.solvePartOne(input);
+        System.out.println("Number of possible passwords: " + partOne);
+
+        long partTwo = d.solvePartTwo(input);
+        System.out.println("Number of possible passwords with more complex requirements: " + partTwo);
     }
 }
+
+
