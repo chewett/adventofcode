@@ -70,6 +70,7 @@ public class Day13 {
         instructions.add(new EqualsInstruction());
         instructions.add(new AdjustRelativeBaseInstruction());
 
+        //TODO: Consider swapping this to the 2D grid
         Map<Point, Long> screenData = new HashMap<>();
 
         IntcodeComputer icc = new IntcodeComputer(instructions);
@@ -94,15 +95,26 @@ public class Day13 {
         return c;
     }
 
+    /**
+     * Simple helper to work out where the ball is on the screen
+     * @param screen Screen to check
+     * @return Ball position
+     */
     public Point getBallPosition(Map<Point, Long> screen) {
         for(Map.Entry<Point, Long> e : screen.entrySet()) {
             if(e.getValue() == 4) {
                 return e.getKey();
             }
         }
+        //If we didn't find it, it's at 0,0
         return new Point(0,0);
     }
 
+    /**
+     * Simple helper to work out where the passle is on the screen
+     * @param screen Screen to check
+     * @return Paddle position
+     */
     public Point getPaddlePos(Map<Point, Long> screen) {
         for(Map.Entry<Point, Long> e : screen.entrySet()) {
             if(e.getValue() == 3) {
@@ -126,6 +138,7 @@ public class Day13 {
         instructions.add(new EqualsInstruction());
         instructions.add(new AdjustRelativeBaseInstruction());
 
+        //TODO: Consider swapping this to the 2D grid
         Map<Point, Long> screenData = new HashMap<>();
 
         IntcodeComputer icc = new IntcodeComputer(instructions);
