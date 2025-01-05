@@ -2,7 +2,7 @@ package net.chewett.adventofcode.aoc2019.intcode;
 
 import net.chewett.adventofcode.aoc2019.intcode.exceptions.UnsupportedIntcodeInstruction;
 import net.chewett.adventofcode.aoc2019.intcode.instructionreturns.IntcodeInstructionReturn;
-import net.chewett.adventofcode.aoc2019.intcode.instructions.IntcodeInstruction;
+import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
 
 import java.util.*;
 
@@ -16,6 +16,26 @@ public class IntcodeComputer {
     private boolean computationAwaitingInput = false;
     private Queue<Long> output = new LinkedList<>();
     private Queue<Long> input = new LinkedList<>();
+
+    /**
+     * Helper function to get a fully configured Intcode computer
+     * @return Fully configured Intcode computer
+     */
+    public static IntcodeComputer getFullyConfiguredComputer() {
+        List<IntcodeInstruction> instructions = new ArrayList<>();
+        instructions.add(new FinishInstruction());
+        instructions.add(new AddInstruction());
+        instructions.add(new MultiplyInstruction());
+        instructions.add(new InputSaveInstruction());
+        instructions.add(new WriteOutputInstruction());
+        instructions.add(new JumpIfTrueInstruction());
+        instructions.add(new JumpIfFalseInstruction());
+        instructions.add(new LessThanInstruction());
+        instructions.add(new EqualsInstruction());
+        instructions.add(new AdjustRelativeBaseInstruction());
+
+        return new IntcodeComputer(instructions);
+    }
 
     public IntcodeComputer(List<IntcodeInstruction> instructions) {
         for(IntcodeInstruction i : instructions) {
