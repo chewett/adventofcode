@@ -2,6 +2,9 @@ package net.chewett.adventofcode.aoc2019;
 
 import java.util.Objects;
 
+/**
+ * Data holder holding the details of the reaction chemicals for 2019 Day 14
+ */
 public class ReactionChemical {
 
     private String name;

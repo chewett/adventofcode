@@ -1,5 +1,8 @@
 package net.chewett.adventofcode.aoc2019;
 
+/**
+ * Data holder holding the details of a reaction chemical and the value of it for 2019 Day 14
+ */
 public class ReactionChemicalValue {
 
     private ReactionChemical r;
@@ -9,11 +12,6 @@ public class ReactionChemicalValue {
         String[] partsOfChemical = s.trim().split(" ");
         this.value = Integer.parseInt(partsOfChemical[0]);
         this.r = new ReactionChemical(partsOfChemical[1].trim());
-    }
-
-    public ReactionChemicalValue(ReactionChemical r, int value) {
-        this.r = r;
-        this.value = value;
     }
 
     public ReactionChemical getReactionChemical() {
