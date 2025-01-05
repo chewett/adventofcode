@@ -6,6 +6,10 @@ import java.util.List;
 
 
 /**
+ * Data holder holding information the map the robot finds for 2019 Day 15
+ *
+ * TODO: See if some of this can be replaced by the 2D Discrete Character grid
+ *
  * WALL = #
  * FLOOR = .
  * OXYGEN = O

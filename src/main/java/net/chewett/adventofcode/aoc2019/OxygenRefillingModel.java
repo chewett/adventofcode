@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Data holder holding information about how we are filling the map with oxygen for 2019 Day 15
+ *
+ * TODO: See if some of this can be replaced by the 2D Discrete Character grid
+ */
 public class OxygenRefillingModel {
 
     private Map<Point, Character> mapData = new HashMap<>();
