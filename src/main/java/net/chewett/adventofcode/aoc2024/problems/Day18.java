@@ -118,6 +118,23 @@ import java.util.List;
  */
 public class Day18 {
 
+    public Day18() {
+        this(true);
+    }
+
+    private int size;
+    private int bytesToSimulate;
+
+    public Day18(boolean largeSize) {
+        if(largeSize) {
+            this.size = 71;
+            this.bytesToSimulate = 1024;
+        }else{
+            this.size = 7;
+            this. bytesToSimulate = 12;
+        }
+    }
+
     /**
      * Given the input of the puzzle and the number of bytes to simulate this works out how many steps it takes
      * to reach the end from the start. It returns -1 if there isn't a way to get out
@@ -126,12 +143,10 @@ public class Day18 {
      * @return Number of steps to the end or -1 if there isn't a path
      */
     public long simulateAndFindNumberOfStepsToEnd(List<String> input, int bytesToSimulate) {
-        int size = 71;
-
         //Just set up the grid with movable things
         Discrete2DPositionGrid<Character> grid = new Discrete2DPositionGrid<>('#');
-        for(int x = 0; x < size; x++) {
-            for(int y = 0; y < size; y++) {
+        for(int x = 0; x < this.size; x++) {
+            for(int y = 0; y < this.size; y++) {
                 grid.setValueAtPosition(x, y, '.');
             }
         }
@@ -182,7 +197,7 @@ public class Day18 {
      * @return Length to the end after simulating 1024 bytes falling
      */
     public long solvePartOne(List<String> input) {
-        return this.simulateAndFindNumberOfStepsToEnd(input, 1024);
+        return this.simulateAndFindNumberOfStepsToEnd(input, this.bytesToSimulate);
     }
 
     /**
@@ -196,7 +211,7 @@ public class Day18 {
      */
     public String solvePartTwo(List<String> input) {
         long steps = 1;
-        int bytesToSimulate = 1024;
+        int bytesToSimulate = this.bytesToSimulate;
         while(steps != -1) {
             bytesToSimulate++;
             steps = this.simulateAndFindNumberOfStepsToEnd(input, bytesToSimulate);
