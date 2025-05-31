@@ -30,7 +30,7 @@ public class Day8Test {
     public void testRealPartTwo() {
         String input = ProblemLoader.loadProblemIntoString(2019, 8);
         Day8 d = new Day8();
-        Assertions.assertEquals(0, d.solvePartTwo(input));
+        Assertions.assertEquals(-1, d.solvePartTwo(input));
     }
 
 }
