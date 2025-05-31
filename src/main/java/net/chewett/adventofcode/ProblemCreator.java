@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,7 +28,8 @@ public class ProblemCreator {
     public static List<String> loadFileHelper(String filePath) {
         List<String> lines = new ArrayList<>();
         try {
-            File file = new File(ProblemLoader.class.getResource(filePath).getFile());
+            //Use the URL decoder because the resource file path could give a %20 if there are spaces and this breaks everything
+            File file = new File(URLDecoder.decode(ProblemLoader.class.getResource(filePath).getFile(), StandardCharsets.UTF_8));
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;
@@ -60,14 +63,14 @@ public class ProblemCreator {
 
     public static void main(String[] args) throws IOException {
 
-        int year = 2023;
-        int day = 4;
+        int year = 2019;
+        String day = "15";
         String type = "StringList";
-        //String type = "IntList";
-        //String type = "String";
-        //String type = "LongList";
-        //String type = "CharacterGrid";
-        //String type = "IntGrid";
+        //type = "IntList";
+        type = "String";
+        //type = "LongList";
+        //type = "CharacterGrid";
+        //type = "IntGrid";
 
         String curDir = System.getProperty("user.dir");
 
@@ -140,8 +143,15 @@ public class ProblemCreator {
         Files.write(Paths.get(testPath), testFile);
 
         //Write the input file
-        System.out.println("Writing: " + inputPath);
-        Files.write(Paths.get(inputPath), new ArrayList<>());
+        if(Paths.get(inputPath).toFile().exists()) {
+            System.out.println("File already exists, NOT writing: " + inputPath);
+        }else{
+            System.out.println("Writing: " + inputPath);
+            Files.write(Paths.get(inputPath), new ArrayList<>());
+        }
+
+
+
 
 
 
