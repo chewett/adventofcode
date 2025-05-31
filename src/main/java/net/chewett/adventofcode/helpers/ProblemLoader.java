@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +102,8 @@ public class ProblemLoader {
 
         List<String> lines = new ArrayList<>();
         try {
-            File file = new File(ProblemLoader.class.getResource(filePath).getFile());
+            //Use the URL decoder because the resource file path could give a %20 if there are spaces and this breaks everything
+            File file = new File(URLDecoder.decode(ProblemLoader.class.getResource(filePath).getFile(), StandardCharsets.UTF_8));
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String st;
