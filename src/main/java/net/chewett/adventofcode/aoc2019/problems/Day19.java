@@ -3,6 +3,7 @@ package net.chewett.adventofcode.aoc2019.problems;
 import net.chewett.adventofcode.aoc2019.intcode.Intcode;
 import net.chewett.adventofcode.aoc2019.intcode.IntcodeComputer;
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
+import net.chewett.adventofcode.helpers.ProblemLoader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,10 +15,7 @@ public class Day19 {
 
     public void solve() {
         try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_19_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
-
-            String tractorBeamRobot = br.readLine();
+            String tractorBeamRobot = ProblemLoader.loadProblemIntoString(2019, 19);
 
             //Set up my Instruction set
             List<IntcodeInstruction> instructions = new ArrayList<>();

@@ -1,6 +1,8 @@
 package net.chewett.adventofcode.aoc2019.problems;
 
+import net.chewett.adventofcode.ProblemCreator;
 import net.chewett.adventofcode.aoc2019.DeckShuffler;
+import net.chewett.adventofcode.helpers.ProblemLoader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,38 +18,31 @@ public class Day22 {
         List<Integer> spaceDeck = new ArrayList<>();
         DeckShuffler.initDeckWithNumberOfNumbers(spaceDeck, 10007);
 
-        try {
-            File file = new File(getClass().getResource("/aoc2019/2019_day_22_input.txt").getFile());
-            BufferedReader br = new BufferedReader(new FileReader(file));
+        List<String> lines = ProblemLoader.loadProblemIntoStringArray(2019, 22);
 
-            String st;
-
-            while ((st = br.readLine()) != null) {
-                String[] splitLine = st.split(" ");
-                String command = splitLine[0];
-                if(command.equals("cut")) {
+        for(String line : lines) {
+            String[] splitLine = line.split(" ");
+            String command = splitLine[0];
+            if (command.equals("cut")) {
+                int num = Integer.parseInt(splitLine[splitLine.length - 1]);
+                DeckShuffler.cutCards(spaceDeck, num);
+            } else if (command.equals("deal")) {
+                String commandTwo = splitLine[1];
+                if (commandTwo.equals("into")) {
+                    DeckShuffler.dealIntoNewStack(spaceDeck);
+                } else if (commandTwo.equals("with")) {
                     int num = Integer.parseInt(splitLine[splitLine.length - 1]);
-                    DeckShuffler.cutCards(spaceDeck, num);
-                }else if(command.equals("deal")) {
-                    String commandTwo = splitLine[1];
-                    if(commandTwo.equals("into")) {
-                        DeckShuffler.dealIntoNewStack(spaceDeck);
-                    }else if(commandTwo.equals("with")) {
-                        int num = Integer.parseInt(splitLine[splitLine.length - 1]);
-                        DeckShuffler.dealWithIncrement(spaceDeck, num);
-                    }
+                    DeckShuffler.dealWithIncrement(spaceDeck, num);
                 }
             }
-
-            for(int i = 0; i < 10007; i++) {
-                if(spaceDeck.get(i) == 2019) {
-                    System.out.println("Found card 2019 at position " + i);
-                }
-            }
-
-        } catch(IOException e) {
-            e.printStackTrace();
         }
+
+        for(int i = 0; i < 10007; i++) {
+            if(spaceDeck.get(i) == 2019) {
+                System.out.println("Found card 2019 at position " + i);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
