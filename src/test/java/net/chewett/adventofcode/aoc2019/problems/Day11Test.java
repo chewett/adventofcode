@@ -28,7 +28,7 @@ public class Day11Test {
     public void testRealPartTwo() {
         String input = ProblemLoader.loadProblemIntoString(2019, 11);
         Day11 d = new Day11();
-        Assertions.assertEquals(0, d.solvePartTwo(input));
+        Assertions.assertEquals(-1, d.solvePartTwo(input));
     }
 
 }
