@@ -1,6 +1,7 @@
 package net.chewett.adventofcode.aoc2019.intcode;
 
 import net.chewett.adventofcode.aoc2019.intcode.instructions.*;
+import net.chewett.adventofcode.helpers.ProblemLoader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -224,10 +225,7 @@ public class IntcodeComputerTest {
 
     @Test
     public void testDay9BoostProgramPartOne() throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader(getClass().getResource("/aoc2019/2019_day_9_input.txt").getFile()));
-
-        //Day 9 input is a single line, so just load that
-        String boostProgram = br.readLine();
+        String boostProgram = ProblemLoader.loadProblemIntoString(2019, 9);;
         IntcodeComputer icc = this.getFullyFeaturedComputer();
 
         Intcode ic = new Intcode(boostProgram);
@@ -240,10 +238,7 @@ public class IntcodeComputerTest {
 
     @Test
     public void testDay9BoostProgramPartTwo() throws Exception {
-        BufferedReader br = new BufferedReader(new FileReader(getClass().getResource("/aoc2019/2019_day_9_input.txt").getFile()));
-
-        //Day 9 input is a single line, so just load that
-        String boostProgram = br.readLine();
+        String boostProgram = ProblemLoader.loadProblemIntoString(2019, 9);
         IntcodeComputer icc = this.getFullyFeaturedComputer();
 
         Intcode ic = new Intcode(boostProgram);
